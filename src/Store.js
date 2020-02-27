@@ -3,5 +3,5 @@ import {Settings} from './models/Settings'
 export const Store = types
     .model("Store", {
         settings:types.optional(Settings,{}),
-        demo:70
+        demo:3
     })
