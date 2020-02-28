@@ -10,6 +10,7 @@ import { DashboardItems } from './DashboardItems';
 import { EditContents } from './EditContents';
 import { SlideOptions } from './SlideOptions';
 import { HomePage } from '../HomePage';
+import {observer} from 'mobx-react';
 
 const style = {
     margin: 0,
@@ -52,7 +53,7 @@ function getStepContent(stepIndex) {
     }
 }
 
-export default function HorizontalLabelPositionBelowStepper() {
+export const  HorizontalLabelPositionBelowStepper = observer(()=> {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
@@ -110,4 +111,4 @@ export default function HorizontalLabelPositionBelowStepper() {
             </div>
         </div>
     );
-}
+});

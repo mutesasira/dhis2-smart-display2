@@ -1,8 +1,9 @@
 import React from 'react';
+import {observer} from 'mobx-react';
 import {useMst} from '../../context/context'
 
-export const DashboardItems = () => {
-    const { demo,settings } = useMst();
+export const DashboardItems = observer(() => {
+    const { dashboards } = useMst();
 
     return (
         <div className="h-auto px-4">
@@ -10,12 +11,9 @@ export const DashboardItems = () => {
                 <div className="w-full md:w-1/4 bg-gray p-4 ">
                     <div className="font-sans flex items-center justify-center bg-blue-darker w-full py-8">
                         <div className="overflow-hidden bg-white rounded max-w-xs w-full shadow-lg  leading-normal">
-                            <a href="#" className="block group p-4 border-b bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white">
-                                <p className="text-base mb-1 text-blue group-hover:text-white">Behavioural Changes</p>
-                            </a>
-                            <a href="#" className="block group p-4 border-b bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white">
-                                <p className="text-base mb-1 text-blue group-hover:text-white">HIV Testing and Counselling...</p>
-                            </a>
+                            {dashboards.map(dashboard=><a href="#" className="block group p-4 border-b bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white">
+                            <p className="text-base mb-1 text-blue group-hover:text-white">{dashboard.name}</p>
+                        </a>)}
                         </div>
                     </div>
                 </div>
@@ -28,7 +26,7 @@ export const DashboardItems = () => {
 
         </div>
     )
-}
+})
 
 
 

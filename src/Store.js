@@ -1,7 +1,10 @@
-import { types } from "mobx-state-tree"
-import {Settings} from './models/Settings'
+import { types, flow } from "mobx-state-tree"
+import { Settings } from './models/Settings';
+
 export const Store = types
     .model("Store", {
-        settings:types.optional(Settings,{}),
-        demo:3
+        engine: types.frozen(),
+        settings: types.optional(Settings, {}),
+        dashboards: types.optional(types.frozen(), []),
+        demo: 3
     })

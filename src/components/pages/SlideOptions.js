@@ -1,5 +1,7 @@
 import React from 'react';
 import EditIcon, { Edit, Info, PlayCircleOutline, Schedule } from '@material-ui/icons';
+// import NumericInput from 'react-numeric-input';
+import * as NumericInput from "react-numeric-input";
 
 export const SlideOptions = () =>{
     return  (
@@ -7,30 +9,29 @@ export const SlideOptions = () =>{
             <div className="flex md:flex-row flex-wrap h-full ml-4">
                 <div className="w-full md:w-1/2 bg-gray p-4 ">
                     <div>
-                        <label className="block">
-                            <Edit/><span className="text-blue-700">Presentation Name:</span>
-                            <input className="form-input mt-1 block w-full" placeholder="Presentation Name"/>
+                        
+                        <label className="block py-2">
+                            <Edit/><span className="text-blue-700">Presentation Name:</span><br/>
+                            <input className="pl-2 appearance-none border rounded py-2 px-3 text-grey-darker w-full"></input>
                         </label>
                     </div>
                     <div>
-                        <label className="block">
-                            <Info/><span className="text-blue-700">Description:</span>
-                            <input className="form-input mt-1 block w-full" placeholder="Presentation Description"/>
+                        <label className="block py-2">
+                            <Info/><span className="text-blue-700">Description:</span><br/>
+                            <input className="pl-2 shadow appearance-none border rounded py-2 px-3 text-grey-darker w-full"></input>
                         </label>
                     </div>
                     <div>
-                        <label className="block">
+                        <label className="block py-2"><br/>
                             <PlayCircleOutline/><span className="text-blue-700">Transition Mode:</span>
-                            <input type="checkbox" class="form-checkbox">Slide</input>
-                            <input type="checkbox" class="form-checkbox">Zoom</input>
-                            <input type="checkbox" class="form-checkbox">Spin</input>
-                            <input type="checkbox" class="form-checkbox">Fade</input>
+                            <input className="pl-2 shadow appearance-none border rounded py-2 px-3 text-grey-darker w-full"></input>
                         </label>
                     </div>
                     <div>
-                        <label className="block">
-                            <Schedule/><span className="text-blue-700">Transition Duration (Seconds):</span>
-                            <input className="form-input mt-1 block w-full" placeholder="Presentation Name"/>
+                        <Schedule/>
+                            <label className="block py-2">
+                            <span className="text-blue-700">Transition Duration (Seconds):</span><br/>
+                            <NumericInput min={0} max={100} value={50}/>
                         </label>
                     </div>
                 </div>
