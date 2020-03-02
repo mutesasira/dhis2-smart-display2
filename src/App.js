@@ -18,7 +18,7 @@ const MyApp = () => {
     }
     const engine = useDataEngine();
 
-    const rootStore = Store.create({engine});
+    const rootStore = new Store(engine);
 
     const displayPage = () => {
         switch (currentPage) {
