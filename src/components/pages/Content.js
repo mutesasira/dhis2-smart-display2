@@ -98,7 +98,7 @@ export default function HorizontalLabelPositionBelowStepper() {
                                     Back
                         </Button>
                                 <Button variant="contained" color="primary" onClick={handleNext}>
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                    {activeStep === steps.length - 1 ? 'Save Presentation' : 'Next'}
                                 </Button>
 
                                 <Button variant="contained" style={style} color="primary" >

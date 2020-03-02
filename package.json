@@ -30,6 +30,7 @@
     "mobx-state-tree": "^3.15.0",
     "postcss-cli": "^7.1.0",
     "react-icons": "^3.9.0",
+    "react-numeric-input": "^2.2.3",
     "react-search-box": "^2.0.2"
   }
 }
