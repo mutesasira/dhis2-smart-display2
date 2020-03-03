@@ -4,7 +4,7 @@ const query = {
     dashboards: {
         resource: 'dashboards.json',
         params: {
-            fields: 'id,name,dashboardItems[*]',
+            fields: 'id,name,dashboardItems[map[id,name],chart[id,name],reportTable[id,name]]',
             paging: 'false'
         }
     }

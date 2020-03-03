@@ -92,7 +92,7 @@ export const SlideOptions = () => {
                   format="MM/dd/yyyy"
                   margin="normal"
                   id="date-picker-inline"
-                  label="Date picker inline"
+                  label="Frequency"
                   value={selectedDate}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
@@ -102,7 +102,7 @@ export const SlideOptions = () => {
                 <KeyboardDatePicker
                   margin="normal"
                   id="date-picker-dialog"
-                  label="Date picker dialog"
+                  label="Select Date"
                   format="MM/dd/yyyy"
                   value={selectedDate}
                   onChange={handleDateChange}
