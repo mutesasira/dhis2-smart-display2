@@ -4,12 +4,12 @@ const query = {
     dashboards: {
         resource: 'dashboards.json',
         params: {
-            fields: 'id,name,dashboardItems[map[id,name],chart[id,name],reportTable[id,name]]',
+            fields: 'id,name,dashboardItems[map[name],chart[name],reportTable[name]]',
             paging: 'false'
         }
     }
 }
-
+// currentDashboard.dashboardItems.map(item.map.name)
 
 export class Settings{
     assignedItemStore = GroupStore.create({state:[]});
