@@ -84,7 +84,7 @@ export const DashboardItems = observer(() => {
 					</div>
 				</div>
 				{
-					setCurrentDashboard.dashboard.map((d, k) => {
+					dashboard.dashboardItems.map((item) => {
 				<div className="w-full md:w-3/4 bg-red p-4 pt-10">
 					<div className="w-full p-4 flex md:flex-row flex-wrap text-left bg-blue-500 text-white">
 						Delivery <MoreVertIcon className="text-black  ml-12" />
@@ -96,7 +96,7 @@ export const DashboardItems = observer(() => {
 							d.name
 						}
 						<List>
-							{d.dashboardItems.map((item, key) => {
+							{item.name.map((d) => {
 								return (
 									<ListItem
 										key={key}
@@ -108,8 +108,8 @@ export const DashboardItems = observer(() => {
 											// primary={extractFavorite(item).name}
 										/>
 										<Checkbox
-											checked={item.selected}
-											onChange={item.handleChange}
+											checked={d.selected}
+											onChange={d.handleChange}
 										/>
 									</ListItem>
 								);
