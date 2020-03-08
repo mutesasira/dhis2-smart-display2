@@ -28,6 +28,8 @@ const MyApp = () => {
                 return <HorizontalLabelPositionBelowStepper />
             case 3:
                 return <Presentations />
+            case 4:
+                return <PresentationList newPresentation={changePage(4)}/>
             default:
                 return <HomePage newPresentation={changePage(2)} viewPresentations={changePage(3)} />
         }

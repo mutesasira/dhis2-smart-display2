@@ -11,6 +11,8 @@ import { EditContents } from './EditContents';
 import { SlideOptions } from './SlideOptions';
 import { HomePage } from '../HomePage';
 import {observer} from 'mobx-react';
+import { green } from '@material-ui/core/colors';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const style = {
     margin: 0,
@@ -20,6 +22,25 @@ const style = {
     left: 'auto',
     position: 'fixed',
 };
+
+const changeTheme = createMuiTheme({
+    overrides: {
+        MuiStepIcon: {
+          root: {
+            '&$active': {
+              color: green,
+            },
+            '&$completed': {
+              color: green,
+            },
+          },
+          text: {
+            color: green
+          },
+         },
+        }
+});
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -83,8 +104,10 @@ export const  HorizontalLabelPositionBelowStepper = observer(()=> {
             <div>
                 {activeStep === steps.length ? (
                     <div className="last-step">
-                        <Typography className={classes.instructions}>All steps completed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
+                        <Typography className={classes.instructions}>Your Presentation has been saves succesfully</Typography>
+                        <Button onClick={handleReset} >
+                            New Presentation
+                        </Button>
                     </div>
                 ) : (
                         <div className="">
@@ -99,7 +122,7 @@ export const  HorizontalLabelPositionBelowStepper = observer(()=> {
                                     Back
                         </Button>
                                 <Button variant="contained" color="primary" onClick={handleNext}>
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                    {activeStep === steps.length - 1 ? 'Save Presentation' : 'Next'}
                                 </Button>
 
                                 <Button variant="contained" style={style} color="primary" >

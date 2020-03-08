@@ -62,7 +62,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
@@ -72,7 +72,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
@@ -82,7 +82,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
@@ -92,7 +92,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
@@ -102,7 +102,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
@@ -112,7 +112,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
@@ -122,7 +122,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
@@ -132,7 +132,7 @@ export const PresentationGrid = ({ newPresentation }) => {
 								<LiveTv style={iconStyles.largeIcon} />
 							</div>
 							<div className="content-right md:h-1/4">
-								some thing
+								<MoreVertIcon/>
 							</div>
 						</div>
 					</Grid>
