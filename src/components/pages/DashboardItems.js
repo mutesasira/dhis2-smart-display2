@@ -20,6 +20,15 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
+const query = {
+    dashboards: {
+        resource: 'dashboards.json',
+        params: {
+            fields: 'id,name,dashboardItems[map[name],chart[name],reportTable[name]]',
+            paging: 'false'
+        }
+    }
+}
 
 
 export const DashboardItems = observer(() => {
@@ -84,37 +93,17 @@ export const DashboardItems = observer(() => {
 					</div>
 				</div>
 				{
-					dashboard.dashboardItems.map((item) => {
+					//query.dashboardItems.map((item) => {
 				<div className="w-full md:w-3/4 bg-red p-4 pt-10">
 					<div className="w-full p-4 flex md:flex-row flex-wrap text-left bg-blue-500 text-white">
 						Delivery <MoreVertIcon className="text-black  ml-12" />
 					</div>
-					<div key={d.id}>
+					<div >
 						{
-							//JSON.stringify(currentDashboard)
+							JSON.stringify(currentDashboard)
 							// JSON.parse(currentDashboard, null, 2)
-							d.name
 						}
-						<List>
-							{item.name.map((d) => {
-								return (
-									<ListItem
-										key={key}
-										role={undefined}
-										dense
-										className="fullList">
-
-										<ListItemText
-											// primary={extractFavorite(item).name}
-										/>
-										<Checkbox
-											checked={d.selected}
-											onChange={d.handleChange}
-										/>
-									</ListItem>
-								);
-							})}
-						</List>
+						
 					</div>
 
 					<div>
@@ -163,8 +152,9 @@ export const DashboardItems = observer(() => {
 							})}
 						</List>
 					</div>
-				</div>;
-			    })}
+				</div>
+				//})
+			}
 			</div>
 		</div>
 	);

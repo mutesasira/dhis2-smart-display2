@@ -2,6 +2,8 @@ import React from 'react';
 import {LiveTv} from '@material-ui/icons';
 import Pagination from '@material-ui/lab/Pagination';
 import { makeStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
 
 const style = {
   margin: 0,
@@ -29,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 	},
   }));
 
-export const PresentationList = () => {
+export const PresentationList = ({newPresentation}) => {
 const classes = useStyles();
   return (
 		<div className="flex flex-col px-16">
@@ -99,6 +101,9 @@ const classes = useStyles();
 			<div className={classes.root}>
 				<Pagination count={20} color="primary" />
 			</div>
+			<Fab size="medium" style={style} color="primary" onClick={newPresentation}>
+                <AddIcon />
+            </Fab>
 		</div>
   );
 };
