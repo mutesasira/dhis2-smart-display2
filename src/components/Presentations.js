@@ -1,8 +1,12 @@
-import React from 'react';
-import ReactSearchBox from 'react-search-box'
+import React, { useState }  from 'react';
+import ReactSearchBox from 'react-search-box';
+import {PresentationGrid} from './presentations/PresentationGrid';
+import {PresentationList} from './presentations/PresentationList';
+import {PresentationSingle} from './presentations/PresentationSingle';
 import { List, GridOn, CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
-import AddIcon from '@material-ui/icons/Add';
-import { Print, Tv, Slideshow, ImportContacts, Public, Schedule, LiveTv, Help, Description, Fullscreen, Dashboard } from "@material-ui/icons";
+// import { HomePage } from './components/HomePage';
+// import Link from '@material-ui/core/Link';
+// import AddIcon from '@material-ui/icons/Add';
 // import AddIcon from '@material-ui/icons/Add';
 // import Fab from '@material-ui/core/Fab';
 // import { HomePage } from '../HomePage';
@@ -28,68 +32,44 @@ const style = {
 };
 
 
-export const Presentations = () => {
+export const Presentations = ({viewPresentationGrid,}) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const changePage = (page) =>{
+        setCurrentPage(page)
+    }
+
+    const showPage = () =>{
+        switch (currentPage){
+            case 1:
+                return <PresentationList />
+            case 2:
+                return <PresentationGrid />
+            case 3:
+                return <PresentationSingle/>
+            default:
+                return <PresentationList/>
+        }
+
+    }
     
     return (
         <div className="h-auto mt-4">
             <div className="flex px-16 py-4">
                 <div className="flex">
-                    <h1 className="font-bold">View as <List className="text-blue-500" />  <GridOn /> <CheckBoxOutlineBlankOutlined /></h1>
+                    <h1>View as 
+                        <List className="text-blue-500" onClick={()=>changePage(1)} /> 
+                        <CheckBoxOutlineBlankOutlined onClick={()=>changePage(3)}/>
+                        <GridOn onClick={()=>changePage(2)}/>
+                    </h1>
                 </div>
-               
                 <div className="ml-auto">
                     <ReactSearchBox
                         placeholder="Search Presentation"
                     />
                 </div>
             </div>
-            <div className="flex flex-col px-16">
-                <div className="flex mb-2">
-                    <div className="w-full md:w-1/4 bg-blue-400 text-left text-gray-700 pt-6">
-                        <h3 className="font-extrabold">
-                            <LiveTv style={style.largeIcon} /> 
-                        </h3>
-                    </div>
-                    <div className="w-full md:w-3/4 bg-white text-left text-gray-200">
-                        <div className="h-auto w-full p-4 bg-gray-200">
-                            <h1 className="text-blue-600 text-2xl">Description of the demonstration of the XXX program</h1>
-                        </div>
-                        <div className="h-auto w-full p-4 bg-gray-200 text-black ">
-                            <h2>This is a very long test that is going to be describing the demonstartion of the presenation of the dashboard in question</h2>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex mb-2">
-                    <div className="w-full md:w-1/4 bg-blue-400 text-left text-gray-700 pt-6">
-                        <h3 className="font-extrabold">
-                            <LiveTv style={style.largeIcon} /> 
-                        </h3>
-                    </div>
-                    <div className="w-full md:w-3/4 bg-white text-left text-gray-200">
-                        <div className="h-auto w-full p-4 bg-gray-200">
-                            <h1 className="text-blue-600 text-2xl">Description of the demonstration of the XXX program</h1>
-                        </div>
-                        <div className="h-auto w-full p-4 bg-gray-200 text-black ">
-                            <h2>This is a very long test that is going to be describing the demonstartion of the presenation of the dashboard in question</h2>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex mb-2">
-                    <div className="w-full md:w-1/4 bg-blue-400 text-left text-gray-700 pt-6">
-                        <h3 className="font-extrabold">
-                            <LiveTv style={style.largeIcon} /> 
-                        </h3>
-                    </div>
-                    <div className="w-full md:w-3/4 bg-white text-left text-gray-200">
-                        <div className="h-auto w-full p-4 bg-gray-200">
-                            <h1 className="text-blue-600 text-2xl">Description of the demonstration of the XXX program</h1>
-                        </div>
-                        <div className="h-auto w-full p-4 bg-gray-200 text-black ">
-                            <h2>This is a very long test that is going to be describing the demonstartion of the presenation of the dashboard in question</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <div>{showPage()}</div>
         </div>
     )
 }
