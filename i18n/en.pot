@@ -5,11 +5,41 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-05T08:59:43.188Z\n"
-"PO-Revision-Date: 2020-02-05T08:59:43.188Z\n"
+"POT-Creation-Date: 2020-03-09T10:15:42.869Z\n"
+"PO-Revision-Date: 2020-03-09T10:15:42.869Z\n"
 
-msgid "Hello {{name}}"
+msgid "Pivot tables"
 msgstr ""
 
-msgid "Welcome to DHIS2!"
+msgid "Pivot Tables"
+msgstr ""
+
+msgid "Charts"
+msgstr ""
+
+msgid "Visualizer"
+msgstr ""
+
+msgid "Maps"
+msgstr ""
+
+msgid "Event reports"
+msgstr ""
+
+msgid "Event Reports"
+msgstr ""
+
+msgid "Event charts"
+msgstr ""
+
+msgid "Event Visualizer"
+msgstr ""
+
+msgid "Reports"
+msgstr ""
+
+msgid "Resources"
+msgstr ""
+
+msgid "Users"
 msgstr ""
