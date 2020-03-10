@@ -96,7 +96,7 @@ export const DashboardItems = observer(() => {
 					//query.dashboardItems.map((item) => {
 				<div className="w-full md:w-3/4 bg-red p-4 pt-10">
 					<div className="w-full p-4 flex md:flex-row flex-wrap text-left bg-blue-500 text-white">
-						Delivery <MoreVertIcon className="text-black  ml-12" />
+						{currentDashboard.name} <MoreVertIcon className="text-black  ml-12" />
 					</div>
 					<div >
 						{
