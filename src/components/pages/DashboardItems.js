@@ -10,7 +10,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import TableIcon from '@material-ui/icons/ViewList';
 import ChartIcon from '@material-ui/icons/InsertChart';
 import MapIcon from '@material-ui/icons/Public';
 import ExtensionIcon from '@material-ui/icons/Extension';
@@ -34,21 +33,41 @@ import {
   MESSAGES,
   SPACER
 } from '../../modules/ItemTypes'
+import {
+	withStyles,
+	MuiThemeProvider,
+	createMuiTheme
+} from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+    maxHeight: 300, 
+    overflow: 'auto'
+  },
+  mainBar:{
+    width: '100%',
+    maxHeight: 300, 
+    overflow: 'auto'
   },
 }));
+const style = {
+  backgroundColor:"red",
+};
+const theme = createMuiTheme({
+  overrides: {
+    '.Mui-checked': {
+        color: 'red'
 
+    },
+ }
+})
 const getItemIcon = type => {
   switch (type) {
     case REPORT_TABLE:
     case EVENT_REPORT:
     case REPORTS:
-      return <TableIcon />;
     case CHART:
     case EVENT_CHART:
       return <ChartIcon />;
@@ -70,8 +89,6 @@ const getItemIcon = type => {
       return <NotInterestedIcon />;
   }
 }
-
-
 export const DashboardItems = observer(() => {
   const { currentSetting } = useMst();
 
@@ -98,13 +115,13 @@ export const DashboardItems = observer(() => {
 
     setChecked(newChecked);
   };
-
   return (
     <div className="h-auto px-4">
       <div className="flex md:flex-row flex-wrap h-full">
         <div className="w-full md:w-1/4 bg-gray p-4 ">
           <div className="font-sans flex items-center justify-center bg-blue-darker w-full py-8">
-            <div className="overflow-hidden bg-white rounded max-w-xs w-full shadow-lg  leading-normal">
+          <div className={classes.mainBar}>
+            <div className=" bg-white rounded max-w-xs w-full shadow-lg  leading-normal ">
               {selectedDashboards.map(dashboard => (
                 <a
                   key={dashboard.id}
@@ -119,26 +136,30 @@ export const DashboardItems = observer(() => {
                 </a>
               ))}
             </div>
+            </div>
           </div>
         </div>
-        <div className="w-full md:w-3/4 bg-red p-4 pt-10">
-          <div className="w-full p-4 flex md:flex-row flex-wrap text-left bg-blue-500 text-white">
-            {currentDashboard.name} <MoreVertIcon className="text-black  ml-12" />
+        <div className="w-auto md:w-3/4 bg-red p-4 pt-10">
+          <div className="w-auto p-4 flex  text-left bg-blue-500 text-white">
+            {currentDashboard.name}<MoreVertIcon className="text-black  text-right" />
           </div>
-          <div>
-            <List className={classes.root}>
+          <div className="w-auto">
+            <List className={classes.root} >
               {currentDashboard.dashboardItems.map((dashboardItem, i) => {
                 const dsbId = `checkbox-list-label-${dashboardItem.id}`;
                 return (
+                  <MuiThemeProvider theme={theme}>
                   <ListItem
                     key={`${dashboardItem.id}${i}`}
                     role={undefined}
                     dense
                     button
-                    onClick={handleToggle(dashboardItem.id)}>
+                    onClick={handleToggle(dashboardItem.id)}
+                    style = {dashboardItem.style}>
                     <ListItemIcon>
                       <Checkbox
                         edge="start"
+                        className="colorRed"
                         checked={dashboardItem.selected}
                         onChange={dashboardItem.handleChange}
                         tabIndex={-1}
@@ -159,6 +180,7 @@ export const DashboardItems = observer(() => {
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
+                  </MuiThemeProvider>
                 );
               })}
             </List>

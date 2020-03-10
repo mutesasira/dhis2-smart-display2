@@ -13882,6 +13882,16 @@ video {
   height:100px; */
 }
 
+.colorRed .check {
+  background-color: #43a7ee;
+  border-color: #43a7ee;
+}
+
+.Mui-checked{
+  background-color: black;
+  color: white;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

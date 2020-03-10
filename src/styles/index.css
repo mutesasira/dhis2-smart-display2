@@ -35,3 +35,12 @@
   /* margin-bottom: 70px;
   height:100px; */
 }
+
+.colorRed .check {
+  background-color: #43a7ee;
+  border-color: #43a7ee;
+}
+.Mui-checked{
+  background-color: black;
+  color: white;
+}
