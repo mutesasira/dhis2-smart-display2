@@ -190,11 +190,22 @@ export const DashboardItems = observer(props => {
                   <ListItemIcon>
                     <Checkbox
                       edge="start"
+                      checkedIcon={
+                        <span
+                          className={clsx(
+                            classes.icon,
+                            classes.checkedIcon
+                          )}
+                        />
+                      }
                       checked={dashboardItem.selected}
                       onChange={dashboardItem.handleChange}
                       tabIndex={-1}
                       disableRipple
                       icon={<span className={classes.icon} />}
+                      // inputProps={{
+                      //   'aria-label': dsbId,
+                      // }}
                     />
                   </ListItemIcon>
                   <ListItemText
