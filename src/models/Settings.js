@@ -1,9 +1,11 @@
-import { decorate, observable, action } from "mobx"
+import { decorate, observable, action, computed, extendObservable } from "mobx"
 import GroupStore from './GroupStore';
 import { Dashboard } from './Dashboard';
 import { DashboardItem } from './DashboardItem';
 import { DashboardItemContent } from './DashboardItemContent'
-import { extractFavorite } from '../modules/utils'
+import { extractFavorite } from '../modules/utils';
+import { getEndPointName } from '../modules/ItemTypes'
+import { flatten, fromPairs } from 'lodash';
 const query = {
   dashboards: {
     resource: 'dashboards.json',
@@ -25,14 +27,12 @@ const convert = (dashboards) => {
       dashboardItem.setId(item.id);
       dashboardItem.setType(item.type);
       dashboardItem.setShape(item.shape);
-
       const i = extractFavorite(item);
       const content = new DashboardItemContent();
-
       content.setId(i.id);
       content.setName(i.name);
       content.setInterpretations(i.interpretations);
-      content.setType(i.type);
+      content.setType(item.type);
       dashboardItem.setDashboardItemContent(content);
       return dashboardItem
     });
@@ -40,6 +40,14 @@ const convert = (dashboards) => {
     return dashboard
   });
   return processedDashboards;
+}
+
+const process = (items) => {
+  const p = items.map(item => {
+    return [item.id, item]
+  });
+
+  return fromPairs(p)
 }
 export class Settings {
   id;
@@ -50,6 +58,7 @@ export class Settings {
   dashboards = [];
   engine;
   setEngine = val => this.engine = val;
+
   assignItems = (items) => {
     const assigned = this.assignedItemStore.state.concat(items);
     this.assignedItemStore.setState(assigned);
@@ -62,12 +71,42 @@ export class Settings {
   }
 
   fetchDashboards = async () => {
-    const { dashboards } = await this.engine.query(query);
-    let items = dashboards.dashboards.map(d => {
+    const { dashboards: { dashboards } } = await this.engine.query(query);
+    let items = dashboards.map(d => {
       return { text: d.name, value: d.id };
     });
-    this.dashboards = convert(dashboards.dashboards);
+    this.dashboards = convert(dashboards);
     this.itemStore.setState(items)
+  }
+
+  fetchItem = async (item) => {
+    const endpoint = getEndPointName(item.type);
+    const query1 = {
+      item: {
+        resource: `${endpoint}/${item.id}`,
+        params: {
+          fields: 'id,displayName~rename(name),displayDescription~rename(description),columns[dimension,legendSet[id],filter,programStage,items[dimensionItem~rename(id),displayName~rename(name),dimensionItemType]],rows[dimension,legendSet[id],filter,programStage,items[dimensionItem~rename(id),displayName~rename(name),dimensionItemType]],filters[dimension,legendSet[id],filter,programStage,items[dimensionItem~rename(id),displayName~rename(name),dimensionItemType]],*,!attributeDimensions,!attributeValues,!category,!categoryDimensions,!categoryOptionGroupSetDimensions,!columnDimensions,!dataDimensionItems,!dataElementDimensions,!dataElementGroupSetDimensions,!filterDimensions,!itemOrganisationUnitGroups,!lastUpdatedBy,!organisationUnitGroupSetDimensions,!organisationUnitLevels,!organisationUnits,!programIndicatorDimensions,!relativePeriods,!reportParams,!rowDimensions,!series,!translations,!userOrganisationUnit,!userOrganisationUnitChildren,!userOrganisationUnitGrandChildren'
+        }
+      }
+    }
+
+    const i = await this.engine.query(query1);
+    return i.item
+  }
+
+  get selectedDashboards() {
+    return this.dashboards.filter(dash => {
+      return this.assignedItemStore.state.indexOf(dash.id) !== -1;
+    });
+  }
+
+  get selectedItems() {
+    const items = this.selectedDashboards.map(dashboard => {
+      const items = dashboard.dashboardItems.filter(item => item.selected);
+      return items
+    });
+
+    return flatten(items)
   }
 }
 
@@ -81,5 +120,7 @@ decorate(Settings, {
 
   assignItems: action,
   unAssignItems: action,
-  fetchDashboards: action
+  fetchDashboards: action,
+  selectedDashboards: computed,
+  selectedItems: computed
 })
