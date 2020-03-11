@@ -27,3 +27,8 @@ export const extractFavorite = item => {
       );
   }
 };
+
+export const getWithoutId = object => ({
+  ...object,
+  id: undefined,
+})

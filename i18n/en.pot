@@ -5,19 +5,16 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-03-09T10:15:42.869Z\n"
-"PO-Revision-Date: 2020-03-09T10:15:42.869Z\n"
+"POT-Creation-Date: 2020-03-10T09:16:11.102Z\n"
+"PO-Revision-Date: 2020-03-10T09:16:11.102Z\n"
+
+msgid "Visualizations"
+msgstr ""
 
 msgid "Pivot tables"
 msgstr ""
 
-msgid "Pivot Tables"
-msgstr ""
-
 msgid "Charts"
-msgstr ""
-
-msgid "Visualizer"
 msgstr ""
 
 msgid "Maps"
@@ -26,13 +23,10 @@ msgstr ""
 msgid "Event reports"
 msgstr ""
 
-msgid "Event Reports"
-msgstr ""
-
 msgid "Event charts"
 msgstr ""
 
-msgid "Event Visualizer"
+msgid "Apps"
 msgstr ""
 
 msgid "Reports"

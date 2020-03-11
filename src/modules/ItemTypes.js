@@ -1,4 +1,4 @@
-import i18n from '@dhis2/d2-i18n'
+import i18n from '@dhis2/d2-i18n';
 import TableIcon from '@material-ui/icons/ViewList';
 import ChartIcon from '@material-ui/icons/InsertChart';
 import MapIcon from '@material-ui/icons/Public';
@@ -10,7 +10,10 @@ import EmailIcon from '@material-ui/icons/Email';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 
-// VisualizationItem types
+import { getBaseUrl } from './utils';
+
+// Item types
+export const VISUALIZATION = 'VISUALIZATION';
 export const REPORT_TABLE = 'REPORT_TABLE';
 export const CHART = 'CHART';
 export const MAP = 'MAP';
@@ -24,97 +27,96 @@ export const MESSAGES = 'MESSAGES';
 export const TEXT = 'TEXT';
 export const SPACER = 'SPACER';
 
-// Domain types
-export const DOMAIN_TYPE_AGGREGATE = 'AGGREGATE';
-export const DOMAIN_TYPE_TRACKER = 'TRACKER';
+const DOMAIN_TYPE_AGGREGATE = 'AGGREGATE';
+const DOMAIN_TYPE_TRACKER = 'TRACKER';
 
-// Visualization types
-export const VISUALIZATION_TYPE_TABLE = 'TABLE';
-export const VISUALIZATION_TYPE_CHART = 'CHART';
-export const VISUALIZATION_TYPE_MAP = 'MAP';
-
+// Dashboard helpers
 export const spacerContent = 'SPACER_ITEM_FOR_DASHBOARD_LAYOUT_CONVENIENCE';
 export const emptyTextItemContent = 'TEXT_ITEM_WITH_NO_CONTENT';
 export const isSpacerType = item =>
   item.type === TEXT && item.text === spacerContent;
 export const isTextType = item =>
   item.type === TEXT && item.text !== spacerContent;
-export const isPluginType = item =>
-  itemTypeMap[item.type].hasOwnProperty('plugin');
+export const isVisualizationType = item =>
+  !!itemTypeMap[item.type].isVisualizationType;
+export const hasMapView = itemType =>
+  itemTypeMap[itemType].domainType === DOMAIN_TYPE_AGGREGATE;
+export const isTrackerDomainType = itemType =>
+  itemTypeMap[itemType].domainType === DOMAIN_TYPE_TRACKER;
+export const getDefaultItemCount = itemType =>
+  itemTypeMap[itemType].defaultItemCount || 5;
+export const getAppName = itemType => itemTypeMap[itemType].appName || '';
 
-// VisualizationItem type map
+// Item type map
 export const itemTypeMap = {
+  [VISUALIZATION]: {
+    id: VISUALIZATION,
+    endPointName: 'visualizations',
+    propName: 'visualization',
+    pluralTitle: i18n.t('Visualizations'),
+    appUrl: id => `dhis-web-data-visualizer/#/${id}`,
+    appName: 'Data Visualizer',
+    defaultItemCount: 10,
+  },
   [REPORT_TABLE]: {
     id: REPORT_TABLE,
     endPointName: 'reportTables',
     propName: 'reportTable',
-    countName: 'reportTableCount',
     pluralTitle: i18n.t('Pivot tables'),
-    plugin: global.reportTablePlugin,
     domainType: DOMAIN_TYPE_AGGREGATE,
-    visualizationType: VISUALIZATION_TYPE_TABLE,
-    appUrl: id => `dhis-web-pivot/?id=${id}`,
-    appName: i18n.t('Pivot Tables'),
+    isVisualizationType: true,
+    appUrl: id => `dhis-web-data-visualizer/#/${id}`,
+    appName: 'Data Visualizer',
   },
   [CHART]: {
     id: CHART,
     endPointName: 'charts',
     propName: 'chart',
-    countName: 'chartCount',
     pluralTitle: i18n.t('Charts'),
-    plugin: global.chartPlugin,
     domainType: DOMAIN_TYPE_AGGREGATE,
-    visualizationType: VISUALIZATION_TYPE_CHART,
+    isVisualizationType: true,
     appUrl: id => `dhis-web-data-visualizer/#/${id}`,
-    appName: i18n.t('Visualizer'),
+    appName: 'Data Visualizer',
   },
   [MAP]: {
     id: MAP,
     endPointName: 'maps',
     propName: 'map',
-    countName: 'mapCount',
     pluralTitle: i18n.t('Maps'),
-    plugin: global.mapPlugin,
     domainType: DOMAIN_TYPE_AGGREGATE,
-    visualizationType: VISUALIZATION_TYPE_MAP,
+    isVisualizationType: true,
     appUrl: id => `dhis-web-maps/?id=${id}`,
-    appName: i18n.t('Maps'),
+    appName: 'Maps',
   },
   [EVENT_REPORT]: {
     id: EVENT_REPORT,
     endPointName: 'eventReports',
     propName: 'eventReport',
-    countName: 'eventReportCount',
     pluralTitle: i18n.t('Event reports'),
-    plugin: global.eventReportPlugin,
     domainType: DOMAIN_TYPE_TRACKER,
-    visualizationType: VISUALIZATION_TYPE_TABLE,
+    isVisualizationType: true,
     appUrl: id => `dhis-web-event-reports/?id=${id}`,
-    appName: i18n.t('Event Reports'),
+    appName: 'Event Reports',
   },
   [EVENT_CHART]: {
     id: EVENT_CHART,
     endPointName: 'eventCharts',
     propName: 'eventChart',
-    countName: 'eventChartCount',
     pluralTitle: i18n.t('Event charts'),
-    plugin: global.eventChartPlugin,
     domainType: DOMAIN_TYPE_TRACKER,
-    visualizationType: VISUALIZATION_TYPE_CHART,
+    isVisualizationType: true,
     appUrl: id => `dhis-web-event-visualizer/?id=${id}`,
-    appName: i18n.t('Event Visualizer'),
+    appName: 'Event Visualizer',
   },
   [APP]: {
     endPointName: 'apps',
     propName: 'appKey',
-    countName: 'appCount',
-    pluralTitle: 'Apps',
+    pluralTitle: i18n.t('Apps'),
   },
   [REPORTS]: {
     id: REPORTS,
     endPointName: 'reports',
     propName: 'reports',
-    countName: 'reportCount',
     pluralTitle: i18n.t('Reports'),
     appUrl: id =>
       `dhis-web-reporting/getReportParams.action?mode=report&uid=${id}`,
@@ -123,7 +125,6 @@ export const itemTypeMap = {
     id: RESOURCES,
     endPointName: 'resources',
     propName: 'resources',
-    countName: 'resourceCount',
     pluralTitle: i18n.t('Resources'),
     appUrl: id => `api/documents/${id}/data`,
   },
@@ -131,7 +132,6 @@ export const itemTypeMap = {
     id: USERS,
     endPointName: 'users',
     propName: 'users',
-    countName: 'userCount',
     pluralTitle: i18n.t('Users'),
     appUrl: id => `dhis-web-dashboard-integration/profile.action?id=${id}`,
   },
@@ -147,7 +147,9 @@ export const itemTypeMap = {
   },
 };
 
-export const getItemUrl = (type, item, d2) => {
+export const getEndPointName = type => itemTypeMap[type].endPointName;
+
+export const getItemUrl = (type, item, baseUrl) => {
   let url;
 
   if (type === APP) {
@@ -155,14 +157,13 @@ export const getItemUrl = (type, item, d2) => {
   }
 
   if (itemTypeMap[type] && itemTypeMap[type].appUrl) {
-    url = `${getBaseUrl(d2)}/${itemTypeMap[type].appUrl(item.id)}`;
+    url = `${baseUrl}/${itemTypeMap[type].appUrl(item.id)}`;
   }
 
   return url;
 };
 
 export const getItemIcon = type => {
-  console.log(type);
   switch (type) {
     case REPORT_TABLE:
     case EVENT_REPORT:

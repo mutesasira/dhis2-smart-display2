@@ -75,12 +75,8 @@ const getItemIcon = type => {
 export const DashboardItems = observer(() => {
   const { currentSetting } = useMst();
 
-  const selectedDashboards = currentSetting.dashboards.filter(dash => {
-    return currentSetting.assignedItemStore.state.indexOf(dash.id) !== -1;
-  });
-
   const [currentDashboard, setCurrentDashboard] = useState(
-    selectedDashboards.length > 0 ? selectedDashboards[0] : {}
+    currentSetting.selectedDashboards.length > 0 ? currentSetting.selectedDashboards[0] : {}
   );
 
   const classes = useStyles();
@@ -105,7 +101,7 @@ export const DashboardItems = observer(() => {
         <div className="w-full md:w-1/4 bg-gray p-4 ">
           <div className="font-sans flex items-center justify-center bg-blue-darker w-full py-8">
             <div className="overflow-hidden bg-white rounded max-w-xs w-full shadow-lg  leading-normal">
-              {selectedDashboards.map(dashboard => (
+              {currentSetting.selectedDashboards.map(dashboard => (
                 <a
                   key={dashboard.id}
                   href="#"

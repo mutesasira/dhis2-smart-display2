@@ -1,5 +1,5 @@
 import { action, computed, decorate, observable } from 'mobx';
-import { itemTypeMap, getItemIcon } from "../modules/ItemTypes";
+import { itemTypeMap, CHART, MAP, EVENT_CHART, EVENT_REPORT, REPORT_TABLE } from "../modules/ItemTypes";
 
 export class DashboardItemContent {
   id;
@@ -8,59 +8,79 @@ export class DashboardItemContent {
   interpretations = [];
   dashboardItemType;
 
-
   setId = val => this.id = val;
   setName = val => this.name = val;
   setType = val => this.type = val;
   setInterpretations = val => this.interpretations = val;
   setDashboardItemType = val => this.dashboardItemType = val;
+  extractMapView = map => map.mapViews && map.mapViews.find(mv => mv.layer.includes(THEMATIC_LAYER));
 
   get getItemId() {
     return `item-${this.id}`
   }
 
-  loadPlugin = (plugin, config, d2) => {
+  hasIntegratedPlugin = type => [CHART, REPORT_TABLE].includes(type);
+
+  itemTypeToExternalPlugin = {
+    [MAP]: 'mapPlugin',
+    [EVENT_REPORT]: 'eventReportPlugin',
+    [EVENT_CHART]: 'eventChartPlugin',
+  };
+
+
+  getPlugin = type => {
+    if (this.hasIntegratedPlugin(type)) {
+      return true;
+    }
+    const pluginName = this.itemTypeToExternalPlugin[type];
+    return global[pluginName];
+  };
+
+  loadPlugin = (plugin, config, credentials) => {
     if (!(plugin && plugin.load)) {
       return;
     }
-
-    const api = d2.Api.getApi();
-
-    const idx = api.baseUrl.indexOf('/api');
-    plugin.url = idx > -1 ? api.baseUrl.slice(0, idx) : api.baseUrl;
-    plugin.auth = api.defaultHeaders.Authorization;
+    plugin.url = credentials.baseUrl;
     plugin.loadingIndicator = true;
-    // plugin.dashboard = true;
-
-    // plugin.auth = d2.auth;
-
+    plugin.dashboard = true;
+    if (credentials.auth) {
+      plugin.auth = credentials.auth;
+    }
     plugin.load(config);
   };
 
-  // const configureFilter = (filter = {}) => {
-  //     const ouIds = getUserOrgUnitIds(filter[FILTER_USER_ORG_UNIT]);
-  //     const userOrgUnitFilter = ouIds.length
-  //         ? {[FILTER_USER_ORG_UNIT]: ouIds}
-  //         : {};
-  //
-  //     return Object.assign({}, ...filter, userOrgUnitFilter);
-  // };
-
-
-  load = async (d2) => {
+  load = async (credentials = { baseUrl: 'http://localhost:8080' }) => {
     const config = {
-      // ...(await this.configureFavorite(d2)),
       id: this.id,
       el: this.getItemId,
-      // userOrgUnit: ['O6uvpzGd5pu']
     };
+    const plugin = this.getPlugin(this.type);
+    this.loadPlugin(plugin, config, credentials);
+  };
 
-    //         id: mapId,
-    //         el: 'map',
+  getVisualizationConfig = (visualization, originalType, activeType) => {
+    if (originalType === MAP && originalType !== activeType) {
+      const extractedMapView = extractMapView(visualization);
 
-    const plugin = itemTypeMap[this.dashboardItemType].plugin;
+      if (extractedMapView === undefined) {
+        return null;
+      }
 
-    this.loadPlugin(plugin, config, d2);
+      return getWithoutId({
+        ...visualization,
+        ...extractedMapView,
+        mapViews: undefined,
+        type: activeType === CHART ? VIS_TYPE_COLUMN : VIS_TYPE_PIVOT_TABLE,
+      });
+    } else if (originalType === REPORT_TABLE && activeType === CHART) {
+      return getWithoutId({ ...visualization, type: VIS_TYPE_COLUMN });
+    } else if (originalType === CHART && activeType === REPORT_TABLE) {
+      return getWithoutId({
+        ...visualization,
+        type: VIS_TYPE_PIVOT_TABLE,
+      });
+    }
+    return getWithoutId(visualization);
   };
 
 }
