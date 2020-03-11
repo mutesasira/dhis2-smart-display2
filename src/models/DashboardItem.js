@@ -52,7 +52,7 @@ export class DashboardItem {
     return getItemIcon(this.type);
   }
   get style(){
-    return this.selected?{background:'#dfedf7'}:{};
+    return this.selected?{background:'#EDFAF4'}:{};
   }
 }
 

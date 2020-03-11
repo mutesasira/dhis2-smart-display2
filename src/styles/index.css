@@ -33,14 +33,11 @@
 
 .dashboard{
   /* margin-bottom: 70px;
-  height:100px; */
+  height:100px; */    
 }
-
-.colorRed .check {
-  background-color: #43a7ee;
-  border-color: #43a7ee;
+.MuiStepIcon-completed{
+  color:green;
 }
-.Mui-checked{
-  background-color: black;
-  color: white;
+.MuiStepIcon-root.MuiStepIcon-completed{
+    color:green;
 }
