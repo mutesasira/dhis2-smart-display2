@@ -41,3 +41,7 @@
 .MuiStepIcon-root.MuiStepIcon-completed{
     color:green;
 }
+.scrollbars{
+  max-height: 100px;
+  overflow: 'auto'
+}

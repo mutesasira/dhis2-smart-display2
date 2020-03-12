@@ -18,7 +18,9 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 500,
     backgroundColor: theme.palette.background.paper,
     // width: '100%',
-		maxHeight: 300,
+  },
+  scrollbar:{
+    maxHeight: 300,
 		overflow: 'auto',
   },
   media: {
@@ -40,17 +42,17 @@ export const EditContents = observer(() => {
       case VISUALIZATION:
       case CHART:
       case REPORT_TABLE:
-        return <DHIS2Visualization height={410} item={item.dashboardItemContent} />
+        return <DHIS2Visualization height={150} item={item.dashboardItemContent} />
       default:
-        return <Visualization item={item.dashboardItemContent} height={410} />
+        return <Visualization item={item.dashboardItemContent} height={150} />
 
     }
   };
   return (
-    <div className="h-auto px-4">
+    <div className="h-auto px-4 -mb-16">
       <div className="flex md:flex-row flex-wrap h-full">
-        <div className="w-full md:w-1/4 bg-gray p-4 ">
-          {currentSetting.selectedItems.map(item => <div key={item.id} className="py-2">
+        <div className="w-full md:w-1/4 bg-gray border h-88 overflow-auto" >
+          {currentSetting.selectedItems.map(item => <div key={item.id} className="py-2 bg-gray-100">
             <Card className={classes.root}>
               <CardContent>
                 {getPluginComponent(item)}
@@ -61,21 +63,10 @@ export const EditContents = observer(() => {
           </div>)}
         </div>
         <div className="w-full md:w-3/4 bg-red p-4 pt-10 flex">
-          <div className="py-2 w-1/2">
+          <div className="py-2 w-full h-48">
             <Card>
               <CardContent>
                 <p>Image</p>
-                <img src="/assets/images/map.gif" />
-              </CardContent>
-              <CardActions></CardActions>
-            </Card>
-          </div>
-
-          <div className="py-2 w-1/2">
-            <Card>
-              <CardContent>
-                <p>Image</p>
-                <img src="/assets/images/map.gif" alt="Image loading" />
               </CardContent>
               <CardActions></CardActions>
             </Card>
