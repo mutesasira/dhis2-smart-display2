@@ -39,7 +39,6 @@ export class DashboardItem {
   setDashboardItemContent = val => this.dashboardItemContent = val;
 
   handleChange = e => {
-    console.log(e);
     const isChecked = e.target.checked;
     this.setSelected(isChecked);
   };

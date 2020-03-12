@@ -93,41 +93,48 @@ const theme = createMuiTheme({
 	},
 });
 const getItemIcon = type => {
-	switch (type) {
-		case REPORT_TABLE:
-		case EVENT_REPORT:
-		case REPORTS:
-		case CHART:
-		case EVENT_CHART:
-			return <ChartIcon />;
-		case MAP:
-			return <MapIcon />;
-		case APP:
-			return <ExtensionIcon />;
-		case RESOURCES:
-			return <DescriptionIcon />;
-		case USERS:
-			return <PersonIcon />;
-		case TEXT:
-			return <FontDownloadIcon />;
-		case MESSAGES:
-			return <EmailIcon />;
-		case SPACER:
-			return <CropFreeIcon />;
-		default:
-			return <NotInterestedIcon />;
-	}
-};
-export const DashboardItems = observer(props => {
-	const { currentSetting } = useMst();
+  switch (type) {
+    case REPORT_TABLE:
+    case EVENT_REPORT:
+    case REPORTS:
+      return <TableIcon />;
+    case CHART:
+    case EVENT_CHART:
+      return <ChartIcon />;
+    case MAP:
+      return <MapIcon />;
+    case APP:
+      return <ExtensionIcon />;
+    case RESOURCES:
+      return <DescriptionIcon />;
+    case USERS:
+      return <PersonIcon />;
+    case TEXT:
+      return <FontDownloadIcon />;
+    case MESSAGES:
+      return <EmailIcon />;
+    case SPACER:
+      return <CropFreeIcon />;
+    default:
+      return <NotInterestedIcon />;
+  }
+}
 
-	const selectedDashboards = currentSetting.dashboards.filter(dash => {
-		return currentSetting.assignedItemStore.state.indexOf(dash.id) !== -1;
-	});
 
-	const [currentDashboard, setCurrentDashboard] = useState(
-		selectedDashboards.length > 0 ? selectedDashboards[0] : {}
-	);
+export const DashboardItems = observer(() => {
+  const { currentSetting } = useMst();
+
+  const [currentDashboard, setCurrentDashboard] = useState(
+    currentSetting.selectedDashboards.length > 0 ? currentSetting.selectedDashboards[0] : {}
+  );
+
+	// const [currentDashboard, setCurrentDashboard] = useState(
+	// 	selectedDashboards.length > 0 ? selectedDashboards[0] : {}
+  // );
+  
+  // const selectedDashboards = currentSetting.dashboards.filter(dash => {
+  //  	return currentSetting.assignedItemStore.state.indexOf(dash.id) !== -1;
+  // });
 
 	const classes = useStyles();
 	const [checked, setChecked] = React.useState([0]);
@@ -151,7 +158,7 @@ export const DashboardItems = observer(props => {
 					<div className="font-sans flex items-center justify-center bg-blue-darker w-full py-8">
 						<div className={classes.mainBar}>
 							<div className=" bg-white rounded max-w-xs w-full shadow-lg  leading-normal ">
-								{selectedDashboards.map(dashboard => (
+								{currentSetting.selectedDashboards.map(dashboard => (
 									<a
 										key={dashboard.id}
 										href="#"
