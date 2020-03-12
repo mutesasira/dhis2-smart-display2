@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import TableIcon from '@material-ui/icons/ViewList';
 import ChartIcon from '@material-ui/icons/InsertChart';
+import BorderAll from '@material-ui/icons/BorderAll'
 import MapIcon from '@material-ui/icons/Public';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -166,6 +167,7 @@ export const getItemUrl = (type, item, baseUrl) => {
 export const getItemIcon = type => {
   switch (type) {
     case REPORT_TABLE:
+        return BorderAll
     case EVENT_REPORT:
     case REPORTS:
       return TableIcon;

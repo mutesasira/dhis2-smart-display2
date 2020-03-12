@@ -50,6 +50,9 @@ export class DashboardItem {
   get icon() {
     return getItemIcon(this.type);
   }
+  get style(){
+    return this.selected?{background:'#EDFAF4'}:{};
+  }
 }
 
 decorate(DashboardItem, {
@@ -80,5 +83,6 @@ decorate(DashboardItem, {
   setReports: action,
   setResources: action,
   setUsers: action,
-  icon: computed
+  icon: computed,
+  style:computed
 });

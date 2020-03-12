@@ -8,11 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import { Dashboard } from '../Dashboard';
 import { DashboardItems } from './DashboardItems';
 import { EditContents } from './EditContents';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { SlideOptions } from './SlideOptions';
 import { HomePage } from '../HomePage';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import { green } from '@material-ui/core/colors';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles'
 
 const style = {
     margin: 0,
@@ -23,25 +25,20 @@ const style = {
     position: 'fixed',
 };
 
-const changeTheme = createMuiTheme({
-    overrides: {
-        MuiStepIcon: {
-          root: {
-            '&$active': {
-              color: green,
-            },
-            '&$completed': {
-              color: green,
-            },
-          },
-          text: {
-            color: green
-          },
-         },
-        }
-});
-
-
+const styles = {
+    root: {
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      borderRadius: 3,
+      border: 0,
+      color: 'white',
+      height: 48,
+      padding: '0 30px',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  };
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
@@ -74,6 +71,23 @@ function getStepContent(stepIndex) {
     }
 }
 
+const theme = createMuiTheme({
+    overrides: {
+      MuiStepIcon: {
+        display: 'block',
+        '&$completed': {
+          color: 'red',
+        },
+        '&$active': {
+          color: 'yellow',
+        },
+        '&$error': {
+          color: 'black',
+        },
+      },
+    },
+  });
+
 export const  HorizontalLabelPositionBelowStepper = observer(()=> {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -92,6 +106,7 @@ export const  HorizontalLabelPositionBelowStepper = observer(()=> {
     };
 
     return (
+        <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map(label => (
@@ -101,13 +116,11 @@ export const  HorizontalLabelPositionBelowStepper = observer(()=> {
                 ))}
             </Stepper>
 
-            <div>
+            <div >
                 {activeStep === steps.length ? (
                     <div className="last-step">
-                        <Typography className={classes.instructions}>Your Presentation has been saves succesfully</Typography>
-                        <Button onClick={handleReset} >
-                            New Presentation
-                        </Button>
+                        <Typography className={classes.instructions}>All steps completed</Typography>
+                        <Button onClick={handleReset}>Reset</Button>
                     </div>
                 ) : (
                         <div className="">
@@ -122,7 +135,7 @@ export const  HorizontalLabelPositionBelowStepper = observer(()=> {
                                     Back
                         </Button>
                                 <Button variant="contained" color="primary" onClick={handleNext}>
-                                    {activeStep === steps.length - 1 ? 'Save Presentation' : 'Next'}
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                 </Button>
 
                                 <Button variant="contained" style={style} color="primary" >
@@ -133,5 +146,6 @@ export const  HorizontalLabelPositionBelowStepper = observer(()=> {
                     )}
             </div>
         </div>
+        </MuiThemeProvider>
     );
 });

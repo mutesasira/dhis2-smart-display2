@@ -13882,6 +13882,14 @@ video {
   height:100px; */
 }
 
+.MuiStepIcon-completed{
+  color:green;
+}
+
+.MuiStepIcon-root.MuiStepIcon-completed{
+  color:green;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

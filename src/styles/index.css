@@ -33,5 +33,11 @@
 
 .dashboard{
   /* margin-bottom: 70px;
-  height:100px; */
+  height:100px; */    
+}
+.MuiStepIcon-completed{
+  color:green;
+}
+.MuiStepIcon-root.MuiStepIcon-completed{
+    color:green;
 }

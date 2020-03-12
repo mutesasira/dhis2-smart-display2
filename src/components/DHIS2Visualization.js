@@ -10,6 +10,8 @@ export const DHIS2Visualization = observer(({ item, height, width }) => {
     height: height || '75vh',
     padding: '0 4px 4px',
     overflow: 'auto',
+    maxHeight: 300,
+
   };
 
   if (width) {
