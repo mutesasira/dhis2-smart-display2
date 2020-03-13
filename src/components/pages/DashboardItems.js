@@ -138,6 +138,7 @@ export const DashboardItems = observer(() => {
 
 	const classes = useStyles();
 	const [checked, setChecked] = React.useState([0]);
+	let selectedCount = 0;
 
 	const handleToggle = value => () => {
 		const currentIndex = checked.indexOf(value);
@@ -181,9 +182,11 @@ export const DashboardItems = observer(() => {
 						<MoreVertIcon className="text-black  text-right" />
 					</div>
 					<div className="w-auto">
-          <List className={classes.root}>
+		  <List className={classes.root}>
+		  
           {currentDashboard.dashboardItems.map((dashboardItem, i) => {
-            const dsbId = `checkbox-list-label-${dashboardItem.id}`;
+			const dsbId = `checkbox-list-label-${dashboardItem.id}`;
+
             return (
               <MuiThemeProvider theme={theme}>
                 <ListItem
@@ -210,11 +213,14 @@ export const DashboardItems = observer(() => {
                       tabIndex={-1}
                       disableRipple
                       icon={<span className={classes.icon} />}
-                      // inputProps={{
-                      //   'aria-label': dsbId,
-                      // }}
-                    />
-                  </ListItemIcon>
+                      inputProps={{
+                        'aria-label': dsbId,
+					  }}
+
+					  
+					  
+					/>
+					</ListItemIcon>
                   <ListItemText
                     primary={dashboardItem.dashboardItemContent.name}
                   />
@@ -222,12 +228,17 @@ export const DashboardItems = observer(() => {
                     <IconButton edge="end" aria-label="comments">
                       {getItemIcon(dashboardItem.type)}
                     </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
+				  </ListItemSecondaryAction>
+					
+				</ListItem>
+				
               </MuiThemeProvider>
             );
-          })}
-        </List>
+		  })}
+		  <span className = "text-bold"> {currentDashboard.selectedItems} out of {currentDashboard.selectedItems} selected</span>
+		</List>
+		
+
 					</div>
 				</div>
 			</div>
