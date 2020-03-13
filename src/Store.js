@@ -1,23 +1,23 @@
 import { decorate, observable, action } from "mobx";
-import { Settings } from './models/Settings';
+import { Presentation } from './models/Presentation';
 import { init } from 'd2'
 
 export class Store {
   engine;
-  settings = [];
+  presentations = [];
   d2;
   baseUrl;
   apiVersion;
-  currentSetting = new Settings();
+  currentPresentation = new Presentation();
   constructor(engine, baseUrl, apiVersion) {
     this.engine = engine;
-    this.currentSetting.setEngine(this.engine);
+    this.currentPresentation.setEngine(this.engine);
     this.baseUrl = baseUrl;
     this.apiVersion = apiVersion;
   }
-  setCurrentSetting = val => {
-    this.currentSetting = val;
-    this.currentSetting.setEngine(this.engine);
+  setPresentation = val => {
+    this.currentPresentation = val;
+    this.currentPresentation.setEngine(this.engine);
   }
   setD2 = async () => {
     this.d2 = await init({
@@ -25,11 +25,28 @@ export class Store {
       baseUrl: `${this.baseUrl}/api/${this.apiVersion}`
     });
   };
+
+  fetchPresentations = async () => {
+    try {
+      const val = await this.d2.dataStore.has('smart-slides');
+      if (val) {
+        const namespace = await this.d2.dataStore.get('smart-slides');
+        const presentations = await namespace.get('presentations');
+      } else {
+        const namespace = await this.d2.dataStore.create('smart-slides');
+        namespace.set('presentations', this.presentations);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
 }
 
 decorate(Store, {
-  settings: observable,
+  presentations: observable,
   engine: observable,
+  currentPresentation: observable,
   d2: observable,
   setD2: action
 });

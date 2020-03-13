@@ -19,9 +19,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     // width: '100%',
   },
-  scrollbar:{
+  scrollbar: {
     maxHeight: 300,
-		overflow: 'auto',
+    overflow: 'auto',
   },
   media: {
     height: 0,
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 export const EditContents = observer(() => {
   const classes = useStyles();
   const store = useMst();
-  const { currentSetting } = store;
+  const { currentPresentation } = store;
 
   const getPluginComponent = (item) => {
     const activeType = item.type;
@@ -52,7 +52,7 @@ export const EditContents = observer(() => {
     <div className="h-auto px-4 -mb-16">
       <div className="flex md:flex-row flex-wrap h-full">
         <div className="w-full md:w-1/4 bg-gray border h-88 overflow-auto" >
-          {currentSetting.selectedItems.map(item => <div key={item.id} className="py-2 bg-gray-100">
+          {currentPresentation.selectedItems.map(item => <div key={item.id} className="py-2 bg-gray-100">
             <Card className={classes.root}>
               <CardContent>
                 {getPluginComponent(item)}

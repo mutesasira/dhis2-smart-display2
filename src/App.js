@@ -22,7 +22,9 @@ const MyApp = () => {
   const rootStore = new Store(engine, baseUrl, apiVersion);
 
   useEffect(() => {
-    rootStore.setD2();
+    rootStore.setD2().then(() => {
+      rootStore.fetchPresentations();
+    })
   }, [rootStore]);
 
 
