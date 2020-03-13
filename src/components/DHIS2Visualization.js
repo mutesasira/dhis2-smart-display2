@@ -11,15 +11,12 @@ export const DHIS2Visualization = observer(({ item, height, width }) => {
     padding: '0 4px 4px',
     overflow: 'none',
     maxHeight: 140,
-
   };
-
   if (width) {
     style = { ...style, width }
   }
-
   useEffect(() => {
-    store.currentSetting.fetchItem(item).then(i => {
+    store.currentPresentation.fetchItem(item).then(i => {
       setVisualization(i);
     });
   }, [store]);

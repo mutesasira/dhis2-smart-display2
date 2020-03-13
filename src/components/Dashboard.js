@@ -10,7 +10,7 @@ export const Dashboard = observer(() => {
   const store = useMst();
 
   useEffect(() => {
-    store.currentSetting.fetchDashboards();
+    store.currentPresentation.fetchDashboards();
   }, [store])
   return (
     <div className="px-6">
@@ -22,10 +22,10 @@ export const Dashboard = observer(() => {
         onChange={() => console.log('XXX')}
       />
       <GroupEditor className="dashboard w-full"
-        itemStore={store.currentSetting.itemStore}
-        assignedItemStore={store.currentSetting.assignedItemStore}
-        onAssignItems={store.currentSetting.assignItems}
-        onRemoveItems={store.currentSetting.unAssignItems}
+        itemStore={store.currentPresentation.itemStore}
+        assignedItemStore={store.currentPresentation.assignedItemStore}
+        onAssignItems={store.currentPresentation.assignItems}
+        onRemoveItems={store.currentPresentation.unAssignItems}
         height={250}
       />
     </div>
