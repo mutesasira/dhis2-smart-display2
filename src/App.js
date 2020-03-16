@@ -3,13 +3,14 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { HomePage } from './components/HomePage';
 import { HorizontalLabelPositionBelowStepper } from './components/pages/Content';
-import './styles/tailwind.css';
 import { Presentations } from './components/Presentations';
 import { DataProvider } from '@dhis2/app-runtime'
 import D2UIApp from '@dhis2/d2-ui-app';
 import { Store } from './Store';
 import { Provider } from './context/context';
-import { useConfig } from '@dhis2/app-runtime'
+import { useConfig } from '@dhis2/app-runtime';
+import 'antd/dist/antd.css';
+import './styles/tailwind.css';
 
 const MyApp = () => {
   const [currentPage, setCurrentPage] = useState(1);
