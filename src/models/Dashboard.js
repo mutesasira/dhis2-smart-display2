@@ -1,4 +1,4 @@
-import { action, decorate, observable } from 'mobx';
+import { action, decorate, observable, computed } from 'mobx';
 
 export class Dashboard {
   id;
@@ -10,6 +10,9 @@ export class Dashboard {
   setName = val => this.name = val;
   setItemCount = val => this.itemCount = val;
   setDashboardItems = val => this.dashboardItems = val;
+  get selectedItems(){
+    return this.dashboardItems.filter(item=>item.selected === true).length;
+  }
 
 }
 
@@ -22,6 +25,7 @@ decorate(Dashboard, {
   setId: action,
   setName: action,
   setItemCount: action,
-  setDashboardItems: action
+  setDashboardItems: action,
+  selectedItems:computed
 
 });

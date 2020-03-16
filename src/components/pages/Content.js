@@ -133,7 +133,7 @@ export const  HorizontalLabelPositionBelowStepper = observer(()=> {
                                     className="backButton"
                                 >
                                     Back
-                        </Button>
+                                    </Button>
                                 <Button variant="contained" color="primary" onClick={handleNext}>
                                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                 </Button>
