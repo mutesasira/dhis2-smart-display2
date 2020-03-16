@@ -159,7 +159,7 @@ export const DashboardItems = observer(() => {
 				<div className="w-full md:w-1/4 bg-gray p-4 ">
 					<div className="font-sans flex items-center justify-center bg-blue-darker w-full py-8">
 						<div className={classes.mainBar}>
-							<div className=" bg-white rounded max-w-xs w-full shadow-lg  leading-normal ">
+							<div className=" bg-white rounded max-w-xs w-full shadow-lg  leading-normal mb-64">
 								{currentPresentation.selectedDashboards.map(
 									dashboard => (
 										<a
