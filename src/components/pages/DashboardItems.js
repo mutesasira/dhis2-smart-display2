@@ -130,14 +130,6 @@ export const DashboardItems = observer(() => {
 			: {}
 	);
 
-	// const [currentDashboard, setCurrentDashboard] = useState(
-	// 	selectedDashboards.length > 0 ? selectedDashboards[0] : {}
-	// );
-
-	// const selectedDashboards = currentPresentation.dashboards.filter(dash => {
-	//  	return currentPresentation.assignedItemStore.state.indexOf(dash.id) !== -1;
-	// });
-
 	const classes = useStyles();
 	const [checked, setChecked] = React.useState([0]);
 
@@ -254,9 +246,8 @@ export const DashboardItems = observer(() => {
 								}
 							)}
 						</List>
-						<span className="text-bold">
+						<span className="text-bold text-larger">
 							{' '}
-							{currentDashboard.selectedItems} out of{' '}
 							{currentDashboard.selectedItems} selected
 						</span>
 					</div>
