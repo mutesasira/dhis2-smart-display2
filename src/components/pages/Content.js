@@ -1,151 +1,83 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+
 import { Dashboard } from '../Dashboard';
 import { DashboardItems } from './DashboardItems';
 import { EditContents } from './EditContents';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { SlideOptions } from './SlideOptions';
-import { HomePage } from '../HomePage';
 import { observer } from 'mobx-react';
-import { green } from '@material-ui/core/colors';
-import { withStyles } from '@material-ui/core/styles';
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import { useMst } from '../../context/context';
+import { Steps, message, Button } from 'antd';
+import { CheckCircleFilled } from '@ant-design/icons';
 
-const style = {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-};
+const { Step } = Steps;
+const steps = [
+  {
+    title: 'Select Dashboards',
+    content: <Dashboard />,
+  },
+  {
+    title: 'Select Dashboard Items',
+    content: <DashboardItems />,
+  },
+  {
+    title: 'Edit Contents',
+    content: <EditContents />,
+  }, {
+    title: 'Slide Options',
+    content: <SlideOptions />,
+  }
+];
 
-const styles = {
-    root: {
-      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-      borderRadius: 3,
-      border: 0,
-      color: 'white',
-      height: 48,
-      padding: '0 30px',
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    },
-    label: {
-      textTransform: 'capitalize',
-    },
+
+export const HorizontalLabelPositionBelowStepper = observer(() => {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const store = useMst();
+
+
+  const handleNext = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-    },
-    backButton: {
-        marginRight: theme.spacing(1),
-    },
-    instructions: {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-    },
-}));
 
-function getSteps() {
-    return ['Select Dashboards', 'Select Dashboard Items', 'Edit Contents', 'Slide Options'];
-}
-
-function getStepContent(stepIndex) {
-    switch (stepIndex) {
-        case 0:
-            return <Dashboard />;
-        case 1:
-            return <DashboardItems />;
-        case 2:
-            return <EditContents />;
-        case 3:
-            return <SlideOptions />;
-        default:
-            return <HomePage />;
-    }
-}
-
-const theme = createMuiTheme({
-    overrides: {
-      MuiStepIcon: {
-        display: 'block',
-        '&$completed': {
-          color: 'red',
-        },
-        '&$active': {
-          color: 'yellow',
-        },
-        '&$error': {
-          color: 'black',
-        },
-      },
-    },
-  });
-
-export const  HorizontalLabelPositionBelowStepper = observer(()=> {
-    const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
-
-    const handleNext = () => {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
-    return (
-        <MuiThemeProvider theme={theme}>
-        <div className={classes.root}>
-            <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map(label => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-
-            <div >
-                {activeStep === steps.length ? (
-                    <div className="last-step">
-                        <Typography className={classes.instructions}>All steps completed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
-                    </div>
-                ) : (
-                        <div className="">
-                            {getStepContent(activeStep)}
-                            {/*{store.name}*/}
-                            <div className="step-action mt-20">
-                                <Button
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
-                                    className="backButton"
-                                >
-                                    Back
-                                    </Button>
-                                <Button variant="contained" color="primary" onClick={handleNext}>
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                </Button>
-
-                                <Button variant="contained" style={style} color="primary" >
-                                    Cancel
-                                </Button>
-                            </div>
-                        </div>
-                    )}
-            </div>
+  const handleBack = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
+  };
+  return (
+    <div className="p-2 flex flex-col">
+      <div className="">
+        <Steps current={activeStep} >
+          {steps.map((item,i,icon) => {
+            if(i<activeStep){
+              return <Step key={item.title} title={item.title, style ={color: '	#3DC807'}}
+                    icon={<CheckCircleFilled  style={{ size:'large', color: '	#3DC807' }}/>}/>
+            }
+            else{
+              return <Step key={item.title} title={item.title} />
+            }
+          })}
+        </Steps>
+        <div className="mt-10">{steps[activeStep].content}</div>
+      </div>
+      <div className="bottom-0 absolute flex mb-10" style={{ width: '99%' }}>
+        <div className="w-1/2 text-left">
+          {activeStep > 0 && (
+            <Button onClick={() => handleBack()}>
+              Previous
+            </Button>
+          )}
         </div>
-        </MuiThemeProvider>
-    );
+        <div className="w-1/2 text-right">
+          {activeStep < steps.length - 1 && (
+            <Button type="primary" onClick={() => handleNext()}>
+              Next
+            </Button>
+          )}
+          {activeStep === steps.length - 1 && (
+            <Button type="primary" onClick={store.savePresentation}>
+              Save Presentation
+            </Button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 });

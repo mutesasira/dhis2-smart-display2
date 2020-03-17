@@ -1,6 +1,7 @@
 import { decorate, observable, action } from "mobx";
 import { Presentation } from './models/Presentation';
-import { init } from 'd2'
+import { init } from 'd2';
+import { generateUid } from 'd2/uid';
 
 export class Store {
   engine;
@@ -41,6 +42,26 @@ export class Store {
     }
   };
 
+  savePresentation = async () => {
+    if (this.currentPresentation.id) {
+      const mapping = _.findIndex(this.presentations, { id: this.currentPresentation.id });
+      if (mapping !== -1) {
+        this.presentations.splice(mapping, 1, this.currentPresentation);
+      } else {
+        this.presentations = [...this.presentations, this.currentPresentation];
+      }
+    } else {
+      this.currentPresentation.setId(generateUid());
+      this.presentations = [...this.presentations, this.currentPresentation];
+    }
+
+    const whatToSave = this.presentations.map(p => {
+      return p.canBeSaved;
+    });
+    const namespace = await this.d2.dataStore.get('smart-slides');
+    namespace.set('presentations', whatToSave);
+  };
+
 }
 
 decorate(Store, {
@@ -48,5 +69,6 @@ decorate(Store, {
   engine: observable,
   currentPresentation: observable,
   d2: observable,
-  setD2: action
+  setD2: action,
+  savePresentation: action
 });

@@ -1,12 +1,6 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+
+import {ShareAltOutlined } from '@ant-design/icons';
 import EditIcon, {
   Edit,
   Info,
@@ -16,110 +10,60 @@ import EditIcon, {
   GroupAdd
 } from '@material-ui/icons';
 // import NumericInput from 'react-numeric-input';
-import * as NumericInput from 'react-numeric-input';
+import { observer } from 'mobx-react';
+import { useMst } from '../../context/context';
+import { Form, Input, Button, Checkbox, InputNumber, DatePicker, Select } from 'antd';
 
-export const SlideOptions = () => {
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date('2014-08-18T21:11:54')
-  );
+const plainOptions = ['slide', 'zoom', 'spin', 'fade'];
 
+const { TextArea } = Input
+
+export const SlideOptions = observer(() => {
+  const { currentPresentation } = useMst();
+
+  const [form] = Form.useForm();
   const handleDateChange = date => {
     setSelectedDate(date);
   };
+
   return (
-    <div className="h-auto px-4">
-      <div className="flex md:flex-row flex-wrap h-full ml-6 py-0">
-        <label className="block py-2 w-full md:w-1/2 bg-gray p-4 " placeholder="Enter Presentation name">
-          <Edit />
-          <span className="text-blue-700">Presentation Name:</span>
-          <br />
-          <input className="ml-6 appearance-none border rounded py-2 px-3 text-grey-darker w-full" />
-        </label>
-        <label className="block py-2 w-full md:w-1/2 bg-gray p-4 ">
-          <Schedule />
-          <span className="text-blue-700">Slide Duration (Seconds):</span>
-          <br />
-          <NumericInput min={0} max={100} value={50} className="ml-6 " />
-        </label>
+    <div className="flex md:flex-row flex-wrap h-64 ml-6 py-2 px-4">
+      <div className="flex flex-col w-full md:w-1/2 pr-6 mb-10">
+        <div className="-ml-6  mb-2 pr-2 text-blue-500"><Edit className = "text-gray-500" />Presentation Name:</div>
+        <Input size="large" value={currentPresentation.name} placeholder="Presentation name" className="w-full " onChange={currentPresentation.onNameChange} />
       </div>
-      <div className="flex md:flex-row flex-wrap h-full ml-6 pt-0">
-        <label className="block py-2 w-full md:w-1/2 bg-gray p-4 ">
-          <Info />
-          <span className="text-blue-700">Description:</span>
-          <br />
-          <input className="ml-6 shadow appearance-none border rounded py-2 px-3 text-grey-darker w-full" />
-        </label>
-        <label className="block py-2 w-full md:w-1/2 bg-gray p-4 ">
-          <Info />
-          <span className="text-blue-700">
-            Restrict Access to this Presentation
-            </span>
-          <br />
-          <button className="ml-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            <Share />
-            Share
-            </button>
-        </label>
+      <div className="flex flex-col w-full md:w-1/2 pl-6 mb-10">
+        <div className="-ml-6 mb-2 pr-2 text-blue-500"><Schedule className = "text-gray-500" />Slide duration (milliseconds):</div>
+        <InputNumber onChange={currentPresentation.setSlideDuration} min={20000} max={60000} value={currentPresentation.slideDuration} step={1000} size="large" placeholder="input placeholder" />
       </div>
-      <div className="flex md:flex-row flex-wrap h-full ml-6 pt-0">
-        <label className="block py-2 w-full md:w-1/2 bg-gray p-4 ">
-          <br />
-          <PlayCircleOutline />
-          <span className="text-blue-700">Transition Mode:</span>
-          <input className="ml-6 shadow appearance-none border rounded py-2 px-3 text-grey-darker w-full" />
-        </label>
-        <label className="block py-2 w-full md:w-1/2 bg-gray p-4 ">
-          <Schedule />
-          <span className="text-blue-700">
-            Schedule Presentation for Sharing
-            </span>
-          <br />
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Frequency"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-              <KeyboardDatePicker
-                margin="normal"
-                id="date-picker-dialog"
-                label="Select Date"
-                format="MM/dd/yyyy"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-            </Grid>
-          </MuiPickersUtilsProvider>
-        </label>
+
+      <div className="flex flex-col w-full md:w-1/2 pr-6 mb-10">
+        <div className="-ml-6 mb-2 pr-2 text-blue-500"><Info className = "text-gray-500" />Description:</div>
+        <TextArea value={currentPresentation.description} placeholder="Presentation description" onChange={currentPresentation.onDescriptionChange} className="w-full pl-12" rows={5} />
       </div>
-      <div className="flex md:flex-row flex-wrap h-full ml-6 pt-0">
-        <label className="block py-2 w-full md:w-1/2 bg-gray p-4 ">
-          <Schedule />
-          <span class ame="text-blue-700">
-            Transition Duragittion (Seconds):
-            </span>
-          <br />
-          <NumericInput min={0} max={100} value={50} className="ml-6" />
-        </label>
-        <div className="w-full md:w-1/2 bg-gray p-4 ">
-          <button className="ml-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            <GroupAdd />
-            Add Receipients
-          </button>
+      <div className="flex flex-col w-full md:w-1/2 pl-6 mb-10 ">
+        <div className="-ml-6  mb-2 pr-2 text-blue-500"><GroupAdd className = "text-gray-500" />Restrict Access to this presentation:</div>
+        <Button className = "bg-blue-500 text-white w-24" icon={<ShareAltOutlined className = "text-white" />}>&nbsp;&nbsp;Share</Button>
+      </div>
+
+      <div className="flex flex-col w-full md:w-1/2 pr-6 mb-10">
+        <div className="-ml-6  mb-2 pr-2 text-blue-500"><PlayCircleOutline className = "text-gray-500" />Transition mode:</div>
+        <Checkbox.Group options={plainOptions} value={currentPresentation.transitionModes} onChange={currentPresentation.setTransitionModes} />
+      </div>
+      <div className="flex flex-col w-full md:w-1/2 pl-6 mb-10">
+        <div className="-ml-6  mb-2 pr-2 text-blue-500"><Edit className = "text-gray-500" />Schedule presentation (PDF) sharing:</div>
+        <div className="flex w-full">
+    
+          <div className="w-1/2">
+            <Button className = "bg-blue-500 text-white" icon={<GroupAdd className = "text-white" />}>&nbsp;&nbsp;Add Recipients</Button>
+          </div>
         </div>
+      </div>
+
+      <div className="flex flex-col w-full md:w-1/2 pr-6 mb-10">
+        <div className="-ml-6 mb-2 pr-2"><Edit />Transition duration (seconds):</div>
+        <InputNumber min={100} max={1000} value={currentPresentation.transitionDuration} size="large" onChange={currentPresentation.setTransitionDuration} placeholder="input placeholder" />
       </div>
     </div>
   );
-};
+});

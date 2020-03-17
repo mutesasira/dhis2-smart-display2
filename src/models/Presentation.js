@@ -5,7 +5,7 @@ import { DashboardItem } from './DashboardItem';
 import { DashboardItemContent } from './DashboardItemContent'
 import { extractFavorite } from '../modules/utils';
 import { getEndPointName } from '../modules/ItemTypes'
-import { flatten, fromPairs } from 'lodash';
+import { flatten, fromPairs, pick } from 'lodash';
 const query = {
   dashboards: {
     resource: 'dashboards.json',
@@ -57,7 +57,27 @@ export class Presentation {
   itemStore = GroupStore.create({ state: [] });
   dashboards = [];
   engine;
+  transitionDuration = 500;
+  slideDuration = 20000;
+  transitionModes = ['slide', 'zoom', 'spin', 'fade'];
+
   setEngine = val => this.engine = val;
+  setName = val => this.name = val;
+  setDashboards = val => this.dashboards = val;
+  setDescription = val => this.description = val;
+  setTransitionModes = val => this.transitionModes = val;
+  setTransitionDuration = val => this.transitionDuration = val;
+  setSlideDuration = val => this.slideDuration = val;
+  setId = val => this.id = val;
+
+
+  onNameChange = e => {
+    this.setName(e.target.value)
+  }
+
+  onDescriptionChange = e => {
+    this.setDescription(e.target.value)
+  }
 
   assignItems = (items) => {
     const assigned = this.assignedItemStore.state.concat(items);
@@ -105,8 +125,11 @@ export class Presentation {
       const items = dashboard.dashboardItems.filter(item => item.selected);
       return items
     });
-
     return flatten(items)
+  }
+
+  get canBeSaved() {
+    return pick(this, ['id', 'name', 'dashboards', 'description', 'transitionModes', 'transitionDuration', 'slideDuration'])
   }
 }
 
@@ -118,9 +141,29 @@ decorate(Presentation, {
   itemStore: observable,
   engine: observable,
 
+  transitionDuration: observable,
+  slideDuration: observable,
+  transitionMode: observable,
+
+
   assignItems: action,
   unAssignItems: action,
   fetchDashboards: action,
   selectedDashboards: computed,
-  selectedItems: computed
+  selectedItems: computed,
+  canBeSaved: computed,
+
+  setTransitionModes: action,
+  setTransitionDuration: action,
+  setSlideDuration: action,
+  setId: action,
+  dashboards: observable,
+  fetchItem: action,
+  onDescriptionChange: action,
+  onNameChange: action,
+  setDashboards: action,
+  setDescription: action,
+  setEngine: action,
+  setName: action,
+  transitionModes: observable
 })
