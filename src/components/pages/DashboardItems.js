@@ -7,7 +7,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -21,6 +20,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import TableIcon from '@material-ui/icons/TableChart';
+import { Checkbox } from 'antd';
 import {
   REPORT_TABLE,
   EVENT_REPORT,
@@ -40,6 +40,16 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
+
+
+
+// const keys = () =>{
+//   return (
+//     <div>can we talk about the keys since emma had the upper office keys and you know sometimes we might need to work over time</div>
+//   )
+// }
+
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -170,7 +180,7 @@ export const DashboardItems = observer(() => {
             </div>
           </div>
         </div>
-        <div className="w-auto md:w-3/4 bg-red p-4 pt-10 h-64">
+        <div className="w-auto md:w-3/4 bg-red p-4 pt-10 h-56">
           <div className="w-auto p-4 flex  text-left bg-blue-500 text-white">
             {currentDashboard.name}
             <MoreVertIcon className="text-black  text-right" />
@@ -247,7 +257,6 @@ export const DashboardItems = observer(() => {
             </List>
             <span className="text-bold">
               {' '}
-              {currentDashboard.selectedItems} out of{' '}
               {currentDashboard.selectedItems} selected
 						</span>
           </div>

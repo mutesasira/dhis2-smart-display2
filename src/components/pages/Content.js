@@ -7,9 +7,9 @@ import { SlideOptions } from './SlideOptions';
 import { observer } from 'mobx-react';
 import { useMst } from '../../context/context';
 import { Steps, message, Button } from 'antd';
+import { CheckCircleFilled } from '@ant-design/icons';
 
 const { Step } = Steps;
-
 const steps = [
   {
     title: 'Select Dashboards',
@@ -28,9 +28,9 @@ const steps = [
   }
 ];
 
+
 export const HorizontalLabelPositionBelowStepper = observer(() => {
   const [activeStep, setActiveStep] = React.useState(0);
-
   const store = useMst();
 
 
@@ -41,14 +41,19 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
-
   return (
     <div className="p-2 flex flex-col">
       <div className="">
-        <Steps current={activeStep} progressDot>
-          {steps.map(item => (
-            <Step key={item.title} title={item.title} />
-          ))}
+        <Steps current={activeStep} >
+          {steps.map((item,i,icon) => {
+            if(i<activeStep){
+              return <Step key={item.title} title={item.title, style ={color: '	#3DC807'}}
+                    icon={<CheckCircleFilled  style={{ size:'large', color: '	#3DC807' }}/>}/>
+            }
+            else{
+              return <Step key={item.title} title={item.title} />
+            }
+          })}
         </Steps>
         <div className="mt-10">{steps[activeStep].content}</div>
       </div>
@@ -68,7 +73,7 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
           )}
           {activeStep === steps.length - 1 && (
             <Button type="primary" onClick={store.savePresentation}>
-              Finish & Save
+              Save Presentation
             </Button>
           )}
         </div>

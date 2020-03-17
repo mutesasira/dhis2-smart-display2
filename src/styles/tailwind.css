@@ -3886,7 +3886,7 @@ video {
 }
 
 .h-88 {
-  height: 42em;
+  height: 32em;
 }
 
 .h-auto {
@@ -17279,7 +17279,7 @@ video {
   }
 
   .sm\:h-88 {
-    height: 42em;
+    height: 32em;
   }
 
   .sm\:h-auto {
@@ -30627,7 +30627,7 @@ video {
   }
 
   .md\:h-88 {
-    height: 42em;
+    height: 32em;
   }
 
   .md\:h-auto {
@@ -43975,7 +43975,7 @@ video {
   }
 
   .lg\:h-88 {
-    height: 42em;
+    height: 32em;
   }
 
   .lg\:h-auto {
@@ -57323,7 +57323,7 @@ video {
   }
 
   .xl\:h-88 {
-    height: 42em;
+    height: 32em;
   }
 
   .xl\:h-auto {
