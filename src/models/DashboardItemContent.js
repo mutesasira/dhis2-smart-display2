@@ -6,13 +6,11 @@ export class DashboardItemContent {
   name;
   type;
   interpretations = [];
-  dashboardItemType;
 
   setId = val => this.id = val;
   setName = val => this.name = val;
   setType = val => this.type = val;
   setInterpretations = val => this.interpretations = val;
-  setDashboardItemType = val => this.dashboardItemType = val;
   extractMapView = map => map.mapViews && map.mapViews.find(mv => mv.layer.includes(THEMATIC_LAYER));
 
   get getItemId() {
@@ -90,13 +88,11 @@ decorate(DashboardItemContent, {
   name: observable,
   interpretations: observable,
   type: observable,
-  dashboardItemType: observable,
 
   setId: action,
   setName: action,
   setInterpretations: action,
   setType: action,
-  setDashboardItemType: action,
   getItemId: computed
 
 });

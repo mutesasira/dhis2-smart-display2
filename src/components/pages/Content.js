@@ -45,12 +45,12 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
     <div className="p-2 flex flex-col">
       <div className="">
         <Steps current={activeStep} >
-          {steps.map((item,i,icon) => {
-            if(i<activeStep){
-              return <Step key={item.title} title={item.title, style ={color: '	#3DC807'}}
-                    icon={<CheckCircleFilled  style={{ size:'large', color: '	#3DC807' }}/>}/>
+          {steps.map((item, i, icon) => {
+            if (i < activeStep) {
+              return <Step key={item.title} title={item.title} style={{ color: '	#3DC807' }}
+                icon={<CheckCircleFilled style={{ size: 'large', color: '	#3DC807' }} />} />
             }
-            else{
+            else {
               return <Step key={item.title} title={item.title} />
             }
           })}
