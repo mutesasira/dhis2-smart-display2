@@ -9,6 +9,7 @@ import { useMst } from '../../context/context';
 import { Steps, message, Button } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
 
+
 const { Step } = Steps;
 const steps = [
   {
@@ -47,7 +48,7 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
         <Steps current={activeStep} >
           {steps.map((item,i,icon) => {
             if(i<activeStep){
-              return <Step key={item.title} title={item.title, style ={color: '	#3DC807'}}
+              return <Step key={item.title} title={item.title}
                     icon={<CheckCircleFilled  style={{ size:'large', color: '	#3DC807' }}/>}/>
             }
             else{
