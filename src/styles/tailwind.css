@@ -13973,23 +13973,23 @@ video {
   color: #1e72ae;
 }
 
-.bg-blue-sd{
+.bg-blue-sd {
   background-color: #43a7ee;
 }
 
-.align{
+.align {
 }
 
-.sbox-sd{
+.sbox-sd {
   width: "370px";
   border: 2px red solid;
 }
 
-.input-css{
-  margin:40px;
+.input-css {
+  margin: 40px;
 }
 
-.input2{
+.input2 {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -13997,20 +13997,20 @@ video {
   margin-left: auto;
 }
 
-.dashboard{
+.dashboard {
   /* margin-bottom: 70px;
   height:100px; */
 }
 
-.MuiStepIcon-completed{
-  color:green;
+.MuiStepIcon-completed {
+  color: green;
 }
 
-.MuiStepIcon-root.MuiStepIcon-completed{
-  color:green;
+.MuiStepIcon-root.MuiStepIcon-completed {
+  color: green;
 }
 
-.scrollbars{
+.scrollbars {
   max-height: 100px;
   overflow: 'auto'
 }

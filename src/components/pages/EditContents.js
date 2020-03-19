@@ -5,13 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { observer } from 'mobx-react';
 import { useMst } from '../../context/context';
-import { Visualization } from '../Visualization';
-import { DHIS2Visualization } from '../DHIS2Visualization';
-import {
-  VISUALIZATION,
-  CHART,
-  REPORT_TABLE
-} from '../../modules/ItemTypes'
+import { VisualizationItem } from './VisualizationItem'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,19 +29,7 @@ export const EditContents = observer(() => {
   const store = useMst();
   const { currentPresentation } = store;
 
-  const getPluginComponent = (item) => {
-    const activeType = item.type;
 
-    switch (activeType) {
-      case VISUALIZATION:
-      case CHART:
-      case REPORT_TABLE:
-        return <DHIS2Visualization height={150} item={item.dashboardItemContent} />
-      default:
-        return <Visualization item={item.dashboardItemContent} height={150} />
-
-    }
-  };
   return (
     <div className="h-auto px-4 -mb-16">
       <div className="flex md:flex-row flex-wrap h-full">
@@ -55,7 +37,7 @@ export const EditContents = observer(() => {
           {currentPresentation.selectedItems.map(item => <div key={item.id} className="py-2 bg-gray-100">
             <Card className={classes.root}>
               <CardContent>
-                {getPluginComponent(item)}
+                <VisualizationItem height={120} width={120} item={item} />
               </CardContent>
               <CardActions>
               </CardActions>

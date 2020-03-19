@@ -51,7 +51,7 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
               return <Step key={item.title} title={item.title}
                     icon={<CheckCircleFilled  style={{ size:'large', color: '	#3DC807' }}/>}/>
             }
-            else{
+            else {
               return <Step key={item.title} title={item.title} />
             }
           })}

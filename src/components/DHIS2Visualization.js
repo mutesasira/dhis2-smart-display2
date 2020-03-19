@@ -8,9 +8,6 @@ export const DHIS2Visualization = observer(({ item, height, width }) => {
   const store = useMst();
   let style = {
     height: height || '75vh',
-    padding: '0 4px 4px',
-    overflow: 'none',
-    maxHeight: 140,
   };
   if (width) {
     style = { ...style, width }
@@ -21,11 +18,14 @@ export const DHIS2Visualization = observer(({ item, height, width }) => {
     });
   }, [store]);
 
-  return <div style={style}>
+  item = { ...item, height, width }
+
+  return <div className="min-h-full min-w-full bg-red-900">
     <VisualizationPlugin
       d2={store.d2}
       visualization={visualization}
       forDashboard={true}
+      className="w-full h-full"
     />
   </div>
 });
