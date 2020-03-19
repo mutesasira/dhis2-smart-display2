@@ -133,19 +133,13 @@ const getItemIcon = type => {
 
 export const DashboardItems = observer(() => {
   const { currentPresentation } = useMst();
-
-  const [currentDashboard, setCurrentDashboard] = useState(
-    currentPresentation.selectedDashboards.length > 0
-      ? currentPresentation.selectedDashboards[0]
-      : {}
-  );
+  const [currentDashboard, setCurrentDashboard] = useState(currentPresentation.dashboards.length > 0? currentPresentation.dashboards[0]: {});
   const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
 
   const handleToggle = value => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
-
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
@@ -161,7 +155,7 @@ export const DashboardItems = observer(() => {
           <div className="font-sans flex items-center justify-center bg-blue-darker w-full py-8">
             <div className={classes.mainBar}>
               <div className=" bg-white rounded max-w-xs w-full shadow-lg  leading-normal mb-64">
-                {currentPresentation.selectedDashboards.map(
+                {currentPresentation.dashboards.map(
                   dashboard => (
                     <a
                       key={dashboard.id}
