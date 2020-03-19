@@ -6,6 +6,13 @@ import { Presentations } from './Presentations';
 import { SlideShow } from './SlideShow';
 import { useMst } from '../context/context';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 export const LandingPage = observer(() => {
   const store = useMst()
   const displayPage = () => {
@@ -25,7 +32,20 @@ export const LandingPage = observer(() => {
     }
   }
 
-  return <div>
-    {displayPage()}
-  </div>
+  return <Router>
+    <Switch>
+      <Route path="/configuration">
+        <HorizontalLabelPositionBelowStepper />
+      </Route>
+      <Route path="/presentations">
+        <Presentations />
+      </Route>
+      <Route path="/slides">
+        <SlideShow />
+      </Route>
+      <Route path="/">
+        <HomePage />
+      </Route>
+    </Switch>
+  </Router>
 })

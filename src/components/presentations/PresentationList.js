@@ -7,6 +7,7 @@ import { useMst } from '../../context/context';
 import { MoreOutlined } from '@ant-design/icons';
 import { observer } from 'mobx-react';
 import { Menu, Dropdown } from 'antd';
+import { useHistory } from "react-router-dom";
 
 const style = {
   margin: 0,
@@ -29,15 +30,20 @@ const style = {
 };
 
 export const PresentationList = observer(() => {
+  let history = useHistory();
   const store = useMst();
 
+  const present = (presentation) => () => {
+    store.setPresentation(presentation);
+    history.push('/slides')
+  }
   return (
     <div className="flex flex-col px-16">
       {store.presentations.map(presentation => {
         const menu = (
           <Menu>
             <Menu.Item key="0">Preview</Menu.Item>
-            <Menu.Item key="1" onClick={store.present(presentation)}>Present</Menu.Item>
+            <Menu.Item key="1" onClick={present(presentation)}>Present</Menu.Item>
             <Menu.Item key="3">Edit</Menu.Item>
             <Menu.Item key="4">Sharing Settings</Menu.Item>
             <Menu.Item key="5">Show Details</Menu.Item>

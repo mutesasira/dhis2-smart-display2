@@ -98,12 +98,6 @@ export class Store {
 
   setCurrentPage = (page) => this.currentPage = page;
 
-  present = (presentation) => () => {
-    this.setPresentation(presentation)
-    this.setCurrentPage(5);
-    this.changeFull(true);
-  }
-
 
   fetchDashboards = async () => {
     const { dashboards: { dashboards } } = await this.engine.query(query);
@@ -161,7 +155,6 @@ decorate(Store, {
   currentPage: observable,
   fetchPresentations: action,
   fullScreen: observable,
-  present: action,
   setCurrentPage: action,
   setPresentation: action,
   apiVersion: observable,

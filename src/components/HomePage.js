@@ -5,6 +5,8 @@ import Fab from '@material-ui/core/Fab';
 import Link from '@material-ui/core/Link';
 import { observer } from 'mobx-react';
 import { useMst } from '../context/context';
+import { useHistory } from "react-router-dom";
+
 //import '././styles/index.css';
 
 const stepList = [
@@ -26,6 +28,9 @@ const style = {
 
 export const HomePage = observer(() => {
   const store = useMst();
+
+  let history = useHistory();
+
   const iconStyles = {
     largeIcon: {
       width: 80,
@@ -141,13 +146,13 @@ export const HomePage = observer(() => {
           </ol>
           <h1 className="pt-5 font-bold">Click <AddIcon /> to create presentation</h1>
           <div className="pt-4 items-center">
-            <button onClick={() => store.setCurrentPage(3)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded "  >
+            <button onClick={() => history.push("/presentations")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded "  >
               View presentations
                         </button>
           </div>
         </div>
       </div>
-      <Fab size="medium" style={style} color="primary" onClick={() => store.setCurrentPage(2)}>
+      <Fab size="medium" style={style} color="primary" onClick={() => history.push("/configuration")}>
         <AddIcon />
       </Fab>
     </div>
