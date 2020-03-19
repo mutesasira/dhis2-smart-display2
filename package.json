@@ -47,6 +47,6 @@
     "react-numeric-input": "^2.2.3",
     "react-router-dom": "^5.1.2",
     "react-search-box": "^2.0.2",
-    "spectacle": "^6.0.0"
+    "spectacle": "^6.0.1"
   }
 }

@@ -13246,10 +13246,10 @@ spdy@^4.0.1:
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
 
-spectacle@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/spectacle/-/spectacle-6.0.0.tgz#cd86350ad70b05bf752754a07b42773ca48a1a3c"
-  integrity sha512-96uUpPx8A6ch5YEzKafoHi95tpqfysP2Bk6vahTZQmzYlpda+1C6ySKCOJbsXEsne+iiiZHl2pcD7OHAy+6Sgw==
+spectacle@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/spectacle/-/spectacle-6.0.1.tgz#dd9896be85425804799b4423e9f4f78f0d28836e"
+  integrity sha512-ro9WGqEQn3Xaq2IydIizg+e6sEK3CXjlwO7oOwBKwKElXtPtnpypyvW0y6as10gfhiZxmANR3/upGV6oOYvzyA==
   dependencies:
     broadcastchannel-polyfill "^1.0.0"
     history "^4.9.0"

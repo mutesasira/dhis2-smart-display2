@@ -1,21 +1,24 @@
 import React from 'react';
 import { LiveTv } from '@material-ui/icons';
+//import Pagination from '@material-ui/lab/Pagination';
+import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
+import { MoreOutlined } from '@ant-design/icons';
 import Fab from '@material-ui/core/Fab';
 import { useMst } from '../../context/context';
-import { MoreOutlined } from '@ant-design/icons';
 import { observer } from 'mobx-react';
 import { Menu, Dropdown } from 'antd';
 import { useHistory } from "react-router-dom";
+import { Row, Col } from 'antd';
 
 const style = {
-  margin: 0,
-  top: 'auto',
-  right: 40,
-  bottom: 40,
-  left: 'auto',
-  position: 'fixed',
+	margin: 0,
+	top: 'auto',
+	right: 40,
+	bottom: 40,
+	left: 'auto',
+	position: 'fixed',
 
   largeIcon: {
     height: '80%',
@@ -51,26 +54,96 @@ export const PresentationList = observer(() => {
             <Menu.Item key="7">Delete</Menu.Item>
           </Menu>
         );
-        return <div key={presentation.id} className="flex mb-2">
-          <div className="bg-blue-400 h-32 w-32 flex items-center text-gray-700">
-            <LiveTv style={{ fontSize: '64px', display: 'flex', alignItems: 'center' }} />
-          </div>
-          <div className="bg-white text-left h-32 w-full">
-            <div className="w-full p-4 bg-gray-200 flex">
-              <div className="text-blue-600 text-2xl">
-                {presentation.name}
-              </div>
-              <div className="ml-auto">
-                <Dropdown overlay={menu} trigger={['click']}><MoreOutlined style={{ fontSize: 24 }} /></Dropdown>
-              </div>
-            </div>
-            <div className="w-full p-4 bg-gray-200 text-black ">
-              <h2>
-                {presentation.description}
-              </h2>
-            </div>
-          </div>
-        </div>
+        return <div key={presentation.id} className="flex flex-col px-16">
+		<Row>
+			<Col span={24}>
+				<div className="flex mb-2">
+					<div className="w-full md:w-1/6  bg-blue-400 text-center">
+						<h3 className="font-extrabold">
+							<LiveTv
+								style={style.largeIcon}
+								className=" text-gray-300 py-2 px-2"
+							/>
+						</h3>
+					</div>
+					<div className="w-full md:w-5/6  bg-white text-left text-gray-200">
+						<div className="h-auto w-full p-4 bg-gray-200">
+							<h1 className="text-blue-600 text-2xl w-full">
+								Description of the demonstration of the XXX
+								program 
+								<Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right ml-auto" style={{ fontSize: 24 }} /></Dropdown>
+								</h1>
+						</div>
+						<div className="h-auto w-full p-4 bg-gray-200 text-black ">
+							<h2>
+								This is a very long test that is going to be
+								describing the demonstartion of the
+								presenation of the dashboard in question
+							</h2>
+						</div>
+					</div>
+				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col span={24}>
+				<div className="flex mb-2">
+					<div className="w-full md:w-1/6  bg-blue-400 text-center">
+						<h3 className="font-extrabold">
+							<LiveTv
+								style={style.largeIcon}
+								className=" text-gray-300 py-2 px-2"
+							/>
+						</h3>
+					</div>
+					<div className="w-full md:w-5/6  bg-white text-left text-gray-200">
+						<div className="h-auto w-full p-4 bg-gray-200">
+							<h1 className="text-blue-600 text-2xl">
+								Description of the demonstration of the XXX
+								program <Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right ml-auto" style={{ fontSize: 24 }} /></Dropdown>
+							</h1>
+						</div>
+						<div className="h-auto w-full p-4 bg-gray-200 text-black ">
+							<h2>
+								This is a very long test that is going to be
+								describing the demonstartion of the
+								presenation of the dashboard in question
+							</h2>
+						</div>
+					</div>
+				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col span={24}>
+				<div className="flex mb-2">
+					<div className="w-full md:w-1/6  bg-blue-400 text-center">
+						<h3 className="font-extrabold">
+							<LiveTv
+								style={style.largeIcon}
+								className=" text-gray-300 py-2 px-2"
+							/>
+						</h3>
+					</div>
+					<div className="w-full md:w-5/6  bg-white text-left text-gray-200">
+						<div className="h-auto w-full p-4 bg-gray-200">
+							<h1 className="text-blue-600 text-2xl">
+								Description of the demonstration of the XXX
+								program <Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right ml-auto" style={{ fontSize: 24 }} /></Dropdown>
+							</h1>
+						</div>
+						<div className="h-auto w-full py-4 p-4 bg-gray-200 text-black ">
+							<h2>
+								This is a very long test that is going to be
+								describing the demonstartion of the
+								presenation of the dashboard in question
+							</h2>
+						</div>
+					</div>
+				</div>
+			</Col>
+		</Row>
+		</div>
       })}
       <div>
         <Pagination count={20} color="primary" />

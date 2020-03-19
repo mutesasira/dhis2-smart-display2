@@ -14012,17 +14012,12 @@ video {
 
 .scrollbars {
   max-height: 100px;
-  overflow: "auto";
+  overflow: 'auto'
 }
 
-.side-preview {
-  height: 120px;
-  width: 120px;
-}
-
-.slide-show {
-  height: cal(100%);
-  width: cal(100%);
+.glistcss{
+  margin-left: 18.6em;
+  margin-top: -31px;
 }
 
 @media (min-width: 640px) {
