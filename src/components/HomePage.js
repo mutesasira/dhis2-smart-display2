@@ -146,13 +146,13 @@ export const HomePage = observer(() => {
           </ol>
           <h1 className="pt-5 font-bold">Click <AddIcon /> to create presentation</h1>
           <div className="pt-4 items-center">
-            <button onClick={() => history.push("/presentations")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded "  >
+            <button onClick={() => history.push("?page=3")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded "  >
               View presentations
                         </button>
           </div>
         </div>
       </div>
-      <Fab size="medium" style={style} color="primary" onClick={() => history.push("/configuration")}>
+      <Fab size="medium" style={style} color="primary" onClick={() => history.push("?page=2")}>
         <AddIcon />
       </Fab>
     </div>
