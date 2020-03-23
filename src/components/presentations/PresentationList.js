@@ -20,12 +20,11 @@ const style = {
 	left: 'auto',
 	position: 'fixed',
 
-  largeIcon: {
-    height: '80%',
-    align: 'center',
-    margin: 0,
-    padding: 0
-  },
+	largeIcon: {
+		width: 100,
+		height: 100,
+		align: 'center',
+	},
   AddIcon: {
     width: 40,
     height: 30,
@@ -59,19 +58,17 @@ export const PresentationList = observer(() => {
 			<Col span={24}>
 				<div className="flex mb-2">
 					<div className="w-full md:w-1/6  bg-blue-400 text-center">
-						<h3 className="font-extrabold">
 							<LiveTv
 								style={style.largeIcon}
 								className=" text-gray-300 py-2 px-2"
 							/>
-						</h3>
 					</div>
 					<div className="w-full md:w-5/6  bg-white text-left text-gray-200">
 						<div className="h-auto w-full p-4 bg-gray-200">
 							<h1 className="text-blue-600 text-2xl w-full">
 								Description of the demonstration of the XXX
 								program 
-								<Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right ml-auto" style={{ fontSize: 24 }} /></Dropdown>
+								<Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right glistcss" style={{ fontSize: 24 }} /></Dropdown>
 								</h1>
 						</div>
 						<div className="h-auto w-full p-4 bg-gray-200 text-black ">
@@ -89,18 +86,16 @@ export const PresentationList = observer(() => {
 			<Col span={24}>
 				<div className="flex mb-2">
 					<div className="w-full md:w-1/6  bg-blue-400 text-center">
-						<h3 className="font-extrabold">
 							<LiveTv
 								style={style.largeIcon}
 								className=" text-gray-300 py-2 px-2"
 							/>
-						</h3>
 					</div>
 					<div className="w-full md:w-5/6  bg-white text-left text-gray-200">
 						<div className="h-auto w-full p-4 bg-gray-200">
 							<h1 className="text-blue-600 text-2xl">
 								Description of the demonstration of the XXX
-								program <Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right ml-auto" style={{ fontSize: 24 }} /></Dropdown>
+								program <Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right glistcss" style={{ fontSize: 24 }} /></Dropdown>
 							</h1>
 						</div>
 						<div className="h-auto w-full p-4 bg-gray-200 text-black ">
@@ -118,18 +113,16 @@ export const PresentationList = observer(() => {
 			<Col span={24}>
 				<div className="flex mb-2">
 					<div className="w-full md:w-1/6  bg-blue-400 text-center">
-						<h3 className="font-extrabold">
 							<LiveTv
 								style={style.largeIcon}
 								className=" text-gray-300 py-2 px-2"
 							/>
-						</h3>
 					</div>
 					<div className="w-full md:w-5/6  bg-white text-left text-gray-200">
 						<div className="h-auto w-full p-4 bg-gray-200">
 							<h1 className="text-blue-600 text-2xl">
 								Description of the demonstration of the XXX
-								program <Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right ml-auto" style={{ fontSize: 24 }} /></Dropdown>
+								program <Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right glistcss " style={{ fontSize: 24 }} /></Dropdown>
 							</h1>
 						</div>
 						<div className="h-auto w-full py-4 p-4 bg-gray-200 text-black ">

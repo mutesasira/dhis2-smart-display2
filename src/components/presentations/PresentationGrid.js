@@ -49,55 +49,56 @@ export const PresentationGrid = observer(({ newPresentation }) => {
 	return (
 		<div className="px-16">
 			<div class="flex">
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+				<div className="flex-1 text-gray-700 relative text-center px-4 py-2 bg-blue-500 h-48">
+					<div><LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/></div> 
+					<div className = "h-12 bg-gray-500 bottom-0 inset-x-0 absolute flex items-center">Demo Presentation <MoreVertIcon /></div>
 				</div>
 				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+					<LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/>
 				</div>
 				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+					<LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/>
 				</div>
 				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+					<LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/>
 				</div>
 			</div>
 			<div className="flex ">
 				<div class="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+					<LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/>
 				</div>
 				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+					<LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/>
 				</div>
 				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+					<LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/>
 				</div>
 				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
+					<LiveTv
+						style={style.largeIcon}
+						className=" text-gray-300 py-2 px-2"
+					/>
 				</div>
 			</div>
 			<div className={classes.root}>
