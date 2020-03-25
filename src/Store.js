@@ -1,4 +1,4 @@
-import { decorate, observable, action, extendObservable } from "mobx";
+import { decorate, observable, action, extendObservable, computed } from "mobx";
 import { Presentation } from './models/Presentation';
 import { Dashboard } from './models/Dashboard';
 import { DashboardItem } from './models/DashboardItem';
@@ -50,7 +50,13 @@ export class Store {
   itemStore = GroupStore.create({ state: [] });
   availableDashboards = [];
   fullScreen = false;
-  currentPage = 1;
+
+  paging = {
+    presentations: {
+      pageSize: 3,
+      page: 1
+    }
+  }
 
   constructor(engine, baseUrl, apiVersion) {
     this.engine = engine;
@@ -144,6 +150,38 @@ export class Store {
     namespace.set('presentations', whatToSave);
   };
 
+  setPaging = val => this.paging = val;
+
+  pagingChange = info => (page, pageSize) => {
+    let current = this.paging[info];
+    if (current) {
+      current = { ...current, page, pageSize }
+      const p = {
+        ...this.paging,
+        [info]: current
+      };
+      this.setPaging(p);
+    }
+  }
+
+  perPageChange = info => (currentPage, size) => {
+    let current = this.paging[info];
+    if (current && (currentPage !== current.page || current.pageSize !== size)) {
+      current = { ...current, page: 1, pageSize: size }
+      const p = {
+        ...this.paging,
+        [info]: current
+      };
+      this.setPaging(p);
+    }
+  }
+
+  get currentPresentations() {
+    const { page, pageSize } = this.paging.presentations;
+    const currentPage = page - 1
+    return this.presentations.slice(currentPage * pageSize, currentPage * pageSize + pageSize);
+  }
+
 }
 
 decorate(Store, {
@@ -152,10 +190,9 @@ decorate(Store, {
   currentPresentation: observable,
   baseUrl: observable,
   availableDashboards: observable,
-  currentPage: observable,
+  paging: observable,
   fetchPresentations: action,
   fullScreen: observable,
-  setCurrentPage: action,
   setPresentation: action,
   apiVersion: observable,
   convert: action,
@@ -170,5 +207,8 @@ decorate(Store, {
 
   setD2: action,
   savePresentation: action,
-  changeFull: action
+  changeFull: action,
+  pagingChange: action,
+  setPaging: action,
+  currentPresentations: computed
 });

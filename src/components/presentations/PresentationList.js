@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LiveTv } from '@material-ui/icons';
-import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
 import { MoreOutlined } from '@ant-design/icons';
 import Fab from '@material-ui/core/Fab';
 import { useMst } from '../../context/context';
 import { observer } from 'mobx-react';
-import { Menu, Dropdown, Row, Col } from 'antd';
+import { Menu, Dropdown, Row, Col, Pagination } from 'antd';
 import { useHistory } from "react-router-dom";
 
 const style = {
@@ -17,11 +16,11 @@ const style = {
   left: 'auto',
   position: 'fixed',
 
-	largeIcon: {
-		width: 100,
-		height: 100,
-		align: 'center',
-	},
+  largeIcon: {
+    width: 100,
+    height: 100,
+    align: 'center',
+  },
   AddIcon: {
     width: 40,
     height: 30,
@@ -36,9 +35,13 @@ export const PresentationList = observer(() => {
     store.setPresentation(presentation);
     history.push('?page=5')
   }
+
+  useEffect(() => {
+    store.setPaging({ presentations: { pageSize: 3, page: 1 } });
+  }, [store])
   return (
-    <div className="flex flex-col px-16">
-      {store.presentations.map(presentation => {
+    <div className="flex flex-col">
+      {store.currentPresentations.map(presentation => {
         const menu = (
           <Menu>
             <Menu.Item key="0">Preview</Menu.Item>
@@ -78,10 +81,19 @@ export const PresentationList = observer(() => {
           </Row>
         </div>
       })}
-      <div>
-        <Pagination count={20} color="primary" />
+      <div className="px-16 mt-8">
+        <Pagination
+          pageSizeOptions={['3', '6', '9', '15', '18', '24', '27', '30']}
+          current={store.paging.presentations.page}
+          pageSize={store.paging.presentations.pageSize}
+          showSizeChanger
+          showQuickJumper
+          onShowSizeChange={store.perPageChange('presentations')}
+          total={store.presentations.length}
+          onChange={store.pagingChange('presentations')}
+        />
       </div>
-      <Fab size="medium" style={style} color="primary" onClick={() => store.setCurrentPage(2)}>
+      <Fab size="medium" style={style} color="primary" onClick={() => history.push("?page=2")}>
         <AddIcon />
       </Fab>
     </div>
