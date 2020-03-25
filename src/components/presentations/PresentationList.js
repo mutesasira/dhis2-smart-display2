@@ -17,12 +17,11 @@ const style = {
   left: 'auto',
   position: 'fixed',
 
-  largeIcon: {
-    height: '80%',
-    align: 'center',
-    margin: 0,
-    padding: 0
-  },
+	largeIcon: {
+		width: 100,
+		height: 100,
+		align: 'center',
+	},
   AddIcon: {
     width: 40,
     height: 30,

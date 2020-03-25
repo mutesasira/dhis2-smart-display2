@@ -5,8 +5,11 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import { Pagination } from 'antd';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { observer } from 'mobx-react';
 import { MoreOutlined } from '@ant-design/icons';
+import { useMst } from '../../context/context';
+import { observer } from 'mobx-react';
+import { Menu, Dropdown, Row, Col } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 const style = {
 	margin: 0,
@@ -46,59 +49,56 @@ const useStyles = makeStyles(theme => ({
 
 export const PresentationGrid = observer(({ newPresentation }) => {
 	const classes = useStyles();
+	let history = useHistory();
+	const store = useMst();
+
+	const present = presentation => () => {
+		store.setPresentation(presentation);
+		history.push('?page=6');
+	};
 	return (
 		<div className="px-16">
-			<div class="flex">
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
-			</div>
-			<div className="flex ">
-				<div class="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
-				<div className="flex-1 text-gray-700 text-center bg-blue-500 px-4 py-2 m-2 h-48">
-				<LiveTv
-				style={style.largeIcon}
-				className=" text-gray-300 py-2 px-2"
-			/>
-				</div>
+			<div className="grid grid-flow-col grid-cols-4 grid-rows-2 gap-4 ">
+				{store.presentations.map(presentation => {
+					const menu = (
+						<Menu>
+							<Menu.Item key="0">Preview</Menu.Item>
+							<Menu.Item key="1" onClick={present(presentation)}>
+								Present
+							</Menu.Item>
+							<Menu.Item key="3">Edit</Menu.Item>
+							<Menu.Item key="4">Sharing Settings</Menu.Item>
+							<Menu.Item key="5">Show Details</Menu.Item>
+							<Menu.Item key="6">Print</Menu.Item>
+							<Menu.Item key="7">Delete</Menu.Item>
+						</Menu>
+					);
+
+					return (
+						<div>
+						<div key={presentation.id}>
+							<div className="text-gray-700 relative  text-center px-4 py-2 bg-blue-500 h-48">
+								<div>
+									<LiveTv
+										style={style.largeIcon}
+										className=" text-gray-300 py-2 px-2"
+									/>
+								</div>
+								<div className="h-12 bg-gray-500 bottom-0 inset-x-0 absolute flex items-center">
+									{presentation.name}
+									<Dropdown
+										overlay={menu}
+										trigger={['click']}>
+										<MoreVertIcon
+											className="text-right ml-auto"
+											style={{ fontSize: 24 }}
+										/>
+									</Dropdown>
+								</div>
+							</div>
+						</div></div>
+					);
+				})}
 			</div>
 			<div className={classes.root}>
 				<Pagination total={500} itemRender={itemRender} />
