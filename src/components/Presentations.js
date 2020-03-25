@@ -4,12 +4,12 @@ import { PresentationGrid } from './presentations/PresentationGrid';
 import { PresentationList } from './presentations/PresentationList';
 import { PresentationSingle } from './presentations/PresentationSingle';
 import { List, GridOn, CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
-// import { HomePage } from './components/HomePage';
-// import Link from '@material-ui/core/Link';
-// import AddIcon from '@material-ui/icons/Add';
-// import AddIcon from '@material-ui/icons/Add';
-// import Fab from '@material-ui/core/Fab';
-// import { HomePage } from '../HomePage';
+import {
+  useLocation,
+  useHistory
+} from "react-router-dom";
+import { observer } from 'mobx-react';
+import { useMst } from '../context/context';
 
 
 const style = {
@@ -31,26 +31,34 @@ const style = {
   },
 };
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
-export const Presentations = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const changePage = (page) => {
-    setCurrentPage(page)
-  }
+
+export const Presentations = observer(() => {
+  const store = useMst()
+  const query = useQuery();
+  const history = useHistory();
+
 
   const showPage = () => {
-    switch (currentPage) {
-      case 1:
+    switch (query.get('mode')) {
+      case 'list':
         return <PresentationList />
-      case 2:
+      case 'grid':
         return <PresentationGrid />
-      case 3:
+      case 'single':
         return <PresentationSingle />
       default:
         return <PresentationList />
     }
-
   }
+
+  const changeMode = (mode) => () => {
+    history.push(`?page=3&mode=${mode}`)
+  }
+
 
   return (
     <div className="h-auto mt-4">
@@ -58,9 +66,9 @@ export const Presentations = () => {
         <div className="flex">
           <h1>
             View as
-            <List className="text-blue-500" onClick={() => changePage(1)} />
-            <CheckBoxOutlineBlankOutlined onClick={() => changePage(3)} />
-            <GridOn onClick={() => changePage(2)} />
+            <List className="text-blue-500" onClick={changeMode('list')} />
+            <CheckBoxOutlineBlankOutlined onClick={changeMode('single')} />
+            <GridOn onClick={changeMode('grid')} />
           </h1>
         </div>
         <div className="ml-auto">
@@ -73,4 +81,4 @@ export const Presentations = () => {
       <div>{showPage()}</div>
     </div>
   )
-}
+})
