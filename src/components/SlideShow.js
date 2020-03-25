@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useMst } from '../context/context';
 
@@ -56,6 +56,11 @@ export const SlideShow = observer(() => {
 
   const [height, setHeight] = useState(700);
   const [width, setWidth] = useState(700);
+
+  if (store.presentations.length > 0) {
+    store.setPresentation(store.presentations[0]);
+  }
+
   const div = useCallback(node => {
     if (node !== null) {
       setHeight(node.getBoundingClientRect().height - 75);
@@ -63,13 +68,11 @@ export const SlideShow = observer(() => {
     }
   }, []);
 
-  return (
-    <Deck theme={theme} template={template} transitionEffect="slide" animationsWhileGoingBack={true} loop={true}>
-      {store.currentPresentation.selectedItems.map(item => <Slide key={item.id}>
-        <FlexBox height="100%" ref={div}>
-          <VisualizationItem height={height} width={width} item={item} />
-        </FlexBox>
-      </Slide>)}
-    </Deck>
-  );
+  return store.currentPresentation.selectedItems.length > 0 ? <Deck theme={theme} template={template} transitionEffect="slide" animationsWhileGoingBack={true} loop={true}>
+    {store.currentPresentation.selectedItems.map(item => <Slide key={item.id}>
+      <FlexBox height="100%" ref={div}>
+        <VisualizationItem height={height} width={width} item={item} />
+      </FlexBox>
+    </Slide>)}
+  </Deck> : <div><pre>{JSON.stringify(store.currentPresentation, null, 2)}</pre></div>
 })
