@@ -47,3 +47,13 @@
 .glistcss{
   margin-left: 14em
 }
+.slideHeight {
+  height: 32em;
+  width: 80em;
+}
+.slideHeightDiv2{
+  height: 100px;
+}
+.gridbg {
+  background-color: 	#D3D3D3;
+}
