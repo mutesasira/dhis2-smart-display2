@@ -10,7 +10,6 @@ import { Menu, Dropdown, Pagination } from 'antd';
 import { useHistory } from 'react-router-dom';
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import { Preview } from '../menus/Preview';
 
 const style = {
 	margin: 0,
@@ -44,11 +43,15 @@ export const PresentationSingle = observer(() => {
 		history.push('?page=5');
 	};
 
-	const preview = presentation => () => {
-		store.setPresentation(presentation);
-		history.push('?page=7');
-	};
-
+	const edit = (presentation) => () =>{
+		store.setPresentation(presentation)
+		history.push('?page=2')
+	  }
+	  const preview = (presentation) => () =>{
+		store.setPresentation(presentation)
+		history.push('?page=6')
+	
+	  }
 	useEffect(() => {
 		store.setPaging({ presentations: { pageSize: 8, page: 1 } });
 	}, [store]);
@@ -59,17 +62,9 @@ export const PresentationSingle = observer(() => {
 					{store.currentPresentations.map(presentation => {
 						const menu = (
 							<Menu>
-								<Menu.Item 
-									key="0"
-									onClick={Preview}>
-									Preview
-								</Menu.Item>
-								<Menu.Item
-									key="1"
-									onClick={present(presentation)}>
-									Present
-								</Menu.Item>
-								<Menu.Item key="3">Edit</Menu.Item>
+								<Menu.Item key="0" onClick={preview(presentation)}>Preview</Menu.Item>
+								<Menu.Item key="1" onClick={present(presentation)} >Present</Menu.Item>
+								<Menu.Item key="3" onClick={edit(presentation)}>Edit</Menu.Item>
 								<Menu.Item key="4">Sharing Settings</Menu.Item>
 								<Menu.Item key="5">Show Details</Menu.Item>
 								<Menu.Item key="6">Print</Menu.Item>

@@ -76,17 +76,16 @@ export const PresentationGrid = observer(() => {
 									/>
 								</div>
 								<div
-									className="h-12 bottom-0 inset-x-0 absolute flex
-					 bg-transparent hover:bg-blue-700  hover:text-white gridbg">
-									<div className="text-white">
+									className="h-12 bottom-0 inset-x-0 absolute flex hover:bg-blue-700 hover:text-white bg-gray-500 ">
+									<div className="text-white truncate w-new text-center z-40">
 										{presentation.name}
 									</div>
 									<Dropdown
-									className = "text-blue-700"
+									className = "text-blue-700 z-40 hover:text-white "
 										overlay={menu}
 										trigger={['click']}>
 										<MoreVertIcon
-											className="text-right ml-auto"
+											className="text-right ml-auto hover:text-white"
 											style={{ fontSize: 24 }}
 										/>
 									</Dropdown>

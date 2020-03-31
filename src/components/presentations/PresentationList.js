@@ -35,18 +35,27 @@ export const PresentationList = observer(() => {
     store.setPresentation(presentation);
     history.push('?page=5')
   }
+  const edit = (presentation) => () =>{
+    store.setPresentation(presentation)
+    history.push('?page=2')
+  }
+  const preview = (presentation) => () =>{
+    store.setPresentation(presentation)
+    history.push('?page=6')
+
+  }
 
   useEffect(() => {
     store.setPaging({ presentations: { pageSize: 3, page: 1 } });
   }, [store])
-  return (
-    <div className="flex flex-col">
+  return (<div className = {style.overlay2}>
+    <div className="flex flex-col" >
       {store.currentPresentations.map(presentation => {
         const menu = (
           <Menu>
-            <Menu.Item key="0">Preview</Menu.Item>
-            <Menu.Item key="1" onClick={present(presentation)}>Present</Menu.Item>
-            <Menu.Item key="3">Edit</Menu.Item>
+            <Menu.Item key="0" onClick={preview(presentation)}>Preview</Menu.Item>
+            <Menu.Item key="1" onClick={present(presentation)} >Present</Menu.Item>
+            <Menu.Item key="3" onClick={edit(presentation)}>Edit</Menu.Item>
             <Menu.Item key="4">Sharing Settings</Menu.Item>
             <Menu.Item key="5">Show Details</Menu.Item>
             <Menu.Item key="6">Print</Menu.Item>
@@ -67,10 +76,11 @@ export const PresentationList = observer(() => {
                 </div>
                 <div className="w-full md:w-5/6  bg-white text-left text-gray-200">
                   <div className="h-auto w-full p-4 bg-gray-200">
-                    <h1 className="text-blue-600 text-2xl w-full flex">
+                    <h1 className="text-blue-600 text-2xl w-full flex truncate ">
                       {presentation.name}
+                      
                       <Dropdown overlay={menu} trigger={['click']}><MoreOutlined className="text-right ml-auto" style={{ fontSize: 24 }} /></Dropdown>
-                    </h1>
+                      </h1>
                   </div>
                   <div className="h-auto w-full p-4 bg-gray-200 text-black ">
                     <h2>{presentation.description}	</h2>
@@ -96,6 +106,6 @@ export const PresentationList = observer(() => {
       <Fab size="medium" style={style} color="primary" onClick={() => history.push("?page=2")}>
         <AddIcon />
       </Fab>
-    </div>
+    </div></div>
   );
 });
