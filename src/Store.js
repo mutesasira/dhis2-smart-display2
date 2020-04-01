@@ -50,6 +50,7 @@ export class Store {
   itemStore = GroupStore.create({ state: [] });
   availableDashboards = [];
   fullScreen = false;
+  previewing = false;
 
   paging = {
     presentations: {
@@ -77,6 +78,13 @@ export class Store {
     p.setDashboards(convertedDashboards);
     return p;
   };
+
+  hidePreview = () => {
+    this.previewing = false;
+  }
+  showPreview = () => {
+    this.previewing = true;
+  }
 
   setD2 = async () => {
     this.d2 = await init({
@@ -111,7 +119,14 @@ export class Store {
       return { text: d.name, value: d.id };
     });
     this.availableDashboards = dashboards.map(ds => convertDashboard(ds));
-    this.itemStore.setState(items)
+    this.itemStore.setState(items);
+
+    if(this.currentPresentation.dashboards.length > 0){
+      const  items = this.currentPresentation.dashboards.map(d => {
+        return { text: d.name, value: d.id };
+      });
+      this.assignedItemStore.setState(items);
+    }
   }
 
   fetchPresentations = async () => {
@@ -176,6 +191,7 @@ export class Store {
     }
   }
 
+
   get currentPresentations() {
     const { page, pageSize } = this.paging.presentations;
     const currentPage = page - 1
@@ -195,9 +211,11 @@ decorate(Store, {
   fullScreen: observable,
   setPresentation: action,
   apiVersion: observable,
+  previewing: observable,
   convert: action,
   d2: observable,
   fetchDashboards: action,
+  showPreview: action,
 
   assignedItemStore: observable,
   itemStore: observable,
@@ -210,5 +228,6 @@ decorate(Store, {
   changeFull: action,
   pagingChange: action,
   setPaging: action,
+  hidePreview: action,
   currentPresentations: computed
 });
