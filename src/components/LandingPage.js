@@ -9,14 +9,12 @@ import { useMst } from '../context/context';
 import {
   useLocation
 } from "react-router-dom";
-import { Preview } from './menus/Preview';
+//import { Preview } from './menus/Preview';
 
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-
-
 
 export const LandingPage = observer(() => {
   const store = useMst();
@@ -32,8 +30,6 @@ export const LandingPage = observer(() => {
       return <PresentationList />
     case '5':
       return <SlideShow />
-    case '6':
-      return <Preview />
     default:
       return <HomePage />
   }
