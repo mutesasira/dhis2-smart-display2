@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { observer } from 'mobx-react';
 import { useMst } from '../context/context';
+import { Preview } from './presentations/Preview';
 
 
 const style = {
@@ -79,6 +80,7 @@ export const Presentations = observer(() => {
       </div>
 
       <div>{showPage()}</div>
+      <Preview/>
     </div>
   )
 })

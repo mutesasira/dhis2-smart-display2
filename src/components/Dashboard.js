@@ -6,9 +6,7 @@ import { useMst } from '../context/context'
 
 export const Dashboard = observer(() => {
   const store = useMst();
-  useEffect(() => {
-    store.fetchDashboards();
-  }, [store])
+  
   return (
     <div className="px-6">
       {/* <InputField
