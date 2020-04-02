@@ -43,7 +43,12 @@ export const PresentationGrid = observer(() => {
 	const present = presentation => () => {
 		store.setPresentation(presentation);
 		history.push('?page=5');
-	};
+  };
+  
+  const preview = presentation => () => {
+    store.setPresentation(presentation);
+    store.showPreview();
+  };
 
 	useEffect(() => {
 		store.setPaging({ presentations: { pageSize: 8, page: 1 } });
@@ -54,7 +59,7 @@ export const PresentationGrid = observer(() => {
 				{store.currentPresentations.map(presentation => {
 					const menu = (
 						<Menu>
-							<Menu.Item key="0">Preview</Menu.Item>
+							<Menu.Item key="0" onClick={preview(presentation)}>Preview</Menu.Item>
 							<Menu.Item key="1" onClick={present(presentation)}>
 								Present
 							</Menu.Item>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Dashboard } from '../Dashboard';
 import { DashboardItems } from './DashboardItems';
@@ -34,7 +34,9 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
   const [activeStep, setActiveStep] = React.useState(0);
   const store = useMst();
 
-
+  useEffect(() => {
+    store.fetchDashboards();
+  }, [store])
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
@@ -42,14 +44,15 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
+
   return (
     <div className="p-2 flex flex-col">
       <div className="">
         <Steps current={activeStep} >
-          {steps.map((item,i,icon) => {
-            if(i<activeStep){
+          {steps.map((item, i, icon) => {
+            if (i < activeStep) {
               return <Step key={item.title} title={item.title}
-                    icon={<CheckCircleFilled  style={{ size:'large', color: '	#3DC807' }}/>}/>
+                icon={<CheckCircleFilled style={{ size: 'large', color: '	#3DC807' }} />} />
             }
             else {
               return <Step key={item.title} title={item.title} />
