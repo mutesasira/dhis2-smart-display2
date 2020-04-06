@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { LiveTv } from '@material-ui/icons';
 import AddIcon from '@material-ui/icons/Add';
-import { MoreOutlined } from '@ant-design/icons';
 import Fab from '@material-ui/core/Fab';
 import { useMst } from '../../context/context';
 import { observer } from 'mobx-react';
@@ -14,6 +13,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import DetailsIcon from '@material-ui/icons/Details';
 import PrintIcon from '@material-ui/icons/Print';
 import DeleteIcon from '@material-ui/icons/Delete';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 const style = {
   margin: 0,
   top: 'auto',
@@ -62,13 +62,13 @@ export const PresentationList = observer(() => {
         {store.currentPresentations.map(presentation => {
           const menu = (
             <Menu>
-            <Menu.Item key="0" onClick={preview(presentation)}><VisibilityIcon/>Preview</Menu.Item>
-            <Menu.Item key="1" onClick={present(presentation)}><TvIcon/>Present</Menu.Item>
-            <Menu.Item key="3" onClick={edit(presentation)}><EditIcon/>Edit</Menu.Item>
-            <Menu.Item key="4"><ShareIcon/>Sharing Settings</Menu.Item>
-            <Menu.Item key="5"><DetailsIcon/>Show Details</Menu.Item>
-            <Menu.Item key="6"><PrintIcon/>Print</Menu.Item>
-            <Menu.Item key="7"><DeleteIcon/>Delete</Menu.Item>
+            <Menu.Item key="0" onClick={preview(presentation)}><VisibilityIcon className="pr-2"/>Preview</Menu.Item>
+            <Menu.Item key="1" onClick={present(presentation)}><TvIcon className="pr-2"/>Present</Menu.Item>
+            <Menu.Item key="3" onClick={edit(presentation)}><EditIcon className="pr-2"/>Edit</Menu.Item>
+            <Menu.Item key="4"><ShareIcon className="pr-2"/>Sharing Settings</Menu.Item>
+            <Menu.Item key="5"><DetailsIcon className="pr-2"/>Show Details</Menu.Item>
+            <Menu.Item key="6"><PrintIcon className="pr-2"/>Print</Menu.Item>
+            <Menu.Item key="7"><DeleteIcon className="pr-2"/>Delete</Menu.Item>
             </Menu>
           );
           return (
@@ -88,7 +88,7 @@ export const PresentationList = observer(() => {
                   <Dropdown
                     overlay={menu}
                     trigger={['click']} >
-                    <MoreOutlined
+                    <MoreVertIcon
                     className="float-right font-bold"
                     style ={{fontSize:30,
                       color:'blue',

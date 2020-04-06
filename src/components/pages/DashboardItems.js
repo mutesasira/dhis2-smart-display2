@@ -20,6 +20,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import TableIcon from '@material-ui/icons/TableChart';
+import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
 import { Checkbox } from 'antd';
 import {
   REPORT_TABLE,
@@ -40,17 +41,16 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
-
-
-
-// const keys = () =>{
-//   return (
-//     <div>can we talk about the keys since emma had the upper office keys and you know sometimes we might need to work over time</div>
-//   )
-// }
-
-
-
+const iconStyles = {
+  largeIcon: {
+    width: 80,
+    height: 80,
+  },
+  AddIcon: {
+    width: 40,
+    height: 30,
+  },
+};
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -174,10 +174,13 @@ export const DashboardItems = observer(() => {
             </div>
           </div>
         </div>
-        <div className="w-auto md:w-3/4 bg-red p-4 pt-10 h-56">
-          <div className="w-auto p-4 flex  text-left bg-blue-500 text-white">
-            {currentDashboard.name}
-            <MoreVertIcon className="text-blue float-right  text-right" />
+        <div className="w-auto md:w-3/4 p-4 pt-10 h-56">
+          <div className="w-auto p-4  bg-blue-500 text-white text-lg">
+            <ViewQuiltIcon style={iconStyles.AddIcon} className="float-left pr-4"/>{currentDashboard.name}
+            <MoreVertIcon className="float-right"
+            style = {{fontSize:24,
+            color:'black'}}
+            />
           </div>
           <div className="w-auto">
             <List className={classes.root}>
@@ -249,7 +252,7 @@ export const DashboardItems = observer(() => {
                 }
               )}
             </List>
-            <span className="text-bold">
+            <span className="text-lg font-bold">
               {' '}
               {currentDashboard.selectedItems} selected
 						</span>

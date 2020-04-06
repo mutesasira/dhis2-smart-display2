@@ -44,7 +44,7 @@ export const EditContents = observer(() => {
             </Card>
           </div>)}
         </div>
-        <div className="w-full md:w-3/4 bg-red p-4 flex">
+        <div className="w-full md:w-3/4 bg-red pl-4">
           <div className=" w-full h-48">
             <Card>
               <CardContent>

@@ -69,13 +69,13 @@ export const PresentationGrid = observer(() => {
 				{store.currentPresentations.map(presentation => {
 					const menu = (
 						<Menu>
-						<Menu.Item key="0" onClick={preview(presentation)}><VisibilityIcon/>Preview</Menu.Item>
-						<Menu.Item key="1" onClick={present(presentation)}><TvIcon/>Present</Menu.Item>
-						<Menu.Item key="3" onClick={edit(presentation)}><EditIcon/>Edit</Menu.Item>
-						<Menu.Item key="4"><ShareIcon/>Sharing Settings</Menu.Item>
-						<Menu.Item key="5"><DetailsIcon/>Show Details</Menu.Item>
-						<Menu.Item key="6"><PrintIcon/>Print</Menu.Item>
-						<Menu.Item key="7"><DeleteIcon/>Delete</Menu.Item>
+						<Menu.Item key="0" onClick={preview(presentation)}><VisibilityIcon className="pr-2"/>Preview</Menu.Item>
+						<Menu.Item key="1" onClick={present(presentation)}><TvIcon className="pr-2"/>Present</Menu.Item>
+						<Menu.Item key="3" onClick={edit(presentation)}><EditIcon className="pr-2"/>Edit</Menu.Item>
+						<Menu.Item key="4"><ShareIcon className="pr-2"/>Sharing Settings</Menu.Item>
+						<Menu.Item key="5"><DetailsIcon className="pr-2"/>Show Details</Menu.Item>
+						<Menu.Item key="6"><PrintIcon className="pr-2"/>Print</Menu.Item>
+						<Menu.Item key="7"><DeleteIcon className="pr-2"/>Delete</Menu.Item>
 						</Menu>
 					);
 
@@ -90,7 +90,7 @@ export const PresentationGrid = observer(() => {
 								</div>
 								<div
 									className="h-12 bottom-0 inset-x-0 absolute flex hover:bg-blue-700 hover:text-white cpx ">
-									<div className="text-white truncate w-new font-serif text-xl py-2 text-center z-40">
+									<div className="text-white truncate w-new font-sans text-xl py-2 text-center z-40">
 										{presentation.name}
 									</div>
 									<Dropdown
