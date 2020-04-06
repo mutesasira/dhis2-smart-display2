@@ -131,9 +131,7 @@ export const PresentationGrid = observer(() => {
 					onChange={store.pagingChange('presentations')}
 				/>
 			</div>
-			<Fab size="medium" style={style} color="primary">
-				<AddIcon />
-			</Fab>
+			
 		</div>
 	);
 });

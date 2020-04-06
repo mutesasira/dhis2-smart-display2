@@ -4,6 +4,9 @@ import { PresentationGrid } from './presentations/PresentationGrid';
 import { PresentationList } from './presentations/PresentationList';
 import { PresentationSingle } from './presentations/PresentationSingle';
 import { List, GridOn, CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
+import HomeIcon from '@material-ui/icons/Home';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
 import {
   useLocation,
   useHistory
@@ -82,6 +85,17 @@ export const Presentations = observer(() => {
       </div>
 
       <div>{showPage()}</div>
+      <Fab
+          size="medium"
+          style={style}
+          color="primary"
+          //onClick={() => history.push('?page=2')}
+          >
+          <AddIcon />
+        </Fab>
+      <Fab color="secondary" aria-label="edit" color="primary">
+        <HomeIcon />
+      </Fab>
       <Preview/>
     </div>
   )

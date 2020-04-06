@@ -17,6 +17,7 @@ import DetailsIcon from '@material-ui/icons/Details';
 import PrintIcon from '@material-ui/icons/Print';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 const style = {
 	margin: 0,
 	top: 'auto',
@@ -120,14 +121,14 @@ export const PresentationSingle = observer(() => {
 											className=" text-gray-300"
 										/>
 									</div>
-										<div className=" grid grid-rows-2 grid-flow-col  bottom-0 inset-x-0 absolute bg-transparent bg-blue-600 hover:bg-blue-700  hover:text-white ">
+										<div className=" grid grid-rows-2 grid-flow-col cpx bottom-0 inset-x-0 absolute bg-transparent bg-blue-600 hover:bg-blue-700  hover:text-white ">
 											<div className="text-2xl font-bold font-sans pl-8 " >
                           {presentation.name}
                           <Dropdown
                       overlay={menu}
                       trigger={['click']}>
                       <MoreVertIcon
-											className="text-right ml-auto hover:text-blue"
+											className="float-right hover:text-blue"
 											style ={{fontSize:40,
 												color:'blue',
 											  }}
@@ -145,12 +146,7 @@ export const PresentationSingle = observer(() => {
 					})}
 				</Carousel>
 			</div>
-			<Fab size="medium" style={style} color="primary">
-				<AddIcon />
-      </Fab>
-      <Fab color="secondary" aria-label="edit">
-        <EditIcon />
-      </Fab>
+			
 		</div>
 	);
 });

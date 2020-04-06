@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { LiveTv } from '@material-ui/icons';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 import { useMst } from '../../context/context';
 import { observer } from 'mobx-react';
 import { Menu, Dropdown, Row, Col, Pagination } from 'antd';
@@ -125,13 +123,7 @@ export const PresentationList = observer(() => {
             onChange={store.pagingChange('presentations')}
           />
         </div>
-        <Fab
-          size="medium"
-          style={style}
-          color="primary"
-          onClick={() => history.push('?page=2')}>
-          <AddIcon />
-        </Fab>
+        
       </div>
     </div>
   );
