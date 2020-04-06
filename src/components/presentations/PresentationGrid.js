@@ -8,7 +8,13 @@ import { useMst } from '../../context/context';
 import { observer } from 'mobx-react';
 import { Menu, Dropdown, Pagination } from 'antd';
 import { useHistory } from 'react-router-dom';
-
+import TvIcon from '@material-ui/icons/Tv'; 
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import EditIcon from '@material-ui/icons/Edit';
+import ShareIcon from '@material-ui/icons/Share';
+import DetailsIcon from '@material-ui/icons/Details';
+import PrintIcon from '@material-ui/icons/Print';
+import DeleteIcon from '@material-ui/icons/Delete';
 const style = {
 	margin: 0,
 	top: 'auto',
@@ -44,6 +50,10 @@ export const PresentationGrid = observer(() => {
 		store.setPresentation(presentation);
 		history.push('?page=5');
   };
+  const edit = (presentation) => () => {
+    store.setPresentation(presentation)
+    history.push('?page=2')
+  }
   
   const preview = presentation => () => {
     store.setPresentation(presentation);
@@ -59,15 +69,13 @@ export const PresentationGrid = observer(() => {
 				{store.currentPresentations.map(presentation => {
 					const menu = (
 						<Menu>
-							<Menu.Item key="0" onClick={preview(presentation)}>Preview</Menu.Item>
-							<Menu.Item key="1" onClick={present(presentation)}>
-								Present
-							</Menu.Item>
-							<Menu.Item key="3">Edit</Menu.Item>
-							<Menu.Item key="4">Sharing Settings</Menu.Item>
-							<Menu.Item key="5">Show Details</Menu.Item>
-							<Menu.Item key="6">Print</Menu.Item>
-							<Menu.Item key="7">Delete</Menu.Item>
+						<Menu.Item key="0" onClick={preview(presentation)}><VisibilityIcon/>Preview</Menu.Item>
+						<Menu.Item key="1" onClick={present(presentation)}><TvIcon/>Present</Menu.Item>
+						<Menu.Item key="3" onClick={edit(presentation)}><EditIcon/>Edit</Menu.Item>
+						<Menu.Item key="4"><ShareIcon/>Sharing Settings</Menu.Item>
+						<Menu.Item key="5"><DetailsIcon/>Show Details</Menu.Item>
+						<Menu.Item key="6"><PrintIcon/>Print</Menu.Item>
+						<Menu.Item key="7"><DeleteIcon/>Delete</Menu.Item>
 						</Menu>
 					);
 
@@ -81,8 +89,8 @@ export const PresentationGrid = observer(() => {
 									/>
 								</div>
 								<div
-									className="h-12 bottom-0 inset-x-0 absolute flex hover:bg-blue-700 hover:text-white bg-gray-500 ">
-									<div className="text-white truncate w-new text-center z-40">
+									className="h-12 bottom-0 inset-x-0 absolute flex hover:bg-blue-700 hover:text-white cpx ">
+									<div className="text-white truncate w-new font-serif text-xl py-2 text-center z-40">
 										{presentation.name}
 									</div>
 									<Dropdown
@@ -91,7 +99,9 @@ export const PresentationGrid = observer(() => {
 										trigger={['click']}>
 										<MoreVertIcon
 											className="text-right ml-auto hover:text-white"
-											style={{ fontSize: 24 }}
+											style ={{fontSize:30,
+												color:'blue',
+											  }}
 										/>
 									</Dropdown>
 								</div>

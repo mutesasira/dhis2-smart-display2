@@ -58,16 +58,18 @@ export const Presentations = observer(() => {
 
   const changeMode = (mode) => () => {
     history.push(`?page=3&mode=${mode}`)
+    
   }
 
 
+  
   return (
     <div className="h-auto mt-4">
       <div className="flex px-16 py-4">
         <div className="flex">
           <h1>
             View as
-            <List className="text-blue-500" onClick={changeMode('list')} />
+            <List  onClick={changeMode('list') } />
             <CheckBoxOutlineBlankOutlined onClick={changeMode('single')} />
             <GridOn onClick={changeMode('grid')} />
           </h1>

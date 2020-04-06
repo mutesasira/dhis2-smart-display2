@@ -14026,11 +14026,30 @@ video {
 
 .BrainhubCarousel__arrows {
   background-color: #43a7ee;
+  color: #84A9CB;
+}
+
+.cpx{
+  background-color: #84A9CB;
+}
+
+.osx{
+  margin-left: 14em;
+}
+
+.mma{
+  color: rgb(223, 232, 241);
+}
+
+.gridl {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 128px 1fr;
 }
 
 .slideHeightDiv2{
-  height: 100px;
-  padding-left: 18em;
+  height: 3.5em;
+  padding-top: 12px;
 }
 
 .gridbg {

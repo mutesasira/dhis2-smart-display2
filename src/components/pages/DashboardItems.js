@@ -177,7 +177,7 @@ export const DashboardItems = observer(() => {
         <div className="w-auto md:w-3/4 bg-red p-4 pt-10 h-56">
           <div className="w-auto p-4 flex  text-left bg-blue-500 text-white">
             {currentDashboard.name}
-            <MoreVertIcon className="text-black  text-right" />
+            <MoreVertIcon className="text-blue float-right  text-right" />
           </div>
           <div className="w-auto">
             <List className={classes.root}>
