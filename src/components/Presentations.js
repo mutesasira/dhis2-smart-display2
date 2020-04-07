@@ -15,12 +15,21 @@ import { observer } from 'mobx-react';
 import { useMst } from '../context/context';
 import { Preview } from './presentations/Preview';
 
+const styleLeft = {
+  margin: 0,
+  top: 'auto',
+  left: 40,
+  bottom: 20,
+  right: 'auto',
+  position: 'fixed',
+
+}
 
 const style = {
   margin: 0,
   top: 'auto',
   right: 40,
-  bottom: 40,
+  bottom: 20,
   left: 'auto',
   position: 'fixed',
 
@@ -93,7 +102,7 @@ export const Presentations = observer(() => {
           >
           <AddIcon />
         </Fab>
-      <Fab color="secondary" aria-label="edit" color="primary">
+      <Fab style={styleLeft} color="secondary" aria-label="edit" color="primary">
         <HomeIcon />
       </Fab>
       <Preview/>

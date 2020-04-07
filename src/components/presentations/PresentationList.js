@@ -80,7 +80,7 @@ export const PresentationList = observer(() => {
             
             </div>
 						<div className="bg-gray-200 p-2 w-auto ">
-              <div className="text-blue-600 text-2xl px-2 break-all font-extrabold">
+              <div className="text-blue-600 text-2xl px-2 truncate w-64 font-extrabold">
                   {presentation.name}
 
                   <Dropdown
@@ -94,7 +94,7 @@ export const PresentationList = observer(() => {
                   />
                   </Dropdown>
               </div>
-              <div className="pt-4 px-2 text-base">
+              <div className="pt-2 px-2 text-base break-all">
                   {presentation.description}{' '}
               </div>
 						</div>

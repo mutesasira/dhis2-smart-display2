@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { LiveTv } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 import { useMst } from '../../context/context';
 import { observer } from 'mobx-react';
 import { Menu, Dropdown, Pagination } from 'antd';
@@ -17,6 +15,7 @@ import DetailsIcon from '@material-ui/icons/Details';
 import PrintIcon from '@material-ui/icons/Print';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+//import { Carousel } from 'antd';
 
 const style = {
 	margin: 0,
@@ -73,7 +72,6 @@ export const PresentationSingle = observer(() => {
 	return (
 		<div className="px-16">
 			<div className="text-gray-700 text-center px-4 py-2">
-				<Carousel arrows infinite>
 					{store.currentPresentations.map((presentation) => {
 						const menu = (
 							<Menu>
@@ -144,7 +142,6 @@ export const PresentationSingle = observer(() => {
 							</div>
 						);
 					})}
-				</Carousel>
 			</div>
 			
 		</div>
