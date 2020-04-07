@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { LiveTv } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useMst } from '../../context/context';
 import { observer } from 'mobx-react';
 import { Menu, Dropdown, Pagination } from 'antd';
 import { useHistory } from 'react-router-dom';
-import TvIcon from '@material-ui/icons/Tv'; 
+import TvIcon from '@material-ui/icons/Tv';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
 import ShareIcon from '@material-ui/icons/Share';
@@ -54,7 +52,7 @@ export const PresentationGrid = observer(() => {
     store.setPresentation(presentation)
     history.push('?page=2')
   }
-  
+
   const preview = presentation => () => {
     store.setPresentation(presentation);
     store.showPreview();
@@ -78,7 +76,6 @@ export const PresentationGrid = observer(() => {
 						<Menu.Item key="7"><DeleteIcon className="pr-2"/>Delete</Menu.Item>
 						</Menu>
 					);
-
 					return (
 						<div key={presentation.id}>
 							<div className="text-gray-700 relative text-center px-4 py-2 bg-blue-500 h-48">
@@ -131,7 +128,7 @@ export const PresentationGrid = observer(() => {
 					onChange={store.pagingChange('presentations')}
 				/>
 			</div>
-			
+
 		</div>
 	);
 });
