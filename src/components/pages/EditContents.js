@@ -44,13 +44,12 @@ export const EditContents = observer(() => {
             </Card>
           </div>)}
         </div>
-        <div className="w-full md:w-3/4 bg-red p-4 pt-10 flex">
-          <div className="py-2 w-full h-48">
+        <div className="w-full md:w-3/4 bg-red pl-4">
+          <div className=" w-full h-48">
             <Card>
               <CardContent>
-                <p>Image</p>
+                <p>Map or Chart</p>
               </CardContent>
-              <CardActions></CardActions>
             </Card>
           </div>
         </div>

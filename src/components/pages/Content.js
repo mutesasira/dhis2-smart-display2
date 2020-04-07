@@ -44,9 +44,11 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
+  const handleCancel = () => {
+  };
 
   return (
-    <div className="p-2 flex flex-col">
+    <div className="px-8 flex py-12 flex-col">
       <div className="">
         <Steps current={activeStep} >
           {steps.map((item, i, icon) => {
@@ -61,15 +63,21 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
         </Steps>
         <div className="mt-10">{steps[activeStep].content}</div>
       </div>
-      <div className="bottom-0 absolute flex mb-10" style={{ width: '99%' }}>
+      <div className="bottom-0  absolute flex mb-4" style={{ width: '97%' }}>
         <div className="w-1/2 text-left">
           {activeStep > 0 && (
             <Button onClick={() => handleBack()}>
               Previous
             </Button>
           )}
+          {
+            <Button type="primary" className="ml-5" onClick={() => handleCancel()}>
+              Cancel
+            </Button>
+          }
         </div>
-        <div className="w-1/2 text-right">
+
+        <div className="w-1/2 text-right mr-32">
           {activeStep < steps.length - 1 && (
             <Button type="primary" onClick={() => handleNext()}>
               Next

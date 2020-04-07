@@ -71,7 +71,12 @@ export const SlideShow = observer(() => {
   return store.currentPresentation.selectedItems.length > 0 ? <Deck theme={theme} template={template} transitionEffect="slide" animationsWhileGoingBack={true} loop={true}>
     {store.currentPresentation.selectedItems.map(item => <Slide key={item.id}>
       <FlexBox height="100%" ref={div}>
-        <VisualizationItem height={height} width={width} item={item} />
+        <div className = "w-full md:w-3/4">
+				<VisualizationItem height={height} width={width} item={item} />
+			</div>
+      <div className = "w-full md:w-1/4 bg-gray-400 h-full">
+        <h1>Interpretations</h1>
+      </div>
       </FlexBox>
     </Slide>)}
   </Deck> : <div><pre>{JSON.stringify(store.currentPresentation, null, 2)}</pre></div>

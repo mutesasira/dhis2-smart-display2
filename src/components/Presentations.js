@@ -4,6 +4,9 @@ import { PresentationGrid } from './presentations/PresentationGrid';
 import { PresentationList } from './presentations/PresentationList';
 import { PresentationSingle } from './presentations/PresentationSingle';
 import { List, GridOn, CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
+import HomeIcon from '@material-ui/icons/Home';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
 import {
   useLocation,
   useHistory
@@ -12,12 +15,21 @@ import { observer } from 'mobx-react';
 import { useMst } from '../context/context';
 import { Preview } from './presentations/Preview';
 
+const styleLeft = {
+  margin: 0,
+  top: 'auto',
+  left: 40,
+  bottom: 20,
+  right: 'auto',
+  position: 'fixed',
+
+}
 
 const style = {
   margin: 0,
   top: 'auto',
   right: 40,
-  bottom: 40,
+  bottom: 20,
   left: 'auto',
   position: 'fixed',
 
@@ -58,16 +70,18 @@ export const Presentations = observer(() => {
 
   const changeMode = (mode) => () => {
     history.push(`?page=3&mode=${mode}`)
+    
   }
 
 
+  
   return (
     <div className="h-auto mt-4">
       <div className="flex px-16 py-4">
         <div className="flex">
           <h1>
             View as
-            <List className="text-blue-500" onClick={changeMode('list')} />
+            <List  onClick={changeMode('list') } />
             <CheckBoxOutlineBlankOutlined onClick={changeMode('single')} />
             <GridOn onClick={changeMode('grid')} />
           </h1>
@@ -80,6 +94,17 @@ export const Presentations = observer(() => {
       </div>
 
       <div>{showPage()}</div>
+      <Fab
+          size="medium"
+          style={style}
+          color="primary"
+          //onClick={() => history.push('?page=2')}
+          >
+          <AddIcon />
+        </Fab>
+      <Fab style={styleLeft} color="secondary" aria-label="edit" color="primary">
+        <HomeIcon />
+      </Fab>
       <Preview/>
     </div>
   )

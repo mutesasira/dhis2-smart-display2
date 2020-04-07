@@ -3886,7 +3886,7 @@ video {
 }
 
 .h-88 {
-  height: 32em;
+  height: 30em;
 }
 
 .h-auto {
@@ -14016,7 +14016,7 @@ video {
 }
 
 .glistcss{
-  margin-left: 14em
+  margin-left: 46em
 }
 
 .slideHeight {
@@ -14026,11 +14026,30 @@ video {
 
 .BrainhubCarousel__arrows {
   background-color: #43a7ee;
+  color: #84A9CB;
+}
+
+.cpx{
+  background-color: #84A9CB;
+}
+
+.osx{
+  margin-left: 14em;
+}
+
+.mma{
+  color: rgb(223, 232, 241);
+}
+
+.gridl {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 128px 1fr;
 }
 
 .slideHeightDiv2{
-  height: 100px;
-  padding-left: 18em;
+  height: 3.5em;
+  padding-top: 12px;
 }
 
 .gridbg {
@@ -17323,7 +17342,7 @@ video {
   }
 
   .sm\:h-88 {
-    height: 32em;
+    height: 30em;
   }
 
   .sm\:h-auto {
@@ -30671,7 +30690,7 @@ video {
   }
 
   .md\:h-88 {
-    height: 32em;
+    height: 30em;
   }
 
   .md\:h-auto {
@@ -44019,7 +44038,7 @@ video {
   }
 
   .lg\:h-88 {
-    height: 32em;
+    height: 30em;
   }
 
   .lg\:h-auto {
@@ -57367,7 +57386,7 @@ video {
   }
 
   .xl\:h-88 {
-    height: 32em;
+    height: 30em;
   }
 
   .xl\:h-auto {
