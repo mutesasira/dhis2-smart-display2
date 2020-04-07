@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import ReactSearchBox from 'react-search-box';
-import { PresentationGrid } from './presentations/PresentationGrid';
-import { PresentationList } from './presentations/PresentationList';
-import { PresentationSingle } from './presentations/PresentationSingle';
-import { List, GridOn, CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
+import {PresentationGrid} from './presentations/PresentationGrid';
+import {PresentationList} from './presentations/PresentationList';
+import {PresentationSingle} from './presentations/PresentationSingle';
+import {List, GridOn, CheckBoxOutlineBlankOutlined} from "@material-ui/icons";
 import HomeIcon from '@material-ui/icons/Home';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
@@ -11,9 +11,9 @@ import {
   useLocation,
   useHistory
 } from "react-router-dom";
-import { observer } from 'mobx-react';
-import { useMst } from '../context/context';
-import { Preview } from './presentations/Preview';
+import {observer} from 'mobx-react';
+import {useMst} from '../context/context';
+import {Preview} from './presentations/Preview';
 
 const styleLeft = {
   margin: 0,
@@ -50,7 +50,7 @@ function useQuery() {
 
 
 export const Presentations = observer(() => {
-  const store = useMst()
+  const store = useMst();
   const query = useQuery();
   const history = useHistory();
 
@@ -58,32 +58,29 @@ export const Presentations = observer(() => {
   const showPage = () => {
     switch (query.get('mode')) {
       case 'list':
-        return <PresentationList />
+        return <PresentationList/>
       case 'grid':
-        return <PresentationGrid />
+        return <PresentationGrid/>
       case 'single':
-        return <PresentationSingle />
+        return <PresentationSingle/>
       default:
-        return <PresentationList />
+        return <PresentationList/>
     }
   }
 
   const changeMode = (mode) => () => {
     history.push(`?page=3&mode=${mode}`)
-    
+
   }
-
-
-  
   return (
     <div className="h-auto mt-4">
       <div className="flex px-16 py-4">
         <div className="flex">
           <h1>
             View as
-            <List  onClick={changeMode('list') } />
-            <CheckBoxOutlineBlankOutlined onClick={changeMode('single')} />
-            <GridOn onClick={changeMode('grid')} />
+            <List onClick={changeMode('list')}/>
+            <CheckBoxOutlineBlankOutlined onClick={changeMode('single')}/>
+            <GridOn onClick={changeMode('grid')}/>
           </h1>
         </div>
         <div className="ml-auto">
@@ -95,15 +92,15 @@ export const Presentations = observer(() => {
 
       <div>{showPage()}</div>
       <Fab
-          size="medium"
-          style={style}
-          color="primary"
-          //onClick={() => history.push('?page=2')}
-          >
-          <AddIcon />
-        </Fab>
+        size="medium"
+        style={style}
+        color="primary"
+        onClick={() => history.push('?page=2')}
+      >
+        <AddIcon/>
+      </Fab>
       <Fab style={styleLeft} color="secondary" aria-label="edit" color="primary">
-        <HomeIcon />
+        <HomeIcon onClick={() => history.push('?page=3&mode=list')}/>
       </Fab>
       <Preview/>
     </div>

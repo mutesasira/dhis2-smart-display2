@@ -1,12 +1,12 @@
-import { decorate, observable, action, extendObservable, computed } from "mobx";
-import { Presentation } from './models/Presentation';
-import { Dashboard } from './models/Dashboard';
-import { DashboardItem } from './models/DashboardItem';
-import { DashboardItemContent } from './models/DashboardItemContent';
-import { init } from 'd2';
-import { generateUid } from 'd2/uid';
+import {decorate, observable, action, extendObservable, computed} from "mobx";
+import {Presentation} from './models/Presentation';
+import {Dashboard} from './models/Dashboard';
+import {DashboardItem} from './models/DashboardItem';
+import {DashboardItemContent} from './models/DashboardItemContent';
+import {init} from 'd2';
+import {generateUid} from 'd2/uid';
 import GroupStore from "./models/GroupStore";
-import { extractFavorite } from "./modules/utils";
+import {extractFavorite} from "./modules/utils";
 
 const query = {
   dashboards: {
@@ -20,18 +20,23 @@ const query = {
 
 const convertDashboard = (d) => {
   const dashboard = new Dashboard();
-  const { id, name, dashboardItems } = d;
-  extendObservable(dashboard, { id, name });
+  const {id, name, dashboardItems} = d;
+  extendObservable(dashboard, {id, name});
   const convertedDashboardItems = dashboardItems.map(item => {
     const dashboardItem = new DashboardItem();
-    let { id: dashboardItemId, type, shape, selected, dashboardItemContent } = item;
-    extendObservable(dashboardItem, { id: dashboardItemId, type, shape, selected: selected === undefined ? true : selected });
+    let {id: dashboardItemId, type, shape, selected, dashboardItemContent} = item;
+    extendObservable(dashboardItem, {
+      id: dashboardItemId,
+      type,
+      shape,
+      selected: selected === undefined ? true : selected
+    });
     if (!dashboardItemContent) {
       dashboardItemContent = extractFavorite(item);
     }
-    const { id: contentId, name: contentName, interpretations } = dashboardItemContent;
+    const {id: contentId, name: contentName, interpretations} = dashboardItemContent;
     const content = new DashboardItemContent();
-    extendObservable(content, { id: contentId, name: contentName, interpretations, type });
+    extendObservable(content, {id: contentId, name: contentName, interpretations, type});
     dashboardItem.setDashboardItemContent(content)
     return dashboardItem
   });
@@ -46,8 +51,8 @@ export class Store {
   baseUrl;
   apiVersion;
   currentPresentation = new Presentation();
-  assignedItemStore = GroupStore.create({ state: [] });
-  itemStore = GroupStore.create({ state: [] });
+  assignedItemStore = GroupStore.create({state: []});
+  itemStore = GroupStore.create({state: []});
   availableDashboards = [];
   fullScreen = false;
   previewing = false;
@@ -65,15 +70,16 @@ export class Store {
     this.baseUrl = baseUrl;
     this.apiVersion = apiVersion;
   }
+
   setPresentation = val => {
     this.currentPresentation = val;
     this.currentPresentation.setEngine(this.engine);
   }
 
   convert = (pre) => {
-    const { name, description, id, transModes, transitionDuration, slideDuration, dashboards } = pre
+    const {name, description, id, transModes, transitionDuration, slideDuration, dashboards} = pre
     let p = new Presentation();
-    extendObservable(p, { name, description, id, transModes, transitionDuration, slideDuration });
+    extendObservable(p, {name, description, id, transModes, transitionDuration, slideDuration});
     const convertedDashboards = dashboards.map(d => convertDashboard(d));
     p.setDashboards(convertedDashboards);
     return p;
@@ -114,16 +120,16 @@ export class Store {
 
 
   fetchDashboards = async () => {
-    const { dashboards: { dashboards } } = await this.engine.query(query);
+    const {dashboards: {dashboards}} = await this.engine.query(query);
     let items = dashboards.map(d => {
-      return { text: d.name, value: d.id };
+      return {text: d.name, value: d.id};
     });
     this.availableDashboards = dashboards.map(ds => convertDashboard(ds));
     this.itemStore.setState(items);
 
-    if(this.currentPresentation.dashboards.length > 0){
-      const  items = this.currentPresentation.dashboards.map(d => {
-        return { text: d.name, value: d.id };
+    if (this.currentPresentation.dashboards.length > 0) {
+      const items = this.currentPresentation.dashboards.map(d => {
+        return {text: d.name, value: d.id};
       });
       this.assignedItemStore.setState(items);
     }
@@ -147,7 +153,7 @@ export class Store {
 
   savePresentation = async () => {
     if (this.currentPresentation.id) {
-      const mapping = _.findIndex(this.presentations, { id: this.currentPresentation.id });
+      const mapping = _.findIndex(this.presentations, {id: this.currentPresentation.id});
       if (mapping !== -1) {
         this.presentations.splice(mapping, 1, this.currentPresentation);
       } else {
@@ -170,7 +176,7 @@ export class Store {
   pagingChange = info => (page, pageSize) => {
     let current = this.paging[info];
     if (current) {
-      current = { ...current, page, pageSize }
+      current = {...current, page, pageSize}
       const p = {
         ...this.paging,
         [info]: current
@@ -182,20 +188,23 @@ export class Store {
   perPageChange = info => (currentPage, size) => {
     let current = this.paging[info];
     if (current && (currentPage !== current.page || current.pageSize !== size)) {
-      current = { ...current, page: 1, pageSize: size }
+      current = {...current, page: 1, pageSize: size}
       const p = {
         ...this.paging,
         [info]: current
       };
       this.setPaging(p);
     }
-  }
+  };
 
 
   get currentPresentations() {
-    const { page, pageSize } = this.paging.presentations;
-    const currentPage = page - 1
-    return this.presentations.slice(currentPage * pageSize, currentPage * pageSize + pageSize);
+    const {page, pageSize} = this.paging.presentations;
+    const currentPage = page - 1;
+    if (pageSize !== 0) {
+      return this.presentations.slice(currentPage * pageSize, currentPage * pageSize + pageSize);
+    }
+    return this.presentations;
   }
 
 }
