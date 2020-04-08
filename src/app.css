@@ -95,6 +95,9 @@
 
 }
 
+.presentation-slide{
+  height: fit-content;
+}
 
 .container {
   margin: auto;

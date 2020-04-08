@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import { Popconfirm} from 'antd';
 import { Dashboard } from '../Dashboard';
 import { DashboardItems } from './DashboardItems';
 import { EditContents } from './EditContents';
@@ -8,6 +8,8 @@ import { observer } from 'mobx-react';
 import { useMst } from '../../context/context';
 import { Steps, message, Button } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
+import {useHistory} from 'react-router-dom';
+import {HomePage} from '../HomePage';
 
 
 const { Step } = Steps;
@@ -33,6 +35,19 @@ const steps = [
 export const HorizontalLabelPositionBelowStepper = observer(() => {
   const [activeStep, setActiveStep] = React.useState(0);
   const store = useMst();
+  let history = useHistory();
+  
+  const savePresentations = () =>{
+    store.savePresentation
+  }
+  
+  // const handleSavePresentation = () =>{
+  //   //alert('Your presentation has been saved succefully')
+  //   savePresentations();
+  //   <HomePage/>
+    
+  // }
+
 
   useEffect(() => {
     store.fetchDashboards();
@@ -45,6 +60,7 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
   const handleCancel = () => {
+    history.push('?page=3');
   };
 
   return (
@@ -71,7 +87,7 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
             </Button>
           )}
           {
-            <Button type="primary" className="ml-5" onClick={() => handleCancel()}>
+            <Button type="primary" className="ml-5" onClick={() => handleCancel() } >
               Cancel
             </Button>
           }
@@ -84,7 +100,8 @@ export const HorizontalLabelPositionBelowStepper = observer(() => {
             </Button>
           )}
           {activeStep === steps.length - 1 && (
-            <Button type="primary" onClick={store.savePresentation}>
+            <Button type="primary" 
+            onClick={store.savePresentation}>
               Save Presentation
             </Button>
           )}
