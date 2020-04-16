@@ -2,7 +2,7 @@ import React, {useCallback, useState, useEffect} from 'react';
 import {observer} from 'mobx-react';
 import useFullscreenStatus, {useMst, useWindowDimensions} from '../context/context';
 import createTheme from 'spectacle/lib/themes/default';
-import {Deck, Slide} from 'spectacle';
+import {Deck, Slide,Text} from 'spectacle';
 import {VisualizationItem} from "./pages/VisualizationItem";
 import Fab from "@material-ui/core/Fab";
 import HomeIcon from "@material-ui/icons/Home";
@@ -32,7 +32,6 @@ export const SlideShow = observer(() => {
   try {
     [isFullscreen, setIsFullscreen] = useFullscreenStatus(maximizableElement);
   } catch (e) {
-    errorMessage = "Fullscreen not supported";
     isFullscreen = false;
     setIsFullscreen = undefined;
   }
@@ -40,7 +39,7 @@ export const SlideShow = observer(() => {
   const handleExitFullscreen = () => document.exitFullscreen();
 
   return store.currentPresentation.selectedItems.length > 0 ?
-    <div ref={maximizableElement}>
+    <div ref={maximizableElement} style={{background: 'red'}}>
       <Deck
         transition={store.currentPresentation.transitionModes}
         transitionDuration={store.currentPresentation.transitionDuration}
@@ -50,8 +49,8 @@ export const SlideShow = observer(() => {
         controls={true}
         progress="none"
         theme={theme}
-        contentHeight={height}
-        contentWidth={width}
+        contentHeight="100vh"
+        contentWidth="100vw"
         autoplayLoop={true}
         autoplayOnStart={true}
         textColor={theme.textColor}
@@ -62,12 +61,22 @@ export const SlideShow = observer(() => {
             fit={true}
             controlColor={slideTheme.controlColor}
             align="center center"
-            contentStyles={{display: 'flex', flexDirection: 'column', zIndex: 0}}
+            contentStyles={{display: 'flex', flexDirection: 'column', zIndex: 0, textAlign: 'center'}}
             margin={0}
             padding={0}
           >
-            <VisualizationItem item={item} height={height} width={width}/>
-
+            <Text style={{
+              bottom: 'auto',
+              top: 0,
+              margin: 'auto',
+              textAlign: 'center',
+              zIndex: 10000,
+              width: '60vw',
+              position: 'fixed',
+            }}>
+              {item.dashboardItemContent.name}
+            </Text>
+            <VisualizationItem item={item} height={height-40} style={{marginTop: 40}}/>
             {isFullscreen ? (
               <Fab
                 size="medium"

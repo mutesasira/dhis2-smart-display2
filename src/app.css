@@ -25,10 +25,6 @@
   margin-left: auto;
 }
 
-.dashboard {
-  /* margin-bottom: 70px;
-  height:100px; */
-}
 .MuiStepIcon-completed {
   color: green;
 }
@@ -90,13 +86,16 @@
   cursor: pointer;
 }
 
-.container1 {
-  padding: 40px;
-  max-height: 60vh;
-  /*background: #419be0;*/
-}
 
 .slick-slide {
   /*margin: auto;*/
+}
+
+table.pivot * {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  -o-user-select: none !important;
+  user-select: none !important;
 }
 
