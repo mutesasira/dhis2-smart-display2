@@ -3,7 +3,6 @@ import {LiveTv} from '@material-ui/icons';
 import {useMst} from '../../context/context';
 import {observer} from 'mobx-react';
 import {Menu, Dropdown, Row, Col, Pagination} from 'antd';
-import {useHistory} from 'react-router-dom';
 import TvIcon from '@material-ui/icons/Tv';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
@@ -33,23 +32,7 @@ const style = {
 };
 
 export const PresentationList = observer(() => {
-  let history = useHistory();
   const store = useMst();
-
-  const present = presentation => () => {
-    store.setPresentation(presentation);
-    history.push('?page=5');
-  };
-  const edit = presentation => () => {
-    store.setPresentation(presentation);
-    history.push('?page=2');
-  };
-
-  const preview = presentation => () => {
-    store.setPresentation(presentation);
-    store.showPreview();
-
-  };
 
   useEffect(() => {
     store.setPaging({presentations: {pageSize: 3, page: 1}});
@@ -61,13 +44,13 @@ export const PresentationList = observer(() => {
         {store.currentPresentations.map(presentation => {
           const menu = (
             <Menu>
-              <Menu.Item key="0" onClick={preview(presentation)}><VisibilityIcon className="pr-2"/>Preview</Menu.Item>
-              <Menu.Item key="1" onClick={present(presentation)}><TvIcon className="pr-2"/>Present</Menu.Item>
-              <Menu.Item key="3" onClick={edit(presentation)}><EditIcon className="pr-2"/>Edit</Menu.Item>
+              <Menu.Item key="0" onClick={store.preview(presentation)}><VisibilityIcon className="pr-2"/>Preview</Menu.Item>
+              <Menu.Item key="1" onClick={store.present(presentation)}><TvIcon className="pr-2"/>Present</Menu.Item>
+              <Menu.Item key="3" onClick={store.edit(presentation)}><EditIcon className="pr-2"/>Edit</Menu.Item>
               <Menu.Item key="4"><ShareIcon className="pr-2"/>Sharing Settings</Menu.Item>
               <Menu.Item key="5"><DetailsIcon className="pr-2"/>Show Details</Menu.Item>
               <Menu.Item key="6"><PrintIcon className="pr-2"/>Print</Menu.Item>
-              <Menu.Item key="7"><DeleteIcon className="pr-2"/>Delete</Menu.Item>
+              <Menu.Item key="7" onClick={store.deletePresentation(presentation)}><DeleteIcon className="pr-2"/>Delete</Menu.Item>
             </Menu>
           );
           return (
@@ -105,6 +88,7 @@ export const PresentationList = observer(() => {
               '3',
               '6',
               '9',
+              '8',
               '15',
               '18',
               '24',

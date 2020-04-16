@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react';
 import {LiveTv} from '@material-ui/icons';
-import {makeStyles} from '@material-ui/core/styles';
 import {useMst} from '../../context/context';
 import {observer} from 'mobx-react';
-import {Menu, Dropdown, Pagination} from 'antd';
-import {useHistory} from 'react-router-dom';
+import {Menu, Dropdown} from 'antd';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import EditIcon from '@material-ui/icons/Edit';
@@ -37,34 +35,8 @@ const style = {
     height: 30,
   },
 };
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-}));
 export const PresentationSingle = observer(() => {
-  let history = useHistory();
   const store = useMst();
-  const classes = useStyles();
-  const present = (presentation) => () => {
-    store.setPresentation(presentation);
-    history.push('?page=5');
-  };
-
-  const edit = (presentation) => () => {
-    store.setPresentation(presentation);
-    history.push('?page=2');
-  };
-
-  const preview = (presentation) => () => {
-    store.setPresentation(presentation);
-    store.showPreview();
-  };
   useEffect(() => {
     store.setPaging({presentations: {pageSize: 0, page: 1}});
   }, [store]);
@@ -75,38 +47,13 @@ export const PresentationSingle = observer(() => {
           {store.currentPresentations.map((presentation) => {
             const menu = (
               <Menu>
-                <Menu.Item
-                  key="0"
-                  onClick={preview(presentation)}>
-                  <VisibilityIcon className="pr-2"/>
-                  Preview
-                </Menu.Item>
-                <Menu.Item
-                  key="1"
-                  onClick={present(presentation)}>
-                  <TvIcon className="pr-2"/>
-                  Present
-                </Menu.Item>
-                <Menu.Item key="3" onClick={edit(presentation)}>
-                  <EditIcon className="pr-2"/>
-                  Edit
-                </Menu.Item>
-                <Menu.Item key="4">
-                  <ShareIcon className="pr-2"/>
-                  Sharing Settings
-                </Menu.Item>
-                <Menu.Item key="5">
-                  <DetailsIcon className="pr-2"/>
-                  Show Details
-                </Menu.Item>
-                <Menu.Item key="6">
-                  <PrintIcon className="pr-2"/>
-                  Print
-                </Menu.Item>
-                <Menu.Item key="7">
-                  <DeleteIcon className="pr-2"/>
-                  Delete
-                </Menu.Item>
+                <Menu.Item key="0" onClick={store.preview(presentation)}><VisibilityIcon className="pr-2"/>Preview</Menu.Item>
+                <Menu.Item key="1" onClick={store.present(presentation)}><TvIcon className="pr-2"/>Present</Menu.Item>
+                <Menu.Item key="3" onClick={store.edit(presentation)}><EditIcon className="pr-2"/>Edit</Menu.Item>
+                <Menu.Item key="4"><ShareIcon className="pr-2"/>Sharing Settings</Menu.Item>
+                <Menu.Item key="5"><DetailsIcon className="pr-2"/>Show Details</Menu.Item>
+                <Menu.Item key="6"><PrintIcon className="pr-2"/>Print</Menu.Item>
+                <Menu.Item key="7" onClick={store.deletePresentation(presentation)}><DeleteIcon className="pr-2"/>Delete</Menu.Item>
               </Menu>
             );
 

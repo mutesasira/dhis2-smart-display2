@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { observer } from 'mobx-react';
-import { useMst } from '../../context/context';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState} from 'react';
+import {observer} from 'mobx-react';
+import {useMst} from '../../context/context';
+import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -21,7 +21,7 @@ import CropFreeIcon from '@material-ui/icons/CropFree';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import TableIcon from '@material-ui/icons/TableChart';
 import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
-import { Checkbox } from 'antd';
+import {Checkbox} from 'antd';
 import {
   REPORT_TABLE,
   EVENT_REPORT,
@@ -41,6 +41,7 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
+
 const iconStyles = {
   largeIcon: {
     width: 80,
@@ -108,32 +109,32 @@ const getItemIcon = type => {
     case REPORT_TABLE:
     case EVENT_REPORT:
     case REPORTS:
-      return <TableIcon />;
+      return <TableIcon/>;
     case CHART:
     case EVENT_CHART:
-      return <ChartIcon />;
+      return <ChartIcon/>;
     case MAP:
-      return <MapIcon />;
+      return <MapIcon/>;
     case APP:
-      return <ExtensionIcon />;
+      return <ExtensionIcon/>;
     case RESOURCES:
-      return <DescriptionIcon />;
+      return <DescriptionIcon/>;
     case USERS:
-      return <PersonIcon />;
+      return <PersonIcon/>;
     case TEXT:
-      return <FontDownloadIcon />;
+      return <FontDownloadIcon/>;
     case MESSAGES:
-      return <EmailIcon />;
+      return <EmailIcon/>;
     case SPACER:
-      return <CropFreeIcon />;
+      return <CropFreeIcon/>;
     default:
-      return <NotInterestedIcon />;
+      return <NotInterestedIcon/>;
   }
 };
 
 export const DashboardItems = observer(() => {
-  const { currentPresentation } = useMst();
-  const [currentDashboard, setCurrentDashboard] = useState(currentPresentation.dashboards.length > 0? currentPresentation.dashboards[0]: {});
+  const {currentPresentation} = useMst();
+  const [currentDashboard, setCurrentDashboard] = useState(currentPresentation.dashboards.length > 0 ? currentPresentation.dashboards[0] : {});
   const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
 
@@ -152,34 +153,30 @@ export const DashboardItems = observer(() => {
     <div className="h-auto px-4">
       <div className="flex md:flex-row flex-wrap h-full">
         <div className="w-full md:w-1/4 bg-gray p-4 ">
-          <div className="font-sans flex items-center justify-center bg-blue-darker w-full py-8">
-            <div className={classes.mainBar}>
-              <div className=" bg-white rounded max-w-xs w-full shadow-lg  leading-normal mb-64">
-                {currentPresentation.dashboards.map(
-                  dashboard => (
-                    <a
-                      key={dashboard.id}
-                      href="#"
-                      onClick={() =>
-                        setCurrentDashboard(dashboard)
-                      }
-                      className="block group p-4 border-b bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white">
-                      <p className="text-base mb-1 text-blue group-hover:text-white">
-                        {dashboard.name}
-                      </p>
-                    </a>
-                  )
-                )}
-              </div>
-            </div>
-          </div>
+          {currentPresentation.dashboards.map(
+            dashboard => (
+              <a
+                key={dashboard.id}
+                href="#"
+                onClick={() =>
+                  setCurrentDashboard(dashboard)
+                }
+                className="block group p-4 border-b bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white">
+                <p className="text-base mb-1 text-blue group-hover:text-white">
+                  {dashboard.name}
+                </p>
+              </a>
+            )
+          )}
         </div>
         <div className="w-auto md:w-3/4 p-4 pt-10 h-56">
           <div className="w-auto p-4  bg-blue-500 text-white text-lg">
             <ViewQuiltIcon style={iconStyles.AddIcon} className="float-left pr-4"/>{currentDashboard.name}
             <MoreVertIcon className="float-right"
-            style = {{fontSize:24,
-            color:'black'}}
+                          style={{
+                            fontSize: 24,
+                            color: 'black'
+                          }}
             />
           </div>
           <div className="w-auto">
@@ -189,7 +186,7 @@ export const DashboardItems = observer(() => {
                   const dsbId = `checkbox-list-label-${dashboardItem.id}`;
 
                   return (
-                    <MuiThemeProvider theme={theme}>
+                    <MuiThemeProvider theme={theme} key={`${dashboardItem.id}${i}`}>
                       <ListItem
                         key={`${dashboardItem.id}${i}`}
                         role={undefined}

@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { LiveTv } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useMst } from '../../context/context';
 import { observer } from 'mobx-react';
 import { Menu, Dropdown, Pagination } from 'antd';
-import { useHistory } from 'react-router-dom';
 import TvIcon from '@material-ui/icons/Tv';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
@@ -32,31 +30,8 @@ const style = {
 	},
 };
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		'& > *': {
-			marginTop: theme.spacing(2),
-		},
-	},
-}));
-
 export const PresentationGrid = observer(() => {
-	let history = useHistory();
 	const store = useMst();
-
-	const present = presentation => () => {
-		store.setPresentation(presentation);
-		history.push('?page=5');
-  };
-  const edit = (presentation) => () => {
-    store.setPresentation(presentation)
-    history.push('?page=2')
-  }
-
-  const preview = presentation => () => {
-    store.setPresentation(presentation);
-    store.showPreview();
-  };
 
 	useEffect(() => {
 		store.setPaging({ presentations: { pageSize: 8, page: 1 } });
@@ -67,13 +42,13 @@ export const PresentationGrid = observer(() => {
 				{store.currentPresentations.map(presentation => {
 					const menu = (
 						<Menu>
-						<Menu.Item key="0" onClick={preview(presentation)}><VisibilityIcon className="pr-2"/>Preview</Menu.Item>
-						<Menu.Item key="1" onClick={present(presentation)}><TvIcon className="pr-2"/>Present</Menu.Item>
-						<Menu.Item key="3" onClick={edit(presentation)}><EditIcon className="pr-2"/>Edit</Menu.Item>
+						<Menu.Item key="0" onClick={store.preview(presentation)}><VisibilityIcon className="pr-2"/>Preview</Menu.Item>
+						<Menu.Item key="1" onClick={store.present(presentation)}><TvIcon className="pr-2"/>Present</Menu.Item>
+						<Menu.Item key="3" onClick={store.edit(presentation)}><EditIcon className="pr-2"/>Edit</Menu.Item>
 						<Menu.Item key="4"><ShareIcon className="pr-2"/>Sharing Settings</Menu.Item>
 						<Menu.Item key="5"><DetailsIcon className="pr-2"/>Show Details</Menu.Item>
 						<Menu.Item key="6"><PrintIcon className="pr-2"/>Print</Menu.Item>
-						<Menu.Item key="7"><DeleteIcon className="pr-2"/>Delete</Menu.Item>
+						<Menu.Item key="7" onClick={store.deletePresentation(presentation)}><DeleteIcon className="pr-2"/>Delete</Menu.Item>
 						</Menu>
 					);
 					return (
@@ -112,6 +87,7 @@ export const PresentationGrid = observer(() => {
 					pageSizeOptions={[
 						'3',
 						'6',
+            '8',
 						'9',
 						'15',
 						'18',

@@ -7,6 +7,9 @@ export class DashboardItemContent {
   type;
   interpretations = [];
 
+  constructor() {
+  }
+
   setId = val => this.id = val;
   setName = val => this.name = val;
   setType = val => this.type = val;

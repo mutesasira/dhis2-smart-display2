@@ -64,6 +64,9 @@ export class Store {
     }
   }
 
+  page = '1';
+  presentationFilter = '';
+
   constructor(engine, baseUrl, apiVersion) {
     this.engine = engine;
     this.currentPresentation.setEngine(this.engine);
@@ -88,9 +91,14 @@ export class Store {
   hidePreview = () => {
     this.previewing = false;
   }
+
   showPreview = () => {
     this.previewing = true;
   }
+
+  setPage = val => {
+    this.page = val
+  };
 
   setD2 = async () => {
     this.d2 = await init({
@@ -112,13 +120,6 @@ export class Store {
     return Promise.resolve();
   }
 
-  changeFull = (full) => {
-    this.fullScreen = full;
-  }
-
-  setCurrentPage = (page) => this.currentPage = page;
-
-
   fetchDashboards = async () => {
     const {dashboards: {dashboards}} = await this.engine.query(query);
     let items = dashboards.map(d => {
@@ -126,13 +127,6 @@ export class Store {
     });
     this.availableDashboards = dashboards.map(ds => convertDashboard(ds));
     this.itemStore.setState(items);
-
-    if (this.currentPresentation.dashboards.length > 0) {
-      const items = this.currentPresentation.dashboards.map(d => {
-        return {text: d.name, value: d.id};
-      });
-      this.assignedItemStore.setState(items);
-    }
   }
 
   fetchPresentations = async () => {
@@ -142,6 +136,9 @@ export class Store {
         const namespace = await this.d2.dataStore.get('smart-slides');
         const presentations = await namespace.get('presentations');
         this.presentations = presentations.map(pre => this.convert(pre));
+        if (this.presentations.length > 0) {
+          this.setPage('3')
+        }
       } else {
         const namespace = await this.d2.dataStore.create('smart-slides');
         namespace.set('presentations', this.presentations);
@@ -168,7 +165,8 @@ export class Store {
       return p.canBeSaved;
     });
     const namespace = await this.d2.dataStore.get('smart-slides');
-    namespace.set('presentations', whatToSave);
+    await namespace.set('presentations', whatToSave);
+    this.setPage('3');
   };
 
   setPaging = val => this.paging = val;
@@ -197,14 +195,55 @@ export class Store {
     }
   };
 
+  createNewPresentation = () => {
+    this.setPresentation(new Presentation());
+    this.setPage('2');
+  }
+
+  present = presentation => () => {
+    this.setPresentation(presentation);
+
+    this.setPage('5')
+  };
+
+
+  deletePresentation = presentation => async () => {
+    const mapping = this.presentations.findIndex(p => p.id === presentation.id);
+    this.presentations.splice(mapping, 1);
+    await this.savePresentation();
+  };
+
+  edit = presentation => () => {
+    this.setPresentation(presentation);
+    const ass = this.currentPresentation.dashboards.map(d => {
+      return {text: d.name, value: d.id};
+    });
+    this.setPage('2');
+    this.assignedItemStore.setState(ass);
+  };
+
+  preview = presentation => () => {
+    this.setPresentation(presentation);
+    this.showPreview();
+  };
+
+  setPresentationFilter = (e) => {
+    this.presentationFilter = e.target.value;
+  }
+
 
   get currentPresentations() {
     const {page, pageSize} = this.paging.presentations;
     const currentPage = page - 1;
     if (pageSize !== 0) {
-      return this.presentations.slice(currentPage * pageSize, currentPage * pageSize + pageSize);
+      return this.presentations.filter(p => String(p.name)
+        .toLowerCase()
+        .includes(String(this.presentationFilter).toLowerCase()))
+        .slice(currentPage * pageSize, currentPage * pageSize + pageSize);
     }
-    return this.presentations;
+    return this.presentations.filter(p => String(p.name)
+      .toLowerCase()
+      .includes(String(this.presentationFilter).toLowerCase()));
   }
 
 }
@@ -216,27 +255,35 @@ decorate(Store, {
   baseUrl: observable,
   availableDashboards: observable,
   paging: observable,
+  assignedItemStore: observable,
   fetchPresentations: action,
   fullScreen: observable,
-  setPresentation: action,
+  itemStore: observable,
   apiVersion: observable,
   previewing: observable,
-  convert: action,
+  page: observable,
   d2: observable,
+  presentationFilter: observable,
+
+  setPresentation: action,
+  convert: action,
   fetchDashboards: action,
   showPreview: action,
-
-  assignedItemStore: observable,
-  itemStore: observable,
-
   assignItems: action,
   unAssignItems: action,
-
+  setPage: action,
   setD2: action,
   savePresentation: action,
+  createNewPresentation: action,
   changeFull: action,
   pagingChange: action,
   setPaging: action,
   hidePreview: action,
+  present: action,
+  preview: action,
+  edit: action,
+  setPresentationFilter: action,
+  deletePresentation: action,
+
   currentPresentations: computed
 });
