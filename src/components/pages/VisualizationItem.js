@@ -7,14 +7,14 @@ import {
   REPORT_TABLE
 } from '../../modules/ItemTypes'
 
-export const VisualizationItem = ({item, height, width}) => {
+export const VisualizationItem = ({item, height, width, style}) => {
   const activeType = item.type;
   switch (activeType) {
     case VISUALIZATION:
     case CHART:
     case REPORT_TABLE:
-      return <DHIS2Visualization width={width} height={height} item={item.dashboardItemContent}/>
+      return <DHIS2Visualization width={width} height={height} item={item.dashboardItemContent} style={style}/>
     default:
-      return <Visualization width={width} height={height} item={item.dashboardItemContent}/>
+      return <Visualization width={width} height={height} item={item.dashboardItemContent} style={style}/>
   }
 };
