@@ -31,6 +31,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.42",
     "@material-ui/pickers": "^3.2.10",
+    "add": "^2.0.6",
     "antd": "^4.0.3",
     "autoprefixer": "^9.7.4",
     "d2": "^31.8.1",
@@ -47,12 +48,14 @@
     "react-full-screen": "^0.2.4",
     "react-icons": "^3.9.0",
     "react-numeric-input": "^2.2.3",
+    "react-recipes": "^1.0.0",
     "react-responsive-carousel": "^3.1.51",
     "react-router-dom": "^5.1.2",
     "react-search-box": "^2.0.2",
     "react-slick": "^0.25.2",
     "react-swipeable-views": "^0.13.9",
     "slick-carousel": "^1.8.1",
-    "spectacle": "^6.0.1"
+    "spectacle": "5.8.0",
+    "yarn": "^1.22.4"
   }
 }

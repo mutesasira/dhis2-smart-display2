@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useMst } from '../context/context';
-import { observer } from 'mobx-react';
+import React, {useEffect, useState} from 'react';
+import {useMst} from '../context/context';
+import {observer} from 'mobx-react';
 import VisualizationPlugin from '@dhis2/data-visualizer-plugin';
 
-export const DHIS2Visualization = observer(({ item, height, width }) => {
+export const DHIS2Visualization = observer(({item, height, width}) => {
   const [visualization, setVisualization] = useState({})
   const store = useMst();
-  let style = {
-    height: height || '75vh',
-  };
-  if (width) {
-    style = { ...style, width }
-  }
+
   useEffect(() => {
     store.currentPresentation.fetchItem(item).then(i => {
       setVisualization(i);
     });
   }, [store]);
 
-  item = { ...item, height, width }
-
-  return <div className="min-h-full min-w-full bg-red-900">
-    <VisualizationPlugin
-      d2={store.d2}
-      visualization={visualization}
-      forDashboard={true}
-      className="w-full h-full"
-    />
-  </div>
+  return <VisualizationPlugin
+    d2={store.d2}
+    visualization={visualization}
+    forDashboard={true}
+  />
 });

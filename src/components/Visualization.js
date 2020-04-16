@@ -1,22 +1,13 @@
-import React, { useEffect } from 'react';
-import { useMst } from '../context/context';
-import { observer } from 'mobx-react';
+import React, {useEffect} from 'react';
+import {observer} from 'mobx-react';
+import {useConfig} from '@dhis2/app-runtime';
 
-export const Visualization = observer(({ item, height, width }) => {
-  let style = {
-    height: height || '75vh'
-  };
 
-  if (width) {
-    style = { ...style, width }
-  }
+export const Visualization = observer(({item, height, width}) => {
+  const {baseUrl} = useConfig();
 
   useEffect(() => {
-    item.load();
+    item.load({baseUrl});
   });
-
-  return <div className="min-w-full min-h-full">
-    <div>{item.name}</div>
-    <div id={item.getItemId} style={style}></div>
-  </div>
+  return <div id={item.getItemId} style={{width, height, margin: 0, padding: 0}}/>
 });

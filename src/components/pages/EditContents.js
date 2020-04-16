@@ -1,43 +1,26 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import { observer } from 'mobx-react';
-import { useMst } from '../../context/context';
-import { VisualizationItem } from './VisualizationItem'
+import {observer} from 'mobx-react';
+import {useMst, useWindowDimensions} from '../../context/context';
+import {VisualizationItem} from './VisualizationItem'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    maxWidth: 500,
-    backgroundColor: theme.palette.background.paper,
-    // width: '100%',
-  },
-  scrollbar: {
-    maxHeight: 300,
-    overflow: 'auto',
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9,
-    marginTop: '30',
-  },
-}));
 
 export const EditContents = observer(() => {
-  const classes = useStyles();
   const store = useMst();
-  const { currentPresentation } = store;
-
+  const {currentPresentation} = store;
+  const {height} = useWindowDimensions();
 
   return (
     <div className="h-auto px-4 -mb-16">
-      <div className="flex md:flex-row flex-wrap h-full">
-        <div className="w-full md:w-1/4 bg-gray border h-88 overflow-auto" >
-          {currentPresentation.selectedItems.map(item => <div key={item.id} className="py-2 bg-gray-100">
-            <Card className={classes.root}>
+      <div className="flex md:flex-row flex-wrap">
+        <div className="w-full md:w-1/4 bg-gray overflow-auto" style={{height: height - 260}}>
+          {currentPresentation.selectedItems.map(item => <div key={item.id} className="p-2 bg-gray-100">
+            <Card>
               <CardContent>
-                <VisualizationItem height={120} width={120} item={item} />
+                <VisualizationItem height='20em' item={item}/>
               </CardContent>
               <CardActions>
               </CardActions>

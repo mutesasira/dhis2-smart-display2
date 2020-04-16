@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import ReactSearchBox from 'react-search-box';
 import {PresentationGrid} from './presentations/PresentationGrid';
 import {PresentationList} from './presentations/PresentationList';
 import {PresentationSingle} from './presentations/PresentationSingle';
@@ -7,13 +6,12 @@ import {List, GridOn, CheckBoxOutlineBlankOutlined} from "@material-ui/icons";
 import HomeIcon from '@material-ui/icons/Home';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
-import {
-  useLocation,
-  useHistory
-} from "react-router-dom";
 import {observer} from 'mobx-react';
 import {useMst} from '../context/context';
 import {Preview} from './presentations/Preview';
+import {Input} from "antd";
+
+const {Search} = Input;
 
 const styleLeft = {
   margin: 0,
@@ -44,19 +42,13 @@ const style = {
   },
 };
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 
 export const Presentations = observer(() => {
   const store = useMst();
-  const query = useQuery();
-  const history = useHistory();
-
+  const [mode, setMode] = useState('list');
 
   const showPage = () => {
-    switch (query.get('mode')) {
+    switch (mode) {
       case 'list':
         return <PresentationList/>
       case 'grid':
@@ -68,10 +60,7 @@ export const Presentations = observer(() => {
     }
   }
 
-  const changeMode = (mode) => () => {
-    history.push(`?page=3&mode=${mode}`)
-
-  }
+  const changeMode = (mode) => () => setMode(mode);
   return (
     <div className="h-auto mt-4">
       <div className="flex px-16 py-4">
@@ -84,8 +73,11 @@ export const Presentations = observer(() => {
           </h1>
         </div>
         <div className="ml-auto">
-          <ReactSearchBox
-            placeholder="Search Presentation"
+          <Search
+            size="large"
+            placeholder="Filter Dashboards"
+            value={store.presentationFilter}
+            onChange={store.setPresentationFilter}
           />
         </div>
       </div>
@@ -95,12 +87,12 @@ export const Presentations = observer(() => {
         size="medium"
         style={style}
         color="primary"
-        onClick={() => history.push('?page=2')}
+        onClick={store.createNewPresentation}
       >
         <AddIcon/>
       </Fab>
-      <Fab style={styleLeft} color="secondary" aria-label="edit" color="primary">
-        <HomeIcon onClick={() => history.push('?page=3&mode=list')}/>
+      <Fab style={styleLeft} aria-label="edit" color="primary">
+        <HomeIcon onClick={() => store.setPage('3')}/>
       </Fab>
       <Preview/>
     </div>

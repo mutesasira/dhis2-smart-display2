@@ -52,7 +52,7 @@ export const getAppName = itemType => itemTypeMap[itemType].appName || '';
 export const itemTypeMap = {
   [VISUALIZATION]: {
     id: VISUALIZATION,
-    endPointName: 'visualizations',
+    endPointName: 'charts',
     propName: 'visualization',
     pluralTitle: i18n.t('Visualizations'),
     appUrl: id => `dhis-web-data-visualizer/#/${id}`,

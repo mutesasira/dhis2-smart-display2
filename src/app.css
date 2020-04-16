@@ -10,7 +10,7 @@
 }
 
 .sbox-sd {
-  width: "370px";
+  width: 370px;
   border: 2px red solid;
 }
 .input-css {
@@ -85,21 +85,18 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
   cursor: pointer;
 }
-.w-new{
-  inline-size: -webkit-fill-available;
-  height: -webkit-fill-available;
 
-}
-
-.presentation-slide{
-  height: fit-content;
-}
-
-.container {
-  margin: auto;
+.container1 {
   padding: 40px;
+  max-height: 60vh;
+  /*background: #419be0;*/
 }
+
+.slick-slide {
+  /*margin: auto;*/
+}
+
