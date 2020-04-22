@@ -5,6 +5,7 @@ import {HorizontalLabelPositionBelowStepper} from './pages/Content';
 import {Presentations} from './Presentations';
 import {SlideShow} from './SlideShow';
 import {useMst} from "../context/context";
+import InterpretationsDrawer from"./InterpretationsDrawer";
 
 export const LandingPage = observer(() => {
   const store = useMst();

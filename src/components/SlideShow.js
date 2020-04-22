@@ -64,19 +64,9 @@ export const SlideShow = observer(() => {
             contentStyles={{display: 'flex', flexDirection: 'column', zIndex: 0, textAlign: 'center'}}
             margin={0}
             padding={0}
+            
           >
-            <Text style={{
-              bottom: 'auto',
-              top: 0,
-              margin: 'auto',
-              textAlign: 'center',
-              zIndex: 10000,
-              width: '60vw',
-              position: 'fixed',
-            }}>
-              {item.dashboardItemContent.name}
-            </Text>
-            <VisualizationItem item={item} height={height-40} style={{marginTop: 40}}/>
+            <VisualizationItem item={item} height={height-40} width={width} style={{marginTop: 40}}/>
             {isFullscreen ? (
               <Fab
                 size="medium"

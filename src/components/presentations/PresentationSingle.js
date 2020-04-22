@@ -60,7 +60,7 @@ export const PresentationSingle = observer(() => {
             return (
               <div key={presentation.id}
                    className="text-white relative text-center bg-blue-500  slideHeight flex flex-col">
-                <div className="text-center mt-4">
+                <div className="text-center mt-40">
                   <LiveTv
                     style={style.largeIcon}
                     className=" text-gray-300"
@@ -68,11 +68,11 @@ export const PresentationSingle = observer(() => {
                 </div>
                 <div
                   className="cpx bottom-0 inset-x-0 absolute bg-transparent bg-blue-600 hover:bg-blue-700  hover:text-white flex">
-                  <div className="w-11/12 flex flex-col">
-                    <span className="text-2xl font-bold font-sans pl-8 truncate">
+                  <div className="w-11/12 flex flex-col text-center ">
+                    <span className="text-2xl font-bold font-sans truncate ml-16">
                       {presentation.name}
                     </span>
-                    <span className="text-base font-sans truncate">
+                    <span className="text-base font-sans truncate ml-16">
                       {presentation.description}
                     </span>
                   </div>

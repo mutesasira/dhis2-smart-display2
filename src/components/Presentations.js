@@ -42,10 +42,10 @@ const style = {
   },
 };
 
-
 export const Presentations = observer(() => {
   const store = useMst();
   const [mode, setMode] = useState('list');
+  const [background, setBackground] = useState('#5dbcd2');
 
   const showPage = () => {
     switch (mode) {
@@ -60,15 +60,21 @@ export const Presentations = observer(() => {
     }
   }
 
+  const colorIcon = () =>  (
+    {backgroundColor: {background}}
+  )       
+  
+
+  
   const changeMode = (mode) => () => setMode(mode);
   return (
     <div className="h-auto mt-4">
       <div className="flex px-16 py-4">
         <div className="flex">
           <h1>
-            View as
-            <List onClick={changeMode('list')}/>
-            <CheckBoxOutlineBlankOutlined onClick={changeMode('single')}/>
+            View as  
+            <List onClick={() => { changeMode('list'); colorIcon()}} />
+            <CheckBoxOutlineBlankOutlined onClick={changeMode('single') }/>
             <GridOn onClick={changeMode('grid')}/>
           </h1>
         </div>
