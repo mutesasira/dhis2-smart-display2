@@ -12,6 +12,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import {SlideShow} from './SlideShow';
 const drawerWidth = 300;
 
@@ -118,7 +119,7 @@ export default function InterpretationsDrawer() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
+        <Typography >
          <SlideShow/>
           
         </Typography>
@@ -134,11 +135,15 @@ export default function InterpretationsDrawer() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+        <MessageOutlinedIcon className = "font-bold text-base"/>
+
+        <h1 className = "font-bold text-base pl-4">Interpretations</h1>
+
+          <IconButton onClick={handleDrawerClose} className = "font-bold text-base">
           
             {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
-          <h1 className = "font-bold">Interpretations</h1>
+          
         </div>
         <List className='interpretationsbg'>
       <ListItem alignItems="flex-start">

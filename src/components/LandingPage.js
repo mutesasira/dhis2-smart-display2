@@ -19,7 +19,7 @@ export const LandingPage = observer(() => {
     case '4':
       return <PresentationList/>
     case '5':
-      return <InterpretationsDrawer/>
+      return <SlideShow/>
     default:
       return <HomePage/>
   }

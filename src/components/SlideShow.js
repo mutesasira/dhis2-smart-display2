@@ -66,18 +66,7 @@ export const SlideShow = observer(() => {
             padding={0}
             
           >
-            <Text style={{
-              bottom: 'auto',
-              top: 0,
-              margin: 'auto',
-              textAlign: 'center',
-              zIndex: 10000,
-              width: '80vw',
-              position: 'fixed',
-            }}>
-              {item.dashboardItemContent.name}
-            </Text>
-            <VisualizationItem item={item} height={height-40} style={{marginTop: 40}}/>
+            <VisualizationItem item={item} height={height-40} width={width} style={{marginTop: 40}}/>
             {isFullscreen ? (
               <Fab
                 size="medium"
