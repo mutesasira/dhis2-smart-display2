@@ -2,11 +2,19 @@
 .text-blue-sd {
   color: #1e72ae;
 }
+.interpretationsbg{
+ background-color: #d9e7f4;
+ width: '100%';
+max-width: '36ch';
+display: 'flex';
+}
 
 .bg-blue-sd {
   background-color: #43a7ee;
 }
-.align {
+.alignGrid {
+  margin: 0 auto;
+  padding-left: 4em;
 }
 
 .sbox-sd {

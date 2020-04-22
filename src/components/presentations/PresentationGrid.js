@@ -62,7 +62,7 @@ export const PresentationGrid = observer(() => {
 								</div>
 								<div
 									className="h-12 bottom-0 inset-x-0 absolute flex hover:bg-blue-700 hover:text-white cpx ">
-									<div className="text-white truncate w-new font-sans text-xl py-2 text-center z-40">
+									<div className="text-white truncate alignGrid font-sans text-xl py-2 text-center z-40">
 										{presentation.name}
 									</div>
 									<Dropdown

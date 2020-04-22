@@ -26,7 +26,7 @@ export const Dashboard = observer(() => {
         assignedItemStore={store.assignedItemStore}
         onAssignItems={store.assignItems}
         onRemoveItems={store.unAssignItems}
-        height={height - 500}
+        height={height - 400}
       />
     </div>
   );

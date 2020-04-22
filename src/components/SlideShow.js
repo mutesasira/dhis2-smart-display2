@@ -64,6 +64,7 @@ export const SlideShow = observer(() => {
             contentStyles={{display: 'flex', flexDirection: 'column', zIndex: 0, textAlign: 'center'}}
             margin={0}
             padding={0}
+            
           >
             <Text style={{
               bottom: 'auto',
@@ -71,7 +72,7 @@ export const SlideShow = observer(() => {
               margin: 'auto',
               textAlign: 'center',
               zIndex: 10000,
-              width: '60vw',
+              width: '80vw',
               position: 'fixed',
             }}>
               {item.dashboardItemContent.name}

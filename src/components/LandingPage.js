@@ -5,6 +5,7 @@ import {HorizontalLabelPositionBelowStepper} from './pages/Content';
 import {Presentations} from './Presentations';
 import {SlideShow} from './SlideShow';
 import {useMst} from "../context/context";
+import InterpretationsDrawer from"./InterpretationsDrawer";
 
 export const LandingPage = observer(() => {
   const store = useMst();
@@ -18,7 +19,7 @@ export const LandingPage = observer(() => {
     case '4':
       return <PresentationList/>
     case '5':
-      return <SlideShow/>
+      return <InterpretationsDrawer/>
     default:
       return <HomePage/>
   }
