@@ -63,16 +63,16 @@ export const PresentationSingle = observer(() => {
                 <div className="text-center mt-40">
                   <LiveTv
                     style={style.largeIcon}
-                    className=" text-gray-300"
+                    className="mma2"
                   />
                 </div>
                 <div
                   className="cpx bottom-0 inset-x-0 absolute bg-transparent bg-blue-600 hover:bg-blue-700  hover:text-white flex">
                   <div className="w-11/12 flex flex-col text-center ">
-                    <span className="text-2xl font-bold font-sans truncate ml-16">
+                    <span className="text-2xl font-bold font-sans truncate ml-20">
                       {presentation.name}
                     </span>
-                    <span className="text-base font-sans truncate ml-16">
+                    <span className="text-base font-sans truncate ml-20">
                       {presentation.description}
                     </span>
                   </div>

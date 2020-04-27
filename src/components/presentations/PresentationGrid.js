@@ -57,7 +57,7 @@ export const PresentationGrid = observer(() => {
 								<div>
 									<LiveTv
 										style={style.largeIcon}
-										className=" text-gray-300 py-2 px-2"
+										className=" mma2 py-2 px-2"
 									/>
 								</div>
 								<div

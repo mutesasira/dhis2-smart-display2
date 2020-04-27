@@ -31,6 +31,12 @@ const style = {
   left: 'auto',
   position: 'fixed',
 
+  viewIcon: {
+    width: 40,
+    height: 40,
+    align: 'center',
+    color: '#9d9d9d',
+  },
   largeIcon: {
     width: 100,
     height: 100,
@@ -60,10 +66,11 @@ export const Presentations = observer(() => {
     }
   }
 
-  const colorIcon = () =>  (
-    {backgroundColor: {background}}
-  )       
-  
+  $("button").click(function(){
+    var color = clicked ? 'red' : 'blue';
+    $(this).css('background-color', color);
+    clicked = !clicked;
+});
 
   
   const changeMode = (mode) => () => setMode(mode);
@@ -71,17 +78,18 @@ export const Presentations = observer(() => {
     <div className="h-auto mt-4">
       <div className="flex px-16 py-4">
         <div className="flex">
-          <h1>
-            View as  
-            <List onClick={() => { changeMode('list'); colorIcon()}} />
-            <CheckBoxOutlineBlankOutlined onClick={changeMode('single') }/>
-            <GridOn onClick={changeMode('grid')}/>
+          <h1 className="text-base font-bold px-1">
+            View as 
+            <List className="px-1 style" style={style.viewIcon} onClick={changeMode('list') } />
+          <CheckBoxOutlineBlankOutlined className="px-1 hover:text-blue-700" style={style.viewIcon}  onClick={changeMode('single') }/>
+          <GridOn className="px-1 hover:text-blue-700" style={style.viewIcon}  onClick={changeMode('grid')}/> 
           </h1>
+          
         </div>
         <div className="ml-auto">
           <Search
             size="large"
-            placeholder="Filter Dashboards"
+            placeholder="Search Presentation"
             value={store.presentationFilter}
             onChange={store.setPresentationFilter}
           />

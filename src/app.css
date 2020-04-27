@@ -9,6 +9,14 @@ max-width: '36ch';
 display: 'flex';
 }
 
+.style  {
+  background-color: red;
+}
+
+.style :focus {     
+  background-color:yellow;    
+}
+
 .bg-blue-sd {
   background-color: #43a7ee;
 }
@@ -60,8 +68,12 @@ display: 'flex';
 .osx{
   margin-left: 14em;
 }
+.mma2{
+  color: #79aee4;
+}
 .mma{
-  color: rgb(223, 232, 241);
+  color: #000000;
+  background-color:#ececec;
 }
 
 .gridl {

@@ -58,10 +58,10 @@ export const PresentationList = observer(() => {
               <div className="bg-blue-500 text-center w-32 font-extrabold ">
                 <LiveTv
                   style={style.largeIcon}
-                  className=" mma py-2 px-2"
+                  className=" mma2 py-4 px-2"
                 />
               </div>
-              <div className="bg-gray-200 p-2 flex-1 flex ">
+              <div className="mma p-2 flex-1 flex ">
                 <div className="flex flex-col">
                   <span className="text-blue-600 text-2xl px-2 truncate w-64 font-extrabold">{presentation.name}</span>
                   <span className="pt-2 px-2 text-base break-all mt-6">{presentation.description}</span>
