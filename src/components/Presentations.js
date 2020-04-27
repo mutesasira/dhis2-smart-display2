@@ -37,6 +37,13 @@ const style = {
     align: 'center',
     color: '#9d9d9d',
   },
+
+  viewIcon2:{
+    width: 40,
+    height: 40,
+    align: 'center',
+    color: '#5dbcd2 ',
+  },
   largeIcon: {
     width: 100,
     height: 100,
@@ -48,10 +55,12 @@ const style = {
   },
 };
 
+
 export const Presentations = observer(() => {
   const store = useMst();
   const [mode, setMode] = useState('list');
-  const [background, setBackground] = useState('#5dbcd2');
+  const [selected, setSelected] = useState(true);
+
 
   const showPage = () => {
     switch (mode) {
@@ -66,12 +75,6 @@ export const Presentations = observer(() => {
     }
   }
 
-  $("button").click(function(){
-    var color = clicked ? 'red' : 'blue';
-    $(this).css('background-color', color);
-    clicked = !clicked;
-});
-
   
   const changeMode = (mode) => () => setMode(mode);
   return (
@@ -80,9 +83,9 @@ export const Presentations = observer(() => {
         <div className="flex">
           <h1 className="text-base font-bold px-1">
             View as 
-            <List className="px-1" style={style.viewIcon} onClick={changeMode('list') } />
-          <CheckBoxOutlineBlankOutlined className="px-1 hover:text-blue-700" style={style.viewIcon}  onClick={changeMode('single') }/>
-          <GridOn className="px-1 hover:text-blue-700" style={style.viewIcon}  onClick={changeMode('grid')}/> 
+            <List  style={selected==true?style.viewIcon2:style.viewIcon} onClick={changeMode('list') } />
+            <CheckBoxOutlineBlankOutlined style={selected==true?style.viewIcon2:style.viewIcon} onClick={changeMode('single') }/>
+            <GridOn style={selected==true?style.viewIcon2:style.viewIcon}  onClick={changeMode('grid')}/> 
           </h1>
           
         </div>
