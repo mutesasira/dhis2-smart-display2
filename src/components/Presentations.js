@@ -80,7 +80,7 @@ export const Presentations = observer(() => {
         <div className="flex">
           <h1 className="text-base font-bold px-1">
             View as 
-            <List className="px-1 style" style={style.viewIcon} onClick={changeMode('list') } />
+            <List className="px-1" style={style.viewIcon} onClick={changeMode('list') } />
           <CheckBoxOutlineBlankOutlined className="px-1 hover:text-blue-700" style={style.viewIcon}  onClick={changeMode('single') }/>
           <GridOn className="px-1 hover:text-blue-700" style={style.viewIcon}  onClick={changeMode('grid')}/> 
           </h1>
