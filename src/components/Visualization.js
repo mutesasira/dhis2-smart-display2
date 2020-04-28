@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {observer} from 'mobx-react';
 import {useConfig} from '@dhis2/app-runtime';
+import { DoubleLeftOutlined } from '@ant-design/icons';
 
 export const Visualization = observer(({item, height, width, style = {}}) => {
   const {baseUrl} = useConfig();
@@ -26,7 +27,7 @@ export const Visualization = observer(({item, height, width, style = {}}) => {
   return (
     <div style = {{height:height-40, display:"flex"}}>
       <div id={item.getItemId} style={{...style, width:calculatedWidth, height:height-40, background:'yellow'}}/>
-      <div onClick = {changeInterepretation} style = {{width:interpretationWidth}}>wertyuiopp</div>
+      <div onClick = {changeInterepretation} style = {{width:interpretationWidth}}><DoubleLeftOutlined /></div>
     </div>
     )
 });
