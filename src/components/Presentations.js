@@ -55,7 +55,6 @@ const style = {
   },
 };
 
-
 export const Presentations = observer(() => {
   const store = useMst();
   const [mode, setMode] = useState('list');
