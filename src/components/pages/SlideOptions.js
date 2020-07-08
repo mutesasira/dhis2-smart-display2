@@ -11,6 +11,7 @@ import {
 import {observer} from 'mobx-react';
 import {useMst} from '../../context/context';
 import {Input, Button, Checkbox, InputNumber} from 'antd';
+import { useForm } from "react-hook-form";
 
 const plainOptions = ['slide', 'zoom', 'spin', 'fade'];
 
@@ -18,14 +19,18 @@ const {TextArea} = Input
 
 export const SlideOptions = observer(() => {
   const {currentPresentation} = useMst();
+  const { errors } = useForm();
 
 
   return (
     <div className="flex md:flex-row flex-wrap h-64 ml-6 py-2 px-4">
       <div className="flex flex-col w-full md:w-1/2 pr-6 mb-10">
         <div className="-ml-6  mb-2 pr-2 text-blue-500"><Edit className="text-gray-500"/>Presentation Name:</div>
-        <Input size="large" value={currentPresentation.name} placeholder="Presentation name" className="w-full "
-               onChange={currentPresentation.onNameChange}/>
+        <Input name = "presentationName" size="large" required = "Required" value={currentPresentation.name} placeholder="Presentation name" className="w-full "
+               onChange={currentPresentation.onNameChange} message = "invalid email address"
+              
+               />
+               {errors.presentationName && errors.presentationName.message}
       </div>
       <div className="flex flex-col w-full md:w-1/2 pl-6 mb-10">
         <div className="-ml-6 mb-2 pr-2 text-blue-500"><Schedule className="text-gray-500"/>Slide duration
